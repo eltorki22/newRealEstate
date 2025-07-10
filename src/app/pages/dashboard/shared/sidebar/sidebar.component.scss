@@ -1,0 +1,15 @@
+.logo{
+        position: absolute;
+    top: 0;
+    right: 40px;
+    
+
+    @media (max-width:767px){
+        top: -20px;
+        right: -6px;
+               transform: scale(0.8);
+    }
+
+}
+
+

@@ -1,0 +1,114 @@
+<h3 class="title-page">الادوات <img src="assets/dashboard/iconarrowdouble.png"  class="mx-1" alt="icon"> <span>ارسال رساله</span></h3>
+
+
+    <form class="forms_dashboard">
+      
+
+      
+        <div class="row">
+
+     
+
+<div class="mb-3 col-sm-12  ">
+                 <label for="numbers" class="form-label">الارقام</label>
+                 <select class="form-select" id="numbers">
+                    <!-- <option value="" selected disabled></option> -->
+                 </select>
+        </div>
+<div class="mb-3 col-sm-12  ">
+
+        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-color: #D4AF37; color: white; width:191px; height: 32px; font-size: 14px; font-weight: 700;">
+ اضغط هنا لاختيار الرساله
+</button>
+                
+        </div>
+
+    
+        <div class="mb-3 col-sm-12">
+                 <label for="date" class="form-label">نص الرساله</label>
+                <textarea name="" id="" class="form-control" style="height: 124px; font-size: 12px; font-weight: 400; color:#7F7F7F ; padding: 15px;">{{this.dataSelected}} </textarea>
+                  
+        </div>
+        
+        <div class="col-12">
+                <label for="" class="my-3">طريقه الارسال </label>
+                               <div class="transmission  d-flex align-items-center col-12">
+                        
+              <div class="form-check">
+  <input  type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+  <label class="form-check-label" for="flexRadioDefault1">
+    SMS
+  </label>
+</div>
+<div class="form-check">
+  <input  type="radio"  name="flexRadioDefault" id="flexRadioDefault2" >
+  <label class="form-check-label" for="flexRadioDefault2">
+    واتساب
+  </label>
+</div>
+                 </div>
+        </div>
+  
+
+        
+ <div class="btn_add_reset">
+                <button type="submit">ارسال</button>
+                
+            </div>        
+        
+      
+</div>
+
+
+
+</form>
+
+
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade " #messageModal id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header justify-content-end">
+        <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+        <button type="button" class="btn-close m-0 text-black" style="width: 8px; height:8px; font-size: 12px;   border:2px solid black;border-radius: 50%;" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+     
+     <div class="modal-body">
+      <form action="">  
+        <div class="row">
+                <div class="col-12 mb-4 d-flex align-items-center justify-content-center data_msg">
+                        <label for="" class="countmsg">1.</label>
+                        <input type="radio" name="msg" id="msg">
+                        <label for="msg" class="mainmsg">sherif4-هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربي، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التي يولدها التطبيق.4-هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربي، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التي يولدها التطبيق.</label>
+                </div>
+                <div class="col-12 mb-4 d-flex align-items-center justify-content-center data_msg">
+                        <label for="" class="countmsg">2.</label>
+                        <input type="radio" name="msg" id="msg2">
+                        <label for="msg2" class="mainmsg">4-هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربي، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التي يولدها التطبيق.4-هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربي، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التي يولدها التطبيق.</label>
+                </div>
+                <div class="col-12 mb-4 d-flex align-items-center justify-content-center data_msg">
+                        <label for="" class="countmsg">3.</label>
+                        <input type="radio" name="msg" id="msg3">
+                        <label for="msg3" class="mainmsg">4-هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربي، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التي يولدها التطبيق.4-هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربي، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التي يولدها التطبيق.</label>
+                </div>
+
+                
+        </div>
+              
+ <div class="btn_add_reset">
+                <button type="button" (click)="btnSelected()">اختيار</button>
+                
+            </div>  
+      </form>
+      </div>
+     
+
+ 
+    </div>
+  </div>
+</div>

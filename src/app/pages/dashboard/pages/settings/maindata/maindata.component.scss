@@ -1,0 +1,38 @@
+@use '../../../../../../styles/abstracts/vars' as *;
+@use '../../../../../../styles/abstracts/mixins' as *;
+
+.link_main_ifs{
+    width: 100%;
+    list-style: none;
+    display: flex;
+    li{
+        a{
+            display: block;
+            text-decoration: none;
+            margin:20px ;
+            font-size: 18px;
+            font-weight: 700;
+            color: #8E8E8E;
+            position: relative;
+
+            @include responsive('small'){
+                font-size: 11px;
+            }
+
+            &.active{
+            color: $main-color;    
+            &::after{
+                content: '';
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                top:calc(100% + 5px) ;
+                width: 80%;
+                height: 2px;
+                border-radius: 4px;
+                background-color: $main-color;
+            }
+            }
+        }
+    }
+}

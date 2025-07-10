@@ -1,0 +1,141 @@
+ <h3 class="title-page">الادوات <img src="assets/dashboard/iconarrowdouble.png"  class="mx-1" alt="icon"> <span>العقودات السابقه</span></h3>
+    <div class="search">
+            <input type="text"  class="form-control" placeholder="بحث">
+            <div class="filter_search">
+                <button class="btn" type="button" (click)="visibleFilter=!visibleFilter"><i class="fa-solid fa-filter"></i></button>
+
+                <span>|</span>
+                <button class="btn" type="submit"> <i class="fa-solid fa-magnifying-glass"></i></button>
+
+                <div class="drop-down" [ngClass]="{'show':visibleFilter}">
+                    <ul>
+                        <li><a href="" class="active">رقم العقد</a></li>
+                        <li><a href="" >نوع العقد</a></li>
+                        <li><a href="" >التاريخ</a></li>
+                    </ul>   
+                </div>
+            </div>
+            </div>
+
+
+<div class="button_data" dir="ltr">
+    <!-- <button (click)="ShowModel()">فسخ</button> -->
+     <button  data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  فسخ 
+</button>
+     <button>تعديل</button>
+    <button>تجديد</button> 
+</div>
+
+
+
+
+<div class="accordion" #acco >
+    <div class="heading" (click)="showAcco()">
+        <div class="left">
+   <h3>نوع العقد</h3>
+        <div class="content-head">
+            <p>رقم العقد</p>
+            <span>20 يناير 2025</span>
+        </div>
+        </div>
+        <!-- <i class="fa-solid fa-chevron-up"></i> -->
+        <div class="right">
+            <h4>ساري</h4>
+            <h4 style="background-color: #7E7E7E;" *ngIf="false">منتهي</h4>
+            <div class="icon">
+                <i class="fa-solid fa-chevron-down" [ngClass]="{'fa-chevron-down':this.isOpen==false,'fa-chevron-up':this.isOpen==true}"></i>    
+            </div>
+        </div>
+    </div>
+
+    <div class="body">
+        <div class="row">
+            <div class="col-6">
+               <div class="mb-3 readonly_input">
+                    <label for="numcont" class="form-label">رقم العقد</label>
+                     <input type="text" class="form-control" style="padding-right: 70px;" id="numcont" placeholder="302" value="302" readonly>
+                </div>
+                </div>
+                <div class="col-6">
+ <div class="mb-3 readonly_input">
+                    <label for="typecont" class="form-label">نوع العقد</label>
+                     <input type="text" class="form-control" id="typecont" style="padding-right: 70px;"  placeholder="302" value="عقد عمل" readonly>
+                </div>
+                </div>
+
+                <div class="col-6">
+ <div class="mb-3 readonly_input">
+                    <label for="typecont" class="form-label">تاريخ بدايه العقد</label>
+                     <input type="text" class="form-control"  style="padding-right: 110px;" id="typecont" placeholder="302" value="25 يناير 2026" readonly>
+                </div>
+                </div>
+              
+              <div class="col-6">
+  <div class="mb-3 readonly_input">
+                    <label for="typecont" class="form-label">تاريخ نهايه العقد</label>
+                     <input type="text" class="form-control" id="typecont" style="padding-right: 110px;"  placeholder="302" value="25 يناير 2026" readonly>
+                </div>
+             
+              </div>
+               <div class="mb-3 readonly_input">
+                    <label for="price" class="form-label" style="right: 22px;">السعر</label>
+                     <input type="text" class="form-control" id="price" style="padding-right: 47px;"  placeholder="302" value="3000" readonly>
+                </div>
+               <div class="mb-3 readonly_input">
+                    <label for="typecont" class="form-label" style="right:22px;">تاريخ نهايه العقد</label>
+                     <input type="text" class="form-control" style="padding-right: 110px;" id="typecont" placeholder="302" value="25 يناير 2026" readonly>
+                </div>
+               <div class="mb-3 readonly_input">
+                    <label for="typecont" class="form-label" style="right:22px;">المرفقات</label>
+                     <input type="text" class="form-control" style="padding-right: 68px;" id="typecont" placeholder="302" value="PNG - PDF" readonly>
+                </div>
+               <div class="mb-3 readonly_input">
+                     <textarea  style="height:124px; font-size: 12px; color: #7F7F7F; text-align: right;" type="text" class="form-control p-2" id="typecont"  >4-هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربي، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التي يولدها التطبيق. 4-هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربي، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التي يولدها التطبيق. 4-هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربي، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التي يولدها التطبيق.
+                     </textarea>
+                </div>
+
+                <div class="showcontract">
+                    <p>إضغط هنا لإظهار صوره العقد</p>
+                    <button class="btn btn-success"><i class="fa-solid fa-eye"></i></button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- </div> -->
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade"   id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header   justify-content-end">
+        <!-- <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5> -->
+        <button type="button" class="btn-close m-0 text-black" style="width: 8px; height:8px; font-size: 12px;   border:2px solid black;border-radius: 50%;" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+            <form action="">
+                <div class="top_form">
+                    <h4>فسخ العقد</h4>
+
+                    <div class="my-4">
+                        <label for="form-label">تاريخ فسخ العقد</label>
+                        <input type="date" name="" id="" class="form-control">
+                    </div>
+                    <div class="mb-2">
+                        <label for="form-label">سبب الفسخ</label>
+                        <textarea type="text" style="height:124px;" placeholder="اكتب المحتوي" name="" id="" class="form-control"></textarea>
+                    </div>
+
+                </div>
+
+                <button class="btn_modal">حفظ</button>
+            </form>
+      </div>
+    
+    </div>
+  </div>
+</div>

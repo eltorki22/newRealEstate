@@ -1,0 +1,36 @@
+@use '../../../../../../styles/abstracts/vars' as *; 
+@use '../../../../../../styles/abstracts/mixins' as *; 
+.bouns{
+    label[data-rate='bouns']{
+        // padding: 20px;
+        height: 32px;
+        line-height: 32px;
+        border: 1px solid $border-color;
+        // padding: 5px 0px;
+        text-align: center;
+        display: block;
+        border-radius: $border-radius-sm;
+        width: 100%;
+        cursor: pointer;
+        background-color: $white-color;
+        color: #A7A7A7;
+        margin: 10px 0px;
+
+
+
+        
+    }
+
+    
+     input[type='radio'] {
+    display: none;
+
+    &:checked + label[data-rate='bouns'] {
+      background-color: #BED2BF !important;
+      color: $black-color;
+      border-color: $black-color;
+    }
+  }
+
+
+}

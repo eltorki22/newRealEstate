@@ -1,0 +1,45 @@
+
+@mixin flex_box($d,$ju,$al,$gap:0){
+    display: $d;
+    justify-content: $ju;
+    align-items: $al;
+    gap: $gap;
+}
+
+@mixin width_height($w,$h){
+    width:$w ;
+    height: $h;
+}
+
+
+@mixin circle($c){
+    width: $c;
+    height: $c;
+    border-radius: 50%;
+}
+
+
+
+@mixin responsive($points){
+
+    @if($points == 'small'){
+        @media (max-width:767px) {
+            @content;
+            
+        }
+    }
+    @if($points == 'meduim'){
+        @media(min-width:768px) and (max-width:992px) {
+            @content;
+            
+        }
+    }
+    @if($points == 'large'){
+        @media(min-width:993px) and (max-width:1200px) {
+            @content;
+        }
+    }
+
+}
+
+

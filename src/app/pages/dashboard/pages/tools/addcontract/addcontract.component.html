@@ -1,0 +1,553 @@
+ <h3 class="title-page">الادوات <img src="assets/dashboard/iconarrowdouble.png"  class="mx-1" alt="icon"> <span>اضافه عقد</span></h3>
+
+
+ <div class="box mt-5 mb-3">
+    <!-- <div class="container">
+<h4 class="title_form">بيانات العقد</h4>        
+    </div> -->
+
+    <form class="forms_dashboard" [formGroup]="this.formData" (ngSubmit)="onSubmit()">
+        <h4 class="title_form" >بيانات العقد</h4>
+        <div class="row row_part">
+
+     
+
+<div class="mb-3 col-sm-12 col-md-6 col-lg-3">
+                 <label for="contractnumber" class="form-label">رقم العقد</label>
+                 <input type="text" class="form-control" id="contractnumber" placeholder="رقم العقد" formControlName="ContractNumber">
+                  <ng-container *ngIf="formData.controls['ContractNumber'].invalid && formData.controls['ContractNumber'].touched">
+                      <small *ngIf="formData.controls['ContractNumber'].hasError('required')"> رقم العقد مطلوب</small>
+                 </ng-container>
+        </div>
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
+                 <label for="typecontract" class="form-label">نوع العقد</label>
+              
+                   <select class="form-select" id="typecontract" aria-label="Default select example" formControlName="ContractType">
+                    <option value="" disabled selected>نوع العقد</option>
+                    <option value="عقد ايجار">عقد ايجار</option>
+                    <option value="عقد صيانه">عقد صيانه</option>                        
+                </select>
+
+                 <ng-container *ngIf="formData.controls['ContractType'].invalid && formData.controls['ContractType'].touched">
+                      <small *ngIf="formData.controls['ContractType'].hasError('required')"> نوع العقد مطلوب</small>
+                 </ng-container>
+        </div>
+
+
+
+
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
+                 <label for="placecontract" class="form-label">مكان ايام العقد</label>
+                 <input type="text" class="form-control" id="placecontract" placeholder="المكان" formControlName="ContractAddress">
+                  <ng-container *ngIf="formData.controls['ContractAddress'].invalid && formData.controls['ContractAddress'].touched">
+                      <small *ngIf="formData.controls['ContractAddress'].hasError('required')"> مكان العقد مطلوب</small>
+                 </ng-container>
+        </div>
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
+                 <label for="dateebramcontract" class="form-label">تاريخ ابرام العقد</label>
+                 
+ 
+
+        <input type="date" class="form-control" id="dateebramcontract" formControlName="ContractDate">
+
+          <ng-container *ngIf="formData.controls['ContractDate'].invalid && formData.controls['ContractDate'].touched">
+                      <small *ngIf="formData.controls['ContractDate'].hasError('required')"> تاريخ ابرام العقد مطلوب</small>
+                 </ng-container>
+ </div>  
+        <div class="mb-3 col-sm-12 col-md-6">
+                 <label for="date1" class="form-label">تاريخ بداية مده الايجار</label>
+                <input type="date" class="form-control" id="date1" formControlName="StartDate">
+
+                   <ng-container *ngIf="formData.controls['StartDate'].invalid && formData.controls['StartDate'].touched">
+                      <small *ngIf="formData.controls['StartDate'].hasError('required')"> تاريخ بدايه الايجار مطلوب</small>
+                 </ng-container>
+ </div>  
+        <div class="mb-3 col-sm-12 col-md-6 ">
+                 <label for="date2" class="form-label">تاريخ نهايه مده الايجار</label>
+ 
+
+            <input type="date" class="form-control" id="date2" formControlName="EndDate">
+              <ng-container *ngIf="formData.controls['EndDate'].invalid && formData.controls['EndDate'].touched">
+                      <small *ngIf="formData.controls['EndDate'].hasError('required')"> تاريخ نهايه الايجار مطلوب</small>
+              </ng-container>
+
+ </div>  
+
+ <div class="mb-3 col-sm-12 col-md-6">
+                 <label for="mara" class="form-label">المراجع</label>
+                 <input type="text" class="form-control" id="mara" placeholder="المراجع" formControlName="ReferenceName">
+                    <ng-container *ngIf="formData.controls['ReferenceName'].invalid && formData.controls['ReferenceName'].touched">
+                      <small *ngIf="formData.controls['ReferenceName'].hasError('required')"> المرجع مطلوب</small>
+              </ng-container>
+        </div>
+       
+       <div class="mb-3 col-sm-12 col-md-6">
+                 <label for="copy" class="form-label d-block">نسخه   
+                 </label>
+                 <input type="file" id="copy" class="d-none" (change)="onFileSelected($event)"  >
+                 <label for="copy" class="form-label d-flex copy_identity">  
+                    <div class="icon"><i class="fa-solid fa-download"></i> </div> 
+                     <input type="text" class="form-control" id="copy" placeholder="نسخه" [value]="this.fileName" readonly style="pointer-events: none;"> 
+                 </label>
+
+ <small *ngIf="formData.controls['ContractFile'].invalid && formData.controls['ContractFile'].touched">
+                  الحقل مطلوب
+</small>              
+               
+            </div>   
+       
+
+             <div class="mb-3 col-sm-12">
+                 <label for="bayan" class="form-label">البيان</label>
+                 <textarea type="text" class="form-control"  style="height: 124px;"id="bayan" placeholder="اكتب المحتوي" formControlName="ContractNotes"></textarea>
+                <ng-container *ngIf="formData.controls['ContractNotes'].invalid && formData.controls['ContractNotes'].touched">
+                      <small *ngIf="formData.controls['ContractNotes'].hasError('required')"> محتوي البيان مطلوب</small>
+              </ng-container>
+        </div>
+            <!-- </div> -->
+ 
+
+
+
+
+
+
+           
+</div>
+      
+
+        
+<div class="box">
+    <div class="row align-items-center ">
+        <div class="col-6">
+            <h4 class="title_form" >بيانات المالك</h4>
+        </div>
+        <div class="col-6 form_search">
+            <input type="text" class="form-control" placeholder="بحث" style="background-color: #FBFBFB;">
+            <button class=""><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+    </div>
+
+</div>
+
+
+
+        <div class="row row_part">
+
+     
+<div class="p-3" style="border: 1px solid #BFDBC9; border-radius: 4px;">
+    <div class="row">
+<div class="mb-3 col-sm-12 col-md-6 col-lg-3 readonly_input">
+                 <label for="username" class="form-label">الاسم</label>
+                 <input type="text" style="padding-right: 50px;" class="form-control" id="username" placeholder="الاسم" readonly value="محمد احمد مجمود">
+        </div>
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-3 readonly_input">
+                 <label for="phonenumber" class="form-label"  >رقم الجوال</label>
+              
+                 <input type="text" name="phonenumber" readonly style="padding-right: 74px;" id="phonenumber" value="01026381737" class="form-control" placeholder="رقم الجوال">
+        </div>
+
+
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-3 readonly_input">
+                 <label for="nationality" class="form-label" >الجنسيه</label>
+                 <input type="text" class="form-control" readonly id="nationality" placeholder="الجنسيه" style="padding-right: 60px;" value="سعودي">
+        </div>
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-3 readonly_input">
+                 <label for="email" class="form-label">البريد الالكتروني</label>
+ 
+
+        <input type="email" class="form-control" id="email" value="gts@gmail.com" placeholder="البريد الالكتروني " readonly style="padding-right: 105px;">
+ </div>  
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-4 readonly_input">
+                 <label for="idtype" class="form-label">نوع الهويه </label>
+ 
+        <input type="text" class="form-control" id="idtype" style="padding-right: 74px;" value="جواز سفر" readonly  placeholder="نوع الهويه">
+ </div>  
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-4 readonly_input">
+                 <label for="idnumber" class="form-label" >رقم الهويه </label>
+ 
+
+            <input type="text" class="form-control" value="987654321234567" style="padding-right: 75px;" id="idnumber" placeholder="رقم الهويه">
+ </div>  
+
+       
+       <div class="mb-3 col-sm-12 col-md-6 col-lg-4 readonly_input">
+                 <label for="copy" class="form-label d-block">نسخه الهويه    
+                 </label>      
+                 <input type="text" class="form-control" id="copy" value="صوره -  pdf "  placeholder="نسخه" readonly style="pointer-events: none; padding-right: 85px;"> 
+                 
+               
+            </div>   
+        
+    </div>
+</div>
+
+       
+
+ 
+
+
+<!-- <div class="row"> -->
+
+    <div class="my-3 col-sm-12 col-md-6 col-lg-4">
+                 <label for="building" class="form-label">العماره</label>
+                 <input type="text" class="form-control" id="building" placeholder="العماره">
+        </div>
+
+
+    <div class="my-3 col-sm-12 col-md-6 col-lg-4">
+                 <label for="door" class="form-label">الدور</label>
+                 <input type="text" class="form-control" id="door" placeholder="الدور">
+        </div>
+
+
+    <div class="my-3 col-sm-12 col-md-6 col-lg-4">
+                 <label for="shaka" class="form-label">شقه</label>
+                 <input type="text" class="form-control" id="shaka" placeholder="شقه">
+        </div>
+
+<!-- </div> -->
+
+
+
+    
+
+
+           
+
+</div>
+
+
+        
+<div class="box">
+    <div class="row align-items-center">
+        <div class="col-6">
+            <h4 class="title_form" >  بيانات المستاجر</h4>
+        </div>
+        <div class="col-6 form_search">
+            <input type="text" class="form-control" placeholder="بحث" style="background-color: #FBFBFB;">
+            <button class=""><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+    </div>
+
+</div>
+
+
+
+        <div class="row row_part">
+
+     
+<!-- <div class="p-3" style="border: 1px solid #BFDBC9; border-radius: 4px;"> -->
+    <div class="row">
+<div class="mb-3 col-sm-12 col-md-6 col-lg-3 readonly_input">
+                 <label for="username2" class="form-label" >الاسم</label>
+                 <input type="text" style="padding-right: 50px;" class="form-control" value="شريف يحيي" readonly id="username2" placeholder="الاسم">
+        </div>
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-3 readonly_input">
+                 <label for="phonenumber2" class="form-label">رقم الجوال</label>
+              
+                 <input type="text" style="padding-right: 74px;" readonly value="01098765443" name="phonenumber" id="phonenumber2" class="form-control" placeholder="رقم الجوال">
+        </div>
+
+
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-3 readonly_input">
+                 <label for="nationality2" class="form-label">الجنسيه</label>
+                 <input type="text" style="padding-right: 60px;" class="form-control" id="nationality2" value="سعودي" readonly placeholder="الجنسيه">
+        </div>
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-3 readonly_input">
+                 <label for="email2"  class="form-label">البريد الالكتروني</label>
+ 
+
+        <input type="email" style="padding-right: 105px;" readonly  value="gts@gmail.com" class="form-control" id="email2" placeholder="البريد الالكتروني ">
+ </div>  
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-3 readonly_input">
+                 <label for="idtype2" class="form-label">نوع الهويه </label>
+ 
+
+        <input type="text" style="padding-right: 75px;" class="form-control" id="idtype2" readonly placeholder="نوع الهويه">
+ </div>  
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-3 readonly_input">
+                 <label for="idnumber2" class="form-label">رقم الهويه </label>
+ 
+
+            <input type="text" class="form-control" style="padding-right: 76px; pointer-events: none;"  readonly value="987654321234567" id="idnumber2" placeholder="رقم الهويه">
+ </div>  
+
+       
+       <div class="mb-3 col-sm-12 col-md-6 col-lg-3 readonly_input">
+                 <label for="copy2" class="form-label d-block">نسخه الهويه    
+                 </label>
+                 <!-- <input type="file" id="copy2" class="d-none" >     -->
+                  
+                   
+                     <input type="text" class="form-control"  value="صوره -  pdf " id="copy2" placeholder="نسخه" readonly style="pointer-events: none; padding-right: 85px;"> 
+               
+               
+            </div>   
+        
+
+                 <div class="mb-3 col-sm-12 col-md-6 col-lg-3 readonly_input">
+                 <label for="nummor" class="form-label">عدد المرافقين</label>
+ 
+
+                 <div class="nummor_eye">
+                    <input type="text" class="form-control" style="padding-right: 100px;" value="2" id="nummor" placeholder="رقم الهويه">
+                    <button class="btn btn-success"><i class="fa-solid fa-eye"></i></button>
+                 </div>
+            
+ </div>  
+    </div>
+  
+
+</div>
+      
+      
+       
+<div class="box">
+    <div class="row align-items-center">
+        <div class="col-6">
+            <h4 class="title_form" >بيانات السمسار ( الوسيط ) </h4>
+        </div>
+        <div class="col-6 form_search">
+            <input type="text" class="form-control" placeholder="بحث" style="background-color: #FBFBFB;">
+            <button class=""><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+    </div>
+
+</div>
+
+
+
+        <div class="row row_part">
+
+     
+<!-- <div class="p-3" style="border: 1px solid #BFDBC9; border-radius: 4px;"> -->
+    <div class="row">
+<div class="mb-3 col-sm-12 col-md-6 col-lg-3 readonly_input">
+                 <label for="username3" class="form-label">الاسم</label>
+                 <input type="text" class="form-control" value="محمد احمد محمود"  readonly style="padding-right: 50px;" id="username3" placeholder="الاسم">
+        </div>
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-3 readonly_input">
+                 <label for="phonenumber3" class="form-label">رقم الجوال</label>
+              
+                 <input type="text" name="phonenumber" style="padding-right: 80px;" readonly value="01026381737" id="phonenumber3" class="form-control" placeholder="رقم الجوال">
+        </div>
+
+
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-3 readonly_input">
+                 <label for="nationality3" class="form-label">الجنسيه</label>
+                 <input type="text" class="form-control" readonly style="padding-right: 60px; " value="سعودي" id="nationality3" placeholder="الجنسيه">
+        </div>
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-3 readonly_input">
+                 <label for="email3" class="form-label">البريد الالكتروني</label>
+ 
+
+        <input type="email" class="form-control" id="email3" readonly style="padding-right: 105px;" value="gts@gmail.com" placeholder="البريد الالكتروني ">
+ </div>  
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-4 readonly_input">
+                 <label for="idtype3" class="form-label">نوع الهويه </label>
+ 
+
+        <input type="text" class="form-control" id="idtype3" readonly style="padding-right:75px ;" placeholder="نوع الهويه">
+ </div>  
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-4 readonly_input">
+                 <label for="idnumber3" class="form-label">رقم الهويه </label>
+ 
+
+            <input type="text" class="form-control" id="idnumber3" style="padding-right:75px ;" readonly placeholder="رقم الهويه">
+ </div>  
+
+       
+       <div class="mb-3 col-sm-12 col-md-6 col-lg-4 readonly_input">
+                 <label for="copy3" class="form-label d-block">نسخه الهويه    
+                 </label>
+                 <input type="file" id="copy3" class="d-none" >
+                
+                     <input type="text" class="form-control"  id="copy" placeholder="نسخه" readonly style="pointer-events: none; padding-right: 85px;"> 
+             
+               
+            </div>   
+        
+
+               
+    </div>
+  
+
+</div>
+    
+
+
+
+ 
+<div class="box">
+    <div class="row align-items-center">
+        <div class="col-6">
+            <h4 class="title_form" >المعلومات الماليه</h4>
+        </div>
+    </div>
+
+</div>
+
+
+
+        <div class="row row_part">
+
+     
+<!-- <div class="p-3" style="border: 1px solid #BFDBC9; border-radius: 4px;"> -->
+    <div class="row">
+<div class="mb-3 col-sm-12 col-md-6 col-lg-4">
+                 <label for="price" class="form-label">السعر</label>
+                 <input type="text" class="form-control" id="price" placeholder="السعر" formControlName="TotalAmount">
+                   <ng-container *ngIf="formData.controls['TotalAmount'].invalid && formData.controls['TotalAmount'].touched">
+                      <small *ngIf="formData.controls['TotalAmount'].hasError('required')">  السعر مطلوب</small>
+              </ng-container>
+        </div>
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-4">
+                 <label for="pushed" class="form-label">المدفوع</label>
+              
+                 <input type="text" name="" id="pushed" class="form-control" placeholder="المدفوع" formControlName="PaidAmount">
+                      <ng-container *ngIf="formData.controls['PaidAmount'].invalid && formData.controls['PaidAmount'].touched">
+                      <small *ngIf="formData.controls['PaidAmount'].hasError('required')">  المدفوع مطلوب</small>
+              </ng-container> 
+        </div>
+
+
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-4">
+                 <label for="motabaky" class="form-label">المتبقي</label>
+                 <input type="text" class="form-control" id="motabaky" placeholder="المتبقي" formControlName="RemainingAmount">
+                      <ng-container *ngIf="formData.controls['RemainingAmount'].invalid && formData.controls['RemainingAmount'].touched">
+                      <small *ngIf="formData.controls['RemainingAmount'].hasError('required')"> المتبقي مطلوب</small>
+              </ng-container> 
+        </div>
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-4">
+                 <label for="valueemola" class="form-label">قيمه العموله</label>
+                 <input type="text" class="form-control" id="valueemola" placeholder="قيمه " formControlName="CommissionValue">
+                 <ng-container *ngIf="formData.controls['CommissionValue'].invalid && formData.controls['CommissionValue'].touched">
+                      <small *ngIf="formData.controls['CommissionValue'].hasError('required')">  قيمه العموله مطلوبه</small>
+              </ng-container> 
+        </div>
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-4">
+                 <label for="madphoa" class="form-label">المدفوع عموله</label>
+                 <input type="text" class="form-control" id="madphoa" placeholder="المدفوع " formControlName="CommissionPaid">
+                  <ng-container *ngIf="formData.controls['CommissionPaid'].invalid && formData.controls['CommissionPaid'].touched">
+                      <small *ngIf="formData.controls['CommissionPaid'].hasError('required')">المدفوع  عموله مطلوب</small>
+              </ng-container> 
+        </div>
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-4">
+                 <label for="motapky" class="form-label">المتبقي عموله</label>
+                 <input type="text" class="form-control" id="motapky" placeholder="المتبقي" formControlName="CommissionRemaining">
+                   <ng-container *ngIf="formData.controls['CommissionRemaining'].invalid && formData.controls['CommissionRemaining'].touched">
+                      <small *ngIf="formData.controls['CommissionRemaining'].hasError('required')">   المتبقي عموله مطلوبه</small>
+              </ng-container> 
+        </div>
+        <div class="mb-3 col-sm-12 col-md-6">
+                 <label for="warn" class="form-label">التنبيه قبل موعد السداد بمدة</label>
+                 <input type="number" class="form-control" id="warn" placeholder="عدد الايام" formControlName="ReminderDaysBeforeDue">
+                  <ng-container *ngIf="formData.controls['ReminderDaysBeforeDue'].invalid && formData.controls['ReminderDaysBeforeDue'].touched">
+                      <small *ngIf="formData.controls['ReminderDaysBeforeDue'].hasError('required')">   عدد الايام مطلوبه</small>
+              </ng-container> 
+        </div>
+        <div class="mb-3 col-sm-12 col-md-6">
+                 <label for="warn" class="form-label" for="InsuranceValue">قيمه التامين</label>
+                 <input type="text" class="form-control" id="InsuranceValue" placeholder="قيمه" formControlName="InsuranceValue">
+                  <ng-container *ngIf="formData.controls['InsuranceValue'].invalid && formData.controls['InsuranceValue'].touched">
+                      <small *ngIf="formData.controls['InsuranceValue'].hasError('required')"> قيمه التأمين مطلوبه</small>
+              </ng-container> 
+        </div>
+    
+
+               
+    </div>
+  
+
+</div>
+    
+
+
+<div class="box">
+    <div class="row align-items-center">
+        <div class="col-6">
+            <h4 class="title_form" >الرسائل</h4>
+        </div>
+    </div>
+
+</div>
+
+
+
+        <div class="row row_part ">
+
+     
+<!-- <div class="p-3" style="border: 1px solid #BFDBC9; border-radius: 4px;"> -->
+    <div class="row">
+<div class="mb-3 col-sm-12 col-md-6 col-lg-4">
+                 <label for="msgname" class="form-label" >اسم الرساله</label>
+                 <!-- <input type="text" class="form-control" id="msgname" placeholder="الاسم" formControlName="">-->
+
+
+                 <select name="" id="" class="form-select" formControlName="MessageId" id="msgname">
+                    <option value="" disabled selected >الاسم</option>
+
+                    @for (item of getAllMessage; track $index) {
+
+                        <option [value]="item.id">{{item.messageName}}</option>
+                    }
+
+                 </select>
+
+                  <ng-container *ngIf="formData.controls['MessageId'].invalid && formData.controls['MessageId'].touched">
+                      <small *ngIf="formData.controls['MessageId'].hasError('required')"> اسم الرساله مطلوب</small>
+                 </ng-container>
+        </div>
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-4">
+                 <label for="phonenumber4" class="form-label">رقم الجوال </label>
+                 <input type="text" name="" id="phonenumber4" class="form-control" placeholder="المدفوع" formControlName="PhoneNumber">
+                  <ng-container *ngIf="formData.controls['PhoneNumber'].invalid && formData.controls['PhoneNumber'].touched">
+                      <small *ngIf="formData.controls['PhoneNumber'].hasError('required')"> رقم الفون مطلوب</small>
+                 </ng-container>
+        </div>
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-4">
+                 <label for="flexRadioDefault1" class="form-label">طريقه الارسال</label>
+
+                 <div class="transmission  d-flex align-items-center ">
+              <div class="form-check">
+  <input  type="radio" name="flexRadioDefault" id="flexRadioDefault1"  formControlName="MessageType" value="0" checked>
+  <label class="form-check-label" for="flexRadioDefault1">
+    SMS
+  </label>
+</div>
+<div class="form-check">
+  <input  type="radio"  name="flexRadioDefault" id="flexRadioDefault2" formControlName="MessageType" value="1">
+  <label class="form-check-label" for="flexRadioDefault2">
+    واتساب
+  </label>
+</div>
+
+ <ng-container *ngIf="formData.controls['MessageType'].invalid && formData.controls['MessageType'].touched">
+                      <small *ngIf="formData.controls['MessageType'].hasError('required')">  طريقه الارسال مطلوبه</small>
+                 </ng-container>
+                 </div>
+   
+        </div>
+
+    
+
+    
+
+               
+    </div>
+  
+
+</div>
+    
+
+            <div class="btn_add_reset">
+                <button type="button">طباعه</button> 
+                <button type="submit">اضافه</button>
+                
+            </div>
+         
+        
+    </form>
+ </div>
+ 

@@ -1,0 +1,135 @@
+ <h3 class="title-page">الادوات <img src="assets/dashboard/iconarrowdouble.png"  class="mx-1" alt="icon"> <span>صرف الرواتب </span></h3>
+
+
+    <form class="forms_dashboard" [formGroup]="exChangeForms" (ngSubmit)="onSubmit()">
+      
+
+      
+        <div class="row">
+
+     
+
+<div class="mb-3 col-sm-12 col-md-6 ">
+                 <label for="arestnumber" class="form-label">رقم السند </label>
+                 <input type="text" class="form-control" id="arestnumber" placeholder="رقم السند">
+        </div>
+        <div class="mb-3 col-sm-12 col-md-6">
+                 <label for="date" class="form-label">التاريخ</label>
+               <input type="date" class="form-control" id="date" placeholder="التاريخ">
+                  
+        </div>
+      
+</div>
+
+
+<div class="row m-0">
+
+
+        <div class="table-responsive pe-0">
+<table class="table table-striped mt-4">
+  <thead>
+    <tr>
+      <th scope="col">م</th>
+      <th scope="col"> اسم الموظف</th>
+      <th scope="col">الراتب</th>
+      <th scope="col">الصندوق</th>
+      <th scope="col"> عدد أيام الغياب</th>
+      <th scope="col">تسديد سلفه</th>
+      <th scope="col">جزاءات</th>
+      <th scope="col">مكافاءات </th>
+      <th scope="col">صافي الراتب </th>
+      <th scope="col">الادوات</th>
+      <!-- <th scope="col">Handle</th> -->
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">م</th>
+      <td>
+
+        <select  class="form-select" (change)="ChangeSelectEmp($event)">
+          <option value="" disabled selected>اسم الموظف</option>
+          @for (item of getNameEmployee; track $index) {
+            <option [value]="item.id">{{item.fullName}}</option>
+          }
+        </select>
+      </td>
+      <td><input type="text" name="" id="" value="0" [value]="this.selectPrice ?? 0" class="form-control text-center" readonly style="pointer-events: none;"></td>
+      <td><select name="" id="" class="form-select">
+        <option value="" selected disabled>-----</option>
+        <option value="0">صندوق</option>
+        <option value="1">بنك</option>
+      </select></td>
+      <td><input type="text" value="0" class="form-control text-center" ></td>
+      <td><input type="text" value="00.00" class="form-control text-center"></td>
+      <td><input type="text" value="0" class="form-control text-center"></td>
+      <td><input type="text" value="00.00" class="form-control text-center"></td>
+      <td><input type="text" value="00.00" class="form-control text-center"></td>
+   
+    
+       <td>
+       <button class="" type="submit" style="width: 126px; height: 32px; background-color: #16601A; color: white; border:0; font-size: 14px; font-weight: 400; border-radius: 4px;"> حفظ</button>
+
+       </td>
+    </tr>
+    <tr>
+      <th scope="row">م</th>
+      <td>محمد احمد ابراهيم</td>
+      <td>123456789101112</td>
+      <td>10%</td>
+      <td>123</td>
+      <td>123</td>
+      <td>123</td>
+      <td>123</td>
+      <td>123</td>
+      <!-- <td>@mdo</td> -->
+       <td class="btn_table">
+       <button class="btn btn-success ms-3"> <i class="fa-solid fa-pen-to-square"></i></button>
+       <button class="btn btn-danger"> <i class="fa-solid fa-trash"></i></button>
+
+       </td>
+    </tr>
+     <tr>
+      <th scope="row">م</th>
+      <td>محمد احمد ابراهيم</td>
+      <td>123456789101112</td>
+        <td>10%</td>
+      <td>123</td>
+      <td>123</td>
+        <td>123</td>
+      <td>123</td>
+      <td>123</td>
+       <td>
+       <button class="btn btn-success ms-3"> <i class="fa-solid fa-pen-to-square"></i></button>
+       <button class="btn btn-danger"> <i class="fa-solid fa-trash"></i></button>
+
+       </td>
+    </tr>
+  </tbody>
+</table>   
+
+       
+            </div>
+ 
+
+
+
+          
+
+
+
+
+
+            
+            
+
+           
+
+
+           
+</div>
+      
+            
+           
+        
+    </form>

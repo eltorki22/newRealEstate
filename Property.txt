@@ -1,0 +1,8 @@
+http://gtsdev-001-site17.atempurl.com/
+
+http://gtsdev-001-site17.atempurl.com/swagger/index.html
+
+{
+  "username": "admin",
+  "password": "12345678"
+}

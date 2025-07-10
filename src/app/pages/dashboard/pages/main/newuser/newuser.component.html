@@ -1,0 +1,137 @@
+  <h3 class="title-page" appIntersection="fade-in">الرئيسيه <img src="assets/dashboard/iconarrowdouble.png"  class="mx-1" alt="icon"> <span>مستخدم جديد</span></h3>
+
+    <form class="forms_dashboard" appIntersection="fade-in" [formGroup]="formData" (ngSubmit)="onSubmit()">
+        <div class="row">
+
+     <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
+                 <label for="fullName" class="form-label">الاسم بالكامل</label>
+                 <input type="text" class="form-control" id="fullName" placeholder="الاسم بالكامل" formControlName="fullName">
+                   <ng-container *ngIf="formData.controls['fullName'].invalid && formData.controls['fullName'].touched">
+                      <small *ngIf="formData.controls['fullName'].hasError('required')"> الاسم بالكامل مطلوب</small>
+                 </ng-container>
+        </div>
+
+<div class="mb-3 col-sm-12 col-md-6 col-lg-3">
+                 <label for="userName" class="form-label">اسم المستخدم</label>
+                 <input type="text" class="form-control" id="userName" placeholder="الاسم" formControlName="userName">
+                   <ng-container *ngIf="formData.controls['userName'].invalid && formData.controls['userName'].touched">
+                      <small *ngIf="formData.controls['userName'].hasError('required')">اسم المستخدم مطلوب</small>
+                 </ng-container>
+        </div>
+
+
+
+           <!-- <ng-container *ngIf="dataForm.controls['FullName'].invalid && dataForm.controls['FullName'].touched">
+                      <small *ngIf="dataForm.controls['FullName'].hasError('required')">اسم المالك مطلوب</small>
+                 </ng-container>
+      -->
+                <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
+                 <label for="email" class="form-label">البريد الالكتروني 
+                 </label>
+                 <input type="text" class="form-control" id="email" placeholder="الايميل" name="email" formControlName="email">
+                   <ng-container *ngIf="formData.controls['email'].invalid && formData.controls['email'].touched">
+                      <small *ngIf="formData.controls['email'].hasError('required')">  البريد الإلكتروني مطلوب</small>
+                      <small *ngIf="formData.controls['email'].hasError('email')">الرجاء إدخال بريد إلكتروني صحيح</small>
+                 </ng-container>
+        </div>
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
+                 <label for="phonenumber" class="form-label">رقم الجوال</label>
+                 <input type="text" class="form-control" id="phonenumber" placeholder="الرقم" formControlName="phoneNumber" maxlength="11">
+                  <ng-container *ngIf="formData.controls['phoneNumber'].invalid && formData.controls['phoneNumber'].touched">
+                      <small *ngIf="formData.controls['phoneNumber'].hasError('required')"> رقم الجوال مطلوب</small>
+                 </ng-container>                 
+        </div>
+
+        
+       
+            <!-- </div> -->
+ 
+
+
+
+
+
+
+<!-- 
+  <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
+                 <label for="group" class="form-label"> المجموعه
+                 </label>
+                <select class="form-select" id="group" aria-label="Default select example" >
+                    <option disabled selected>اختر المجموعه</option>
+                       
+                </select>
+        </div> -->
+  <div class="mb-3 col-sm-12 col-md-2 ">
+             
+  <!-- </div> -->
+               <label for="status" class="form-label">حالة المستخدم</label>
+
+  <div class="form-check mt-1 d-flex align-items-center"> <!-- خليها mt بدل mb -->
+    <input type="checkbox" class="checkbox" id="status" #inpChecked  checked (change)="userChange($event)">
+    <label class="form-check-label" for="status" >نشط</label>
+  </div>   
+                
+        </div>
+
+       
+
+
+           
+</div>
+      
+            
+            <div class="btn_add_reset">
+                <button type="reset" (click)="resetData()">جديد</button> 
+                <!-- <button type="submit">اضافه</button>
+                  -->
+ <button type="submit" [ngStyle]="{'background-color':btnText == 'Add' ? '#16601A':'#fd7e14'}">{{btnText=="Add" ? "اضافه" : 'تعديل'}}</button>                
+            </div>
+         
+        
+    </form>
+<div class="table-responsive" appIntersection="fade-in">
+<table class="table table-striped mt-4">
+  <thead>
+    <tr>
+      <th scope="col">م</th>
+      <th scope="col">اسم المستخدم</th>
+      <th scope="col"> البريد الالكتروني</th>
+      <th scope="col"> رقم الجوال</th>
+      <th scope="col">حاله المستخدم</th>
+      <th scope="col">الادوات</th>
+      <!-- <th scope="col">Handle</th> -->
+    </tr>
+  </thead>
+  <tbody>
+    @for (item of getAllData; track $index) {
+    <tr>
+      <th scope="row">{{$index + 1}}</th>
+      <td>{{item.userName}}</td>
+      <td>{{item.email}}</td>
+      <td>{{item.phoneNumber}}</td>
+      <td>{{item.isActive ? 'نشط' : 'غير نشط'}}</td>
+       <td>
+       <button class="btn btn-success ms-3" (click)="getUpdateData(item.userId)"> <i class="fa-solid fa-pen-to-square"></i></button>
+       <button class="btn btn-danger" (click)="DeleteModel(item.userId)"> <i class="fa-solid fa-trash"></i></button>
+
+       </td>
+    </tr>
+    }
+
+
+  </tbody>
+</table>   
+</div>
+
+
+<div class="modal_delete" [ngClass]="{'active':this.show}">
+<app-confirm-delete (toggleModal)="onClose()" (onDelete)="deleteConfirmed($event)" [itemId]="this.deleteId"></app-confirm-delete>
+</div>
+
+
+
+<app-pagination
+  [totalPages]="getAllData?.paginationInfo?.totalPagesCount"
+  [currentPage]="pageIndex"
+  (pageChange)="onPageChanged($event)">
+</app-pagination>

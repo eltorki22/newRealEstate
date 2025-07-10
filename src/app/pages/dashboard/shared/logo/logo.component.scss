@@ -1,0 +1,49 @@
+svg{
+ 
+   transform: scale(0.5);
+  transform-origin: top right;
+
+  display: block; /* بدل inline */
+  margin: 0 auto;
+  padding: 0;
+  line-height: 0; /* يمنع المساحة السفلية */
+  overflow: visible; /* لو فيه عناصر خارجة ما تنقصش */
+}
+.circle_spacing {
+    fill:none;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: changeSvg 4s linear infinite; /* مدة أطول تشمل الثبات */
+
+}
+
+@keyframes changeSvg {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+  50% {
+    stroke-dashoffset: 0; /* الشكل يكتمل */
+  }
+  100% {
+    stroke-dashoffset: 1000; /* يفضل ثابت */
+  }
+}
+
+.text_svg{
+  stroke: #16601A;
+  fill:none;
+  stroke-dasharray: 8,1;
+  stroke-dashoffset: 1000;
+    animation: changeText 4s linear infinite;
+}
+
+@keyframes changeText {
+  0%{
+    stroke-dashoffset:1000 ;
+  }
+
+  100%{
+    stroke-dashoffset: 0;
+  }
+  
+}

@@ -1,0 +1,36 @@
+<header>
+    <div class="container">
+
+ <div class="setting">
+
+
+    <div class="dropdown">
+ <div class="btn-group" dropdown>
+  <button id="button-basic" dropdownToggle type="button" class="dropdown-toggle border-0 d-flex align-items-center flex-row-reverse"
+          aria-controls="dropdown-basic">
+    <img src="assets/dashboard/user.png" class="ms-2" alt="user">      
+   محمد احمد
+  <span class="caret me-2"></span>  
+     
+  </button>
+  <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
+      role="menu" aria-labelledby="button-basic">
+    <li role="menuitem"><a class="dropdown-item" routerLink="profile">الملف الشخصي</a></li>
+    <li role="menuitem"><a class="dropdown-item" routerLink="changepassword">تغيير كلمه المرور</a></li>
+    <!-- <li role="menuitem"><a class="dropdown-item" href="#">Something else here</a></li> -->
+    <li class="divider dropdown-divider"></li>
+    <li role="menuitem"><a class="dropdown-item" (click)="logout()">تسجيل خروج</a>
+    </li>
+  </ul>
+</div>
+    </div>
+   
+ </div>
+
+
+    <div class="bars" (click)="changeData()">  
+        <i class="fa-solid fa-bars" [ngClass]="sidebarVisible ? 'fa-xmark' : 'fa-bars'"></i>
+    </div>
+    </div>
+
+</header>

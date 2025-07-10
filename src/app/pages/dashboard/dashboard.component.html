@@ -1,0 +1,16 @@
+<!-- <div class="row w-100 m-0"> -->
+    
+<div class="p-0 content-area" [ngClass]="{'with-sidebar':isSidebarVisible}">
+            <app-header (showSidebar)="handleSidebarChange($event)"></app-header>
+            <div class=" direction container">
+    <router-outlet></router-outlet>
+            </div>
+        
+    </div>
+    <div class="p-0 aside_dashboard" [ngClass]="{'active':isSidebarVisible}" >
+<app-sidebar></app-sidebar>
+    </div>
+
+
+
+

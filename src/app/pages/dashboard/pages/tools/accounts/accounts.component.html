@@ -1,0 +1,117 @@
+ <h3 class="title-page">الادوات <img src="assets/dashboard/iconarrowdouble.png"  class="mx-1" alt="icon"> <span> الحسابات</span></h3>
+
+
+  <form class="forms_dashboard" [formGroup]="accountForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+
+     
+
+<div class="mb-3 col-sm-12 col-md-6 col-lg-3">
+                 <label for="username" class="form-label">الاسم</label>
+                 <input type="text" class="form-control" id="username" placeholder="الاسم" formControlName="accountName">
+                   <ng-container *ngIf="accountForm.controls['accountName'].invalid && accountForm.controls['accountName'].touched">
+                      <small *ngIf="accountForm.controls['accountName'].hasError('required')"> الاسم مطلوب</small>
+                 </ng-container>
+        </div>
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
+                 <label for="type" class="form-label">النوع</label>
+                   <select class="form-select" id="type" aria-label="Default select example" formControlName="accountType">
+                    <option value="" disabled selected>نوع الحساب</option>
+                    <option value="صندوق">صندوق</option>
+                    <option value="بنك">بنك</option>
+                      
+                </select>
+                    <ng-container *ngIf="accountForm.controls['accountType'].invalid && accountForm.controls['accountType'].touched">
+                      <small *ngIf="accountForm.controls['accountType'].hasError('required')"> نوع الحساب مطلوب</small>
+                 </ng-container>
+        </div>
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
+                 <label for="accountnumber" class="form-label">رقم الحساب</label>
+                 <input type="text" class="form-control" id="accountnumber" placeholder="الرقم"  (keypress)="validationNumber($event)" formControlName="accountNumber">
+                      <ng-container *ngIf="accountForm.controls['accountNumber'].invalid && accountForm.controls['accountNumber'].touched">
+                      <small *ngIf="accountForm.controls['accountNumber'].hasError('required')"> رقم الحساب مطلوب</small>
+                 </ng-container>
+        </div>
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
+                 <label for="ayban" class="form-label"> الايبان</label>
+                 <input type="text" class="form-control" id="ayban" placeholder="الرقم" (keypress)="validationNumber($event)" formControlName="ibanNumber">
+                     <ng-container *ngIf="accountForm.controls['ibanNumber'].invalid && accountForm.controls['ibanNumber'].touched">
+                      <small *ngIf="accountForm.controls['ibanNumber'].hasError('required')">  رقم الايبان مطلوب</small>
+                 </ng-container>
+        </div>
+     
+        
+       
+            <!-- </div> -->
+ 
+
+
+
+
+
+
+
+
+</div>
+      
+            
+            <div class="btn_add_reset">
+                <button type="reset" (click)="resetData()">جديد</button> 
+                <!-- <button type="submit">اضافه</button> -->
+                   <button type="submit" [ngStyle]="{'background-color':btnText == 'Add' ? '#16601A':'#fd7e14'}">{{btnText=="Add" ? "اضافه" : 'تعديل'}}</button>
+                
+            </div>
+         
+        
+    </form>
+<div class="table-responsive">
+<table class="table table-striped mt-4">
+  <thead>
+    <tr>
+      <th scope="col">م</th>
+      <th scope="col">اسم الحساب</th>
+      <th scope="col"> نوع الحساب</th>
+      <th scope="col">رقم الحساب</th>
+      <th scope="col">الايبان</th>
+      <th scope="col">الادوات</th>
+      <!-- <th scope="col">Handle</th> -->
+    </tr>
+  </thead>
+  <tbody>
+    @for (item of accountData.rows; track $index) {
+  <tr>
+      <th scope="row">{{$index + 1}}</th>
+      <td>{{item.accountName}}</td>
+      <td>{{item.accountType}}</td>
+      <td>{{item.accountNumber}}</td>
+      <td>{{item.ibanNumber}}</td>
+      <!-- <td>@mdo</td> -->
+       <td>
+       <button class="btn btn-success ms-3" (click)="getupdateData(item.id)"> <i class="fa-solid fa-pen-to-square"></i></button>
+       <button class="btn btn-danger" (click)="deleteModel(item.id)"> <i class="fa-solid fa-trash"></i></button>
+
+       </td>
+    </tr>
+
+
+    }
+  
+
+  </tbody>
+</table>   
+</div>
+    
+<!-- </div> -->
+
+
+<div class="modal_delete" [ngClass]="{'active':this.show}">
+<app-confirm-delete (toggleModal)="onClose()" (onDelete)="deleteConfirmed($event)" [itemId]="this.deleteId"></app-confirm-delete>
+</div>
+
+
+<app-pagination
+  [totalPages]="accountData?.paginationInfo?.totalPagesCount"
+  [currentPage]="pageIndex"
+  (pageChange)="onPageChanged($event)">
+</app-pagination>
+

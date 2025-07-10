@@ -1,0 +1,20 @@
+<div id="confirmModal" class="modal-overlay">
+  <div class="modal-container">
+    <div class="modal-header">
+      <svg xmlns="http://www.w3.org/2000/svg" class="modal-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <h2>تأكيد الحذف</h2>
+      <button class="close-btn" aria-label="إغلاق" (click)="onClose()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <p>هل أنت متأكد أنك تريد حذف هذا العنصر؟</p>
+      <small>لن تتمكن من استعادته لاحقًا!</small>
+    </div>
+    <div class="modal-footer">
+      <button id="confirmBtn" class="btn btn-danger" (click)="onDeleteClick()">نعم، احذف</button>
+      <button id="cancelBtn" class="btn btn-secondary" (click)="onClose()">إلغاء</button>
+    </div>
+  </div>
+</div>

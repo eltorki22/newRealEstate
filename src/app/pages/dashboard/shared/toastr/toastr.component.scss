@@ -1,0 +1,33 @@
+.toaster {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  min-width: 200px;
+  max-width: 400px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  color: white;
+  font-weight: 500;
+  z-index: 9999;
+  opacity: 0;
+  transition: 0.3s ease;
+  transform: translateY(-20px);
+  font-size: 14px;
+  text-align: center;
+  font-weight: 600;
+  visibility: hidden;
+
+  &.active {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+  }
+
+  &.success {
+    background-color: #28a745;
+  }
+
+  &.error {
+    background-color: #dc3545;
+  }
+}

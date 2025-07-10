@@ -1,0 +1,16 @@
+.forms_dashboard{
+    background-color: transparent;
+    .row:first-child{
+           width: 100%;
+    min-height: 100px;
+    // background-color: $secondary-color;
+    padding: 25px;
+    // border-radius: $border-radius-sm;
+        background-color: #EEF5EF;
+        border-radius: 4px;
+    }
+}
+
+.table tbody tr td{
+    min-width: 126px !important;
+}

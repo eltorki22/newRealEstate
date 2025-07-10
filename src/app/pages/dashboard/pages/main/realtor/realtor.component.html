@@ -1,0 +1,193 @@
+  <h3 class="title-page" appIntersection="fade-in">الرئيسيه <img src="assets/dashboard/iconarrowdouble.png"  class="mx-1" alt="icon"> <span>السمسار</span></h3>
+
+    <form class="forms_dashboard" appIntersection="fade-in" [formGroup]="formData" (ngSubmit)="onSubmit()">
+        <div class="row">
+
+
+
+<div class="mb-3 col-sm-12 col-md-6 col-lg-3">
+                 <label for="username" class="form-label">الاسم</label>
+                 <input type="text" class="form-control" id="username" placeholder="الاسم" formControlName="fullName">
+                  <ng-container *ngIf="formData.controls['fullName'].invalid && formData.controls['fullName'].touched">
+                      <small *ngIf="formData.controls['fullName'].hasError('required')">اسم السمسار مطلوب</small>
+                 </ng-container>
+        </div>
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
+                 <label for="Nationality" class="form-label">الجنسيه</label>
+
+                   <select class="form-select" id="Nationality" aria-label="Default select example" formControlName="nationality">
+                    <option value="" disabled selected>الجنسيه</option>
+
+                      @for (item of getAllNationality; track $index) {
+                        <option [value]="item.nationality_ar">{{item.nationality_ar}}</option>
+                      }
+                </select>
+                  <ng-container *ngIf="formData.controls['nationality'].invalid && formData.controls['nationality'].touched">
+                      <small *ngIf="formData.controls['nationality'].hasError('required')">رجاء اختيار الجنسيه</small>
+                 </ng-container>
+        </div>
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
+                 <label for="phonenumber" class="form-label">رقم الجوال</label>
+                 <input type="text" maxlength="11"  (keypress)="validateNumber($event)" class="form-control" id="phonenumber" placeholder="الرقم" formControlName="phoneNumber">
+                   <ng-container *ngIf="formData.controls['phoneNumber'].invalid && formData.controls['phoneNumber'].touched">
+                      <small *ngIf="formData.controls['phoneNumber'].hasError('required')">رقم التليفون مطلوب</small>
+                 </ng-container>
+        </div>
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
+                 <label for="email" class="form-label">البريد الالكتروني
+                 </label>
+                 <input type="text" class="form-control" id="email" placeholder="الايميل" formControlName="email">
+                  <ng-container *ngIf="formData.controls['email'].invalid && formData.controls['email'].touched">
+                      <small *ngIf="formData.controls['email'].hasError('required')">  البريد الإلكتروني مطلوب</small>
+                      <small *ngIf="formData.controls['email'].hasError('email')">الرجاء إدخال بريد إلكتروني صحيح</small>
+                 </ng-container>
+        </div>
+
+
+            <!-- </div> -->
+
+
+
+
+
+
+
+
+  <div class="mb-3 col-sm-12 col-md-6 col-lg-4">
+                 <label for="Identitytype" class="form-label">نوع الهويه
+                 </label>
+                <select class="form-select" id="Identitytype" aria-label="Default select example" formControlName="idType">
+                    <option value="" disabled selected>النوع</option>
+                        <option value="هويه الوطنيه">هويه الوطنيه</option>
+                        <option value="هويه مقيم (الاقامه)">هويه مقيم (الاقامه)</option>
+                        <option value="هويه زائر">هويه زائر</option>
+                        <option value="هويه خليجيه (لمواطني دول الخليج)">هويه خليجيه (لمواطني دول الخليج)</option>
+                        <option value="هويه زائر (لليمنيين)">هويه زائر (لليمنيين)</option>
+                        <option value="وثيقه سفر اضطراريه (للسعوديين مؤقتا)"> وثيقه سفر اضطراريه (للسعوديين مؤقتا)</option>
+                        <option value="بطاقه الاحوال المدنيه  (قديمه قبل الهويه الوطنيه)">بطاقه الاحوال المدنيه  (قديمه قبل الهويه الوطنيه)</option>
+                        <option value="هويه دبلوماسيه">هويه دبلوماسيه</option>
+                        <option value="هويه خاصه (للمسؤولين والموظفين الرسميين)">هويه خاصه (للمسؤولين والموظفين الرسميين)</option>
+                        <option value="هويه طالب (لبعض المعاهد الأمنيه والعسكريه)">هويه طالب (لبعض المعاهد الأمنيه والعسكريه)</option>
+                </select>
+                  <ng-container *ngIf="formData.controls['idType'].invalid && formData.controls['idType'].touched">
+                      <small *ngIf="formData.controls['idType'].hasError('required')">الرجاء اختيار نوع الهوية</small>
+                 </ng-container>
+        </div>
+
+              <div class="mb-3 col-sm-12 col-md-6 col-lg-4">
+                 <label for="idnumber" class="form-label">رقم الهويه
+                 </label>
+                 <input type="text" class="form-control" id="idnumber" (keypress)="validateNumber($event)" placeholder="الرقم" formControlName="idNumber">
+                       <ng-container *ngIf="formData.controls['idNumber'].invalid && formData.controls['idNumber'].touched">
+                      <small *ngIf="formData.controls['idNumber'].hasError('required')">رقم الهويه مطلوب</small>
+                 </ng-container>
+        </div>
+
+              <div class="mb-3 col-sm-12 col-md-6 col-lg-4">
+                 <label for="copy" class="form-label d-block"> نسخه الهويه
+                 </label>
+                 <input type="file" id="copy" class="d-none" (change)="onFileSelected($event)">
+                 <label for="copy" class="form-label d-flex copy_identity" (click)="markAsFileTouched()">
+                    <div class="icon"><i class="fa-solid fa-download"></i> </div>
+                     <input type="text" class="form-control" id="copy" placeholder="نسخه" [value]="fileName" readonly style="pointer-events: none;">
+                 </label>
+
+
+            </div>
+
+
+
+
+ <div class="mb-3 bouns">
+                <label for="rate" class="form-label">نسبه البونص</label>
+                 <div class="row align-items-center">
+                    <div class="col-sm-6 col-md-3">
+                        <input type="radio" name="bonusType" formControlName="bonusType" id="bounsrate" [value]="'rate'">
+                        <label for="bounsrate" data-rate="bouns">نسبه البونص</label>
+
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <input type="radio" name="bonusType" formControlName="bonusType"  checked id="bounsvalue" [value]="'value'" >
+                        <label for="bounsvalue" data-rate="bouns">قيمه البونص</label>
+
+
+                    </div>
+
+
+                    <div class="col-sm-12 col-md-6">
+                        <input type="text" #inpBouns name="value" id="" class="form-control" (focus)="validationBouns($event)" (input)="validationBouns($event)"   [placeholder]="formData.controls['bonusType'].value == 'value' ? 'قيمه' : 'نسبه'">
+                      
+                    </div>
+
+
+                    <div class="col-sm-12 text-end"> 
+   <small *ngIf="this.bonusErrorMessage" style="    display: block;
+    text-align: center;
+    margin: 0;
+    margin-right: 124px;
+    
+">{{bonusErrorMessage}}</small>
+                    </div>
+                   
+
+                 </div>
+</div>
+
+
+
+</div>
+
+
+            <div class="btn_add_reset">
+                <button type="reset">جديد</button>
+                <button type="submit" [ngStyle]="{'background-color':btnText=='Add' ? '#16601A' : '#fd7e14'}">{{btnText == 'Add'  ? 'اضافه' : 'تعديل'}}</button>
+
+            </div>
+
+
+    </form>
+<div class="table-responsive" appIntersection="fade-in">
+<table class="table table-striped mt-4">
+  <thead>
+    <tr>
+      <th scope="col">م</th>
+      <th scope="col">اسم المالك</th>
+      <th scope="col">رقم الجوال</th>
+      <th scope="col">نسبة البونص</th>
+      <th scope="col">قيمه البونص</th>
+      <th scope="col">الادوات</th>
+      <!-- <th scope="col">Handle</th> -->
+    </tr>
+  </thead>
+  <tbody>
+    @for (item of getAllData.rows; track $index) {
+   <tr>
+      <th scope="row">{{$index + 1}}</th>
+      <td>{{item?.fullName}}</td>
+      <td>{{item.phoneNumber}}</td>
+      <td>{{item.commissionPercentage}}{{'%'}} </td>
+      <td>{{item.commissionAmount}}</td>
+       <td>
+       <button class="btn btn-success ms-3" (click)="getDataUpdate(item.id)"> <i class="fa-solid fa-pen-to-square"></i></button>
+       <button class="btn btn-danger" (click)="DeleteModel(item.id)"> <i class="fa-solid fa-trash"></i></button>
+       </td>
+    </tr>
+    }
+
+
+
+  </tbody>
+</table>
+</div>
+
+
+<div class="modal_delete" [ngClass]="{'active':this.show}">
+<app-confirm-delete (toggleModal)="onClose()" (onDelete)="deleteConfirmed($event)" [itemId]="this.deleteId"></app-confirm-delete>
+</div>
+
+
+<app-pagination
+  [totalPages]="getAllData?.paginationInfo?.totalPagesCount"
+  [currentPage]="pageIndex"
+  (pageChange)="onPageChanged($event)">
+</app-pagination>

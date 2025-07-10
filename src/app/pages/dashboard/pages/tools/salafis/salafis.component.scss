@@ -1,0 +1,194 @@
+@use '../../../../../../styles/abstracts/vars' as *;
+@use '../../../../../../styles/abstracts/mixins' as *;
+.search{
+        position: relative;
+
+        .filter_search{
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            input{
+                color: #CECECE;
+            }
+            span{
+                color: #7F7F7F;
+            }
+            i{
+                color: #7F7F7F;
+            }
+
+            .drop-down{
+                position: absolute;
+                right: -102px;
+                opacity: 0;
+                visibility: hidden;
+                transition: 0.3s;
+                &.show{
+                    opacity: 1;
+                    visibility: visible;
+                }
+            
+                top:calc(100% + 15px);
+
+                &::before{
+                   content: "";
+    position: absolute;
+    top: -16px;
+    // right: 11px;
+    right:115px;
+    border-width: 8px;
+    border-style: solid;
+    border-color: transparent transparent $main-color transparent;
+    
+                }
+             
+                ul{
+                 
+                    
+                    list-style: none;
+            
+                        width: 150px;
+                background-color: white;
+                padding: 10px;
+                   border-radius: $border-radius-sm;
+                box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.271); 
+
+                    li{
+                        a{
+                            color: $black-color;
+                            text-decoration: none;
+                            padding: 5px;
+                            font-size: 14px;
+                            width: 100%;
+                            display: block;
+                            margin: 5px;
+                            
+
+                            &.active{
+                                
+                            background-color: $main-color;
+                            color: $white-color;
+                            }
+                        }
+                    }
+                }
+                
+            }
+        }
+    }
+.button_data{
+    text-align: left;
+    button{
+        margin: 20px 10px;
+        width: 99px;
+        height: 32px;
+
+        border: 1px solid $main-color;
+        border-radius: $border-radius-sm;
+        background-color: transparent;
+        color: $main-color;
+        
+    }
+}
+
+
+.forms_dashboard{
+        // background-color: transparent;
+        
+        .row_part{
+            background-color: $background-color;
+            // margin-bottom: 40px;
+                padding: 15px;
+        }
+
+        .readonly_input{
+            position: relative;
+            // input{
+            //     // padding-right: 50px;
+            //         padding-right: 74px;
+            // }
+            input{
+                pointer-events: none;
+            }
+            label{
+                    position: absolute;
+                    top: 4px;
+                    right: 22px;z-index: 1000;
+            }
+        }
+}
+
+.form_search{
+    position: relative;
+
+
+    input{
+        padding-left: 30px;
+        background-color: #7F7F7F;
+        font-size: 12px;
+        font-weight: 400;
+
+    }
+    button{
+        position: absolute;
+        background-color: transparent;
+        border: 0;
+        left: 18px;
+    top: 4px;
+    color: #7F7F7F;
+    }
+}
+
+.nummor_eye{
+    position: relative;
+    button{
+            position: absolute;
+    left: 4px;
+    top: 4px;
+    width: 25px;
+    height: 25px;
+
+    i{
+        position: absolute;
+        left: 13%;
+        top: 24%;
+    }
+    }
+}
+
+.transmission{
+
+    .form-check{
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    input[type='radio']{
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        width: 14px;
+       height: 14px;
+       border: 2px solid $main-color;
+       border-radius: 50%;
+
+       position: relative;
+       &:checked{
+        &::after{
+            content: '';
+            position: absolute;
+    width: 9px;
+    height: 9px;
+        background-color: $main-color;
+        border-radius: 50%;
+        left: 1px;
+        top: 1px;
+
+        }
+       
+
+       }
+        
+    }
+}

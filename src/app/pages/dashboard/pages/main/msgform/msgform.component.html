@@ -1,0 +1,78 @@
+  <h3 class="title-page" appIntersection="fade-in">الرئيسيه <img src="assets/dashboard/iconarrowdouble.png"  class="mx-1" alt="icon"> <span>نموذج الرسايل</span></h3>
+
+    <form class="forms_dashboard" appIntersection="fade-in" [formGroup]="formData" (ngSubmit)="onSubmit()">
+        <div class="row">
+
+     
+
+<div class="mb-3 col-sm-12 ">
+                 <label for="msgname" class="form-label">الاسم</label>
+                 <input type="text" class="form-control mt-2" id="msgname" placeholder="الاسم" formControlName="messageName">
+
+                   <ng-container *ngIf="formData.controls['messageName'].invalid && formData.controls['messageName'].touched">
+                      <small *ngIf="formData.controls['messageName'].hasError('required')">اسم الرساله مطلوب</small>
+                 </ng-container>
+        </div>
+<div class="mb-3 col-sm-12 ">
+                 <label for="msgcontent" class="form-label">الرساله</label>
+                 <textarea name="" id="msgcontent" placeholder="اكتب المحتوي" class="form-control" style="height: 124px; color: #7F7F7F;" formControlName="message"></textarea>
+
+                  <ng-container *ngIf="formData.controls['message'].invalid && formData.controls['message'].touched">
+                      <small *ngIf="formData.controls['message'].hasError('required')"> محتوي الرساله مطلوب</small>
+                 </ng-container>
+        </div>
+     
+           
+
+
+           
+</div>
+      
+            
+            <div class="btn_add_reset">
+                <button type="reset" (click)="resetDataForm()">جديد</button> 
+                <!-- <button type="submit">اضافه</button> -->
+                  <button type="submit" [ngStyle]="{'background-color':btnText == 'Add' ? '#16601A':'#fd7e14'}">{{btnText=="Add" ? "اضافه" : 'تعديل'}}</button>
+                
+            </div>
+         
+        
+    </form>
+<div class="table-responsive" appIntersection="fade-in">
+<table class="table table-striped mt-4">
+  <thead>
+    <tr>
+      <th scope="col">م</th>
+      
+      <th scope="col">الاسم</th>
+      <th scope="col">الرساله</th>
+      <th scope="col">الادوات</th>
+      <!-- <th scope="col">Handle</th> -->
+    </tr>
+  </thead>
+  <tbody>
+
+    @for (item of getAllData; track $index) {
+   <tr>
+      <th scope="row">{{$index}}</th>
+      <td>{{item.messageName}}</td>
+      <td style="color: #000;">
+        {{item.message}}
+      </td>
+       <td>
+       <button class="btn btn-success ms-3" (click)="getUpdateData(item.id)"> <i class="fa-solid fa-pen-to-square"></i></button>
+       <button class="btn btn-danger" (click)="deleteModel(item.id)"> <i class="fa-solid fa-trash"></i></button>
+
+       </td>
+    </tr>
+    }
+ 
+
+  </tbody>
+</table>   
+</div>
+
+
+<div class="modal_delete" [ngClass]="{'active':this.show}">
+<app-confirm-delete (toggleModal)="onClose()" (onDelete)="deleteConfirmed($event)" [itemId]="this.deleteId"></app-confirm-delete>
+</div>

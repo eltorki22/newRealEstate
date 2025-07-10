@@ -1,0 +1,187 @@
+ <h3 class="title-page" appIntersection="fade-in">الرئيسيه <img src="assets/dashboard/iconarrowdouble.png"  class="mx-1" alt="icon"> <span>الوحده</span></h3>
+
+
+ 
+    <form class="forms_dashboard" appIntersection="fade-in"   [formGroup]="formData" (ngSubmit)="onSubmit()">
+        <div class="row">
+
+     
+
+<div class="mb-3 col-sm-12 col-md-6 col-lg-4">
+                 <label for="apartment" class="form-label">رقم الشقه </label>
+                 <input type="text" class="form-control" id="apartment"  placeholder="رقم الشقه" formControlName="unitNumber">
+                  <ng-container *ngIf="formData.controls['unitNumber'].invalid && formData.controls['unitNumber'].touched">
+                      <small *ngIf="formData.controls['unitNumber'].hasError('required')"> رقم الشقه مطلوب</small>
+                 </ng-container>
+        </div>
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-4">
+                 <label for="nameapartment" class="form-label">اسم الشقه</label>
+               <input type="text" class="form-control" id="nameapartment" placeholder="اسم الشقه" formControlName="unitName">
+                   <ng-container *ngIf="formData.controls['unitName'].invalid && formData.controls['unitName'].touched">
+                      <small *ngIf="formData.controls['unitName'].hasError('required')"> اسم الشقه مطلوب</small>
+                 </ng-container>
+        </div>
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-4">
+                 <label for="numberroom" class="form-label">عدد الغرف</label>
+               <input type="text" class="form-control" id="numberroom" (keypress)="ValidationNumber($event)" placeholder="عدد الغرف" formControlName="roomCount">
+                 <ng-container *ngIf="formData.controls['roomCount'].invalid && formData.controls['roomCount'].touched">
+                      <small *ngIf="formData.controls['roomCount'].hasError('required')"> عدد الغرف مطلوب</small>
+                 </ng-container>
+                  
+        </div>
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-4">
+                 <label for="build" class="form-label">العماره</label>
+                 
+
+                 <div class="d-flex align-items-center">
+ <select class="form-select" id="build" aria-label="Default select example" style="border-radius: 0px 10px 10px 0px;" formControlName="propertyId">
+                    <option value="" disabled selected>العماره</option>
+
+                    @for (item of getBuildingData; track $index) {
+
+                      <option [value]="item.id">{{item.name}}</option>
+                    }
+                        
+                        
+                </select>
+
+                <a   class="refresh" (click)="refreshData()"><i class="fa-solid fa-rotate-right"></i></a>
+                 </div>
+                   <ng-container *ngIf="formData.controls['propertyId'].invalid && formData.controls['propertyId'].touched">
+                      <small *ngIf="formData.controls['propertyId'].hasError('required')">  العماره مطلوبه </small>
+                 </ng-container>
+                 
+                 
+
+        </div>
+        
+
+                <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
+                 <label for="dor" class="form-label">الدور</label>
+                 
+
+                
+ <select class="form-select" id="dor" aria-label="Default select example" formControlName="floorNumber">
+                    <option disabled selected>الدور</option>
+                    <option value="الاول">الاول</option>
+                    <option value="الثاني">الثاني</option>
+                    <option value="الثالث">الثالث</option>
+                    <option value="الرابع">الرابع</option>
+                    <option value="الخامس">الخامس</option>
+                    <option value="السادس">السادس</option>
+                    <option value="السابع">السابع</option>
+                    <option value="الثامن">الثامن</option>
+                    <option value="التاسع">التاسع</option>
+                    <option value="العاشر">العاشر</option>
+                        
+                        
+                </select>
+
+
+
+               <ng-container *ngIf="formData.controls['floorNumber'].invalid && formData.controls['floorNumber'].touched">
+                      <small *ngIf="formData.controls['floorNumber'].hasError('required')"> عدد الغرف مطلوب</small>
+                 </ng-container>
+                 
+                 
+
+        </div>
+        
+       
+            <!-- </div> -->
+ 
+
+
+
+                 <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
+                 <label for="price" class="form-label"> السعر</label>
+               <input type="text" class="form-control" id="price" placeholder="السعر" formControlName="price" (keypress)="ValidationNumber($event)" formControlName="price">
+                  
+                 <ng-container *ngIf="formData.controls['price'].invalid && formData.controls['price'].touched" >
+                      <small *ngIf="formData.controls['price'].hasError('required')">  السعر مطلوب</small>
+                 </ng-container>
+               
+        </div>
+                 <div class="mb-3 col-sm-12 col-md-6 col-lg-12">
+                 <label for="baian" class="form-label"> البيان</label>
+               <textarea type="text" style="height: 124px; padding: 15px; font-size: 12px; font-weight: 400; color: #7F7F7F;" class="form-control" id="baian" placeholder="اكتب المحتوي" formControlName="description"></textarea>
+                                  <ng-container *ngIf="formData.controls['description'].invalid && formData.controls['description'].touched">
+                      <small *ngIf="formData.controls['price'].hasError('required')">  المحتوي مطلوب</small>
+                 </ng-container> 
+        </div>
+
+
+
+
+
+
+            
+            
+
+           
+
+
+           
+</div>
+      
+            
+            <div class="btn_add_reset">
+                <button type="reset">جديد</button> 
+                      <button type="submit" [ngStyle]="{'background-color':btnText == 'Add' ? '#16601A':'#fd7e14'}">{{btnText=='Add' ? "اضافه" : "تعديل"}}</button>
+                
+            </div>
+         
+        
+    </form>
+<div class="table-responsive" appIntersection="fade-in">
+<table class="table table-striped mt-4">
+  <thead>
+    <tr>
+      <th scope="col">م</th>
+      <th scope="col"> رقم الشقه</th>
+      <th scope="col">اسم الشقه</th>
+      <th scope="col">العماره</th>
+      <th scope="col"> الدور</th>
+      <th scope="col"> عدد الغرف</th>
+      <th scope="col"> السعر</th>
+      <th scope="col">الادوات</th>
+      <!-- <th scope="col">Handle</th> -->
+    </tr>
+  </thead>
+  <tbody>
+    @for (item of getAllData.rows; track $index) {
+
+ <tr>
+      <th scope="row">{{$index + 1}}</th>
+      <td>{{item.unitNumber}}</td>
+      <td>{{item.unitName}}</td>
+      <td>{{item.propertyName}}</td>
+      <td>{{item.floorNumber}}</td>
+      <td>{{item.roomCount}}</td>
+      <td>{{item.price}}</td>
+    
+       <td>
+       <button class="btn btn-success ms-3" (click)="getUpdateData(item.id)"> <i class="fa-solid fa-pen-to-square"></i></button>
+       <button class="btn btn-danger" (click)="DeleteModel(item.id)"> <i class="fa-solid fa-trash"></i></button>
+
+       </td>
+    </tr>
+   
+    }
+   
+  </tbody>
+</table>   
+</div>
+
+
+<div class="modal_delete" [ngClass]="{'active':this.show}">
+<app-confirm-delete (toggleModal)="onClose()" (onDelete)="deleteConfirmed($event)" [itemId]="this.deleteId"></app-confirm-delete>
+</div>
+
+
+
+<app-pagination
+  [totalPages]="getAllData?.paginationInfo?.totalPagesCount"
+  [currentPage]="pageIndex"
+  (pageChange)="onPageChanged($event)">
+</app-pagination>

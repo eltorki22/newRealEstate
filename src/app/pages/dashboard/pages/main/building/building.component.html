@@ -1,0 +1,102 @@
+  <h3 class="title-page" appIntersection="fade-in">الرئيسيه <img src="assets/dashboard/iconarrowdouble.png"  class="mx-1" alt="icon"> <span>العماره</span></h3>
+
+
+  
+    <form class="forms_dashboard" appIntersection="fade-in" [formGroup]="formData" (ngSubmit)="onSubmit()">
+        <div class="row">
+
+     
+
+<div class="mb-3 col-sm-12 col-md-6 col-lg-4">
+                 <label for="namebuilding" class="form-label">اسم العماره</label>
+                 <input type="text" class="form-control" id="namebuilding" placeholder="اسم العماره" formControlName="name">
+                   <ng-container *ngIf="formData.controls['name'].invalid && formData.controls['name'].touched">
+                      <small *ngIf="formData.controls['name'].hasError('required')">اسم العماره مطلوب</small>
+                 </ng-container>
+        </div>
+<div class="mb-3 col-sm-12 col-md-6 col-lg-4">
+                 <label for="address" class="form-label">العنوان</label>
+                 <input type="text" class="form-control" id="address" placeholder="العنوان" formControlName="address">
+                     <ng-container *ngIf="formData.controls['address'].invalid && formData.controls['address'].touched">
+                      <small *ngIf="formData.controls['address'].hasError('required')"> العنوان مطلوب</small>
+                 </ng-container>
+        </div> 
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-4">
+                 <label for="username" class="form-label">اسم المالك</label>
+              
+                   <select class="form-select" id="username" aria-label="Default select example" formControlName="ownerId">
+                    <option value="" disabled selected>الاسم</option>
+
+                    @for (item of getAllOwnerData; track $index) {
+                        <option [value]="item.id">{{item.fullName}}</option>
+                    }
+                    
+                        
+                        
+                </select>
+                  <ng-container *ngIf="formData.controls['ownerId'].invalid && formData.controls['ownerId'].touched">
+                      <small *ngIf="formData.controls['ownerId'].hasError('required')"> اسم المالك مطلوب</small>
+                 </ng-container>
+        </div>
+  
+    
+           
+</div>
+      
+            
+            <div class="btn_add_reset">
+                <button type="reset">جديد</button> 
+                <button type="submit" [ngStyle]="{'background-color':btnText == 'Add' ? '#16601A':'#fd7e14'}">{{btnText=='Add' ? "اضافه" : "تعديل"}}</button>
+                
+            </div>
+         
+        
+    </form>
+
+
+<div class="table-responsive" appIntersection="fade-in">
+<table class="table table-striped mt-4">
+  <thead>
+    <tr>
+      <th scope="col">م</th>
+      <th scope="col">اسم العماره</th>
+      <th scope="col">العنوان</th>
+      <th scope="col"> اسم المالك</th>
+      <th scope="col">الادوات</th>
+      <!-- <th scope="col">Handle</th> -->
+    </tr>
+  </thead>
+  <tbody>
+    @for (item of getAllData.rows; track $index) {
+
+  <tr>
+      <th scope="row">{{$index + 1}}</th>
+      <td>{{item.name}}</td>
+      <td>{{item.address}}</td>
+      <td>{{item.ownerName}}</td>
+       <td>
+       <button class="btn btn-success ms-3" (click)="getUpdateData(item.id)"> <i class="fa-solid fa-pen-to-square"></i></button>
+       <button class="btn btn-danger" (click)="deleteData(item.id)"> <i class="fa-solid fa-trash"></i></button>
+
+       </td>
+    </tr>
+    }
+  
+  
+  </tbody>
+</table>   
+</div>
+
+<!-- </div> -->
+<div class="modal_delete" [ngClass]="{'active':this.show}">
+<app-confirm-delete (toggleModal)="onClose()" (onDelete)="deleteConfirmed($event)" [itemId]="this.deleteId"></app-confirm-delete>
+</div>
+
+
+
+
+<app-pagination
+  [totalPages]="getAllData?.paginationInfo?.totalPagesCount"
+  [currentPage]="pageIndex"
+  (pageChange)="onPageChanged($event)">
+</app-pagination>

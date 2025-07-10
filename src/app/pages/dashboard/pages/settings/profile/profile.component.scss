@@ -1,0 +1,16 @@
+@use '../../../../../../styles/abstracts/vars' as *;
+@use '../../../../../../styles/abstracts/mixins' as *;
+
+.imgprofile{
+@include responsive('small'){
+     margin-bottom: 20px;
+ width: 100%;
+
+}
+@include responsive('meduim'){
+ width: 100%;
+ height: 100%;
+
+}
+   
+}

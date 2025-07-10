@@ -1,0 +1,120 @@
+<section class="login">
+    <div class="row me-0">
+        <aside class="col-6" appIntersection="fade-in">
+            <img src="assets/login/landing.png" alt="login">
+        </aside>
+        <div class="col-lg-6 col-md-12 d-flex align-items-center ">
+            <div class="logo" appIntersection="fade-in">
+              <app-logo></app-logo>
+                <!-- <img  src="assets/shared/logo.png" alt="logo" class="w-25 h-25"> -->
+            </div>
+<ng-container #container></ng-container>
+
+<ng-template #login>
+<!-- <div class="rotate"></div> -->
+  <form class="login_card" appIntersection="fade-in"  [formGroup]="Dataform" (ngSubmit)="onSubmit()">
+    
+                <h3>الرجاء إدخال البيانات</h3>
+
+                 <div class="mb-3 w-100 input_icon_email">
+                     <input type="text" class="form-control" id="username" placeholder="اسم المستخدم" name="username" formControlName="username">
+                     <ng-container *ngIf="Dataform.controls['username'].invalid && Dataform.controls['username'].touched">
+                        <small *ngIf="Dataform.controls['username'].hasError('required')">اسم المستخدم مطلوب</small>
+                     </ng-container>
+
+                </div>
+
+                <div class="mb-3 w-100 input_icon_password">
+                   <input type="password" class="form-control" id="password" placeholder="كلمه المرور" formControlName="password">
+                                        <ng-container *ngIf="Dataform.controls['password'].invalid && Dataform.controls['password'].touched">
+                        <small *ngIf="Dataform.controls['password'].hasError('required')">كلمة المرور مطلوبة</small>
+                     </ng-container>
+
+                 </div>
+
+                 <div class="foot_input mb-3">
+
+
+                <a  class="nesset" (click)="otpcode()">هل نسيت كلمة المرور؟</a>
+
+                <div class="form-check checkbox_login"  >
+                   <input type="checkbox" id="exampleCheck1" checked>
+                    <label class="form-check-label" for="exampleCheck1">تذكرني</label>
+
+
+
+                </div>
+                 </div>
+
+
+                 <button type="submit" class="btn_login">دخول</button>
+
+
+            </form>
+</ng-template>
+
+<ng-template #otpcodetem>
+  <!-- <app-otpcode></app-otpcode> -->
+
+
+   <div class="otp-container login_card">
+    <h3 style="margin-bottom: 0;"> OTP code ادخل</h3>
+    <p class="otpcode_content">ادخل رمز التحقق الذي أُرسل إلى البريد الإلكتروني الخاص بك<br>gt******{{'@'}}.com</p>
+
+    <div class="otp-inputs">
+      <input type="text" #otpInput
+  placeholder="-" (input)="onOtpInput($event,i)" *ngFor="let item of otpArray; let i =index" maxlength="1">
+    </div>
+
+    <div class="resend-text">
+      يمكنك اعادة ارسال الرمز بعد <span id="countdown">35</span> ثانية
+    </div>
+
+    <div class="resend-link">اعاده ارسال الرمز ؟</div>
+
+    <button class="submit-btn" (click)="enterData()" >استمرار</button>
+  </div>
+
+
+
+
+
+</ng-template>
+
+
+
+<ng-template #resetpassword>
+  <form class="login_card" [formGroup]="passwordForm" (ngSubmit)="submitNewPassword()">
+    <h3>ادخل كلمه مرور جديده !</h3>
+    <p class="otpcode_content" style="margin-top:-20px;">
+      يجب أن تكون كلمة المرور الجديدة الخاصة بك فريدة من نوعها مقارنة بكلمات المرور التي استخدمتها سابقًا.
+    </p>
+
+    <div class="mb-3 w-100 input_icon_password">
+      <input [type]="showNewPassword ? 'text' : 'password'" class="form-control" placeholder="كلمه المرور الجديده"
+        formControlName="newPassword">
+      <span class="toggle-eye" (click)="showNewPassword = !showNewPassword">
+        <i class="fas" [ngClass]="showNewPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+      </span>
+    </div>
+
+    <div class="mb-3 w-100 input_icon_password">
+      <input [type]="showConfirmPassword ? 'text' : 'password'" class="form-control" placeholder="تأكيد كلمه المرور"
+        formControlName="confirmPassword">
+      <span class="toggle-eye" (click)="showConfirmPassword = !showConfirmPassword">
+        <i class="fas" [ngClass]="showConfirmPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+      </span>
+    </div>
+
+    <button type="submit" class="btn_login">حفظ</button>
+  </form>
+</ng-template>
+
+
+            </div>
+
+        </div>
+
+</section>
+
+

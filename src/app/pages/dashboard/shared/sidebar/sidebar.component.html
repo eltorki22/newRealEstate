@@ -1,0 +1,51 @@
+<aside>
+    <div class="logo mb-3" routerLink="home" style="cursor: pointer;">
+        <!-- <img src="assets/dashboard/logo.png" alt="" srcset=""> -->
+         <app-logo></app-logo>
+    </div>
+
+ 
+<accordion [isAnimated]="true">
+  <accordion-group heading="البيانات الرئيسيه" >
+    <ul dir="rtl">
+        <li class="mb-2" ><a routerLink="home"  [routerLinkActive]="'active'">لوحه التحكم </a></li>
+        <li class="mb-2"><a routerLink="owner" [routerLinkActive]="'active'">المالك</a></li>
+        <li class="mb-2"><a routerLink="realtor" [routerLinkActive]="'active'">السمسار</a></li>
+        <li class="mb-2"><a routerLink="tenant" [routerLinkActive]="'active'">المستأجر</a></li>
+        <li class="mb-2"><a routerLink="building" [routerLinkActive]="'active'">العماره</a></li>
+        <li class="mb-2"><a routerLink="loneliness" [routerLinkActive]="'active'">الوحده</a></li>
+        <li class="mb-2"><a routerLink="services" [routerLinkActive]="'active'">الخدمات</a></li>
+        <li class="mb-2"><a routerLink="newuser" [routerLinkActive]="'active'">مستخدم جديد</a></li>
+        <!-- <li class="mb-2"><a routerLink="groupname" [routerLinkActive]="'active'">المجموعه</a></li> -->
+        <li class="mb-2"><a routerLink="msgform" [routerLinkActive]="'active'">نموذج الرسايل</a></li>
+       
+    </ul>
+  </accordion-group>
+  <accordion-group heading="الادوات">
+   <ul dir="rtl">
+        <li class="mb-2" ><a routerLink="addcontract"  [routerLinkActive]="'active'">اضافه عقد</a></li>
+        <li class="mb-2" ><a routerLink="previouscontract"  [routerLinkActive]="'active'">العقودات السابقه</a></li>
+        <li class="mb-2" ><a routerLink="arestdocument"  [routerLinkActive]="'active'">سند القبض </a></li>
+        <li class="mb-2" ><a routerLink="exchange"  [routerLinkActive]="'active'">سند الصرف </a></li>
+        <li class="mb-2" ><a routerLink="accountstatement"  [routerLinkActive]="'active'">كشف الحساب</a></li>
+        <li class="mb-2" ><a routerLink="accounts"  [routerLinkActive]="'active'">الحسابات</a></li>
+        <li class="mb-2" ><a routerLink="employees"  [routerLinkActive]="'active'">الموظفين</a></li>
+        <li class="mb-2" ><a routerLink="exchangesalaries"  [routerLinkActive]="'active'">صرف الروانب</a></li>
+        <li class="mb-2" ><a routerLink="salafis"  [routerLinkActive]="'active'">السلفيات</a></li>
+        <li class="mb-2" ><a routerLink="sendmsg"  [routerLinkActive]="'active'">ارسال رساله</a></li>
+
+    </ul>
+  </accordion-group>
+  <accordion-group heading="التقارير">
+    <p>Some content</p>
+  </accordion-group>
+  <accordion-group heading="الاعدادات">
+     <ul dir="rtl">
+        <li class="mb-2" ><a routerLink="profile"  [routerLinkActive]="'active'">الملف الشخصي</a></li>
+        <li class="mb-2" ><a routerLink="changepassword"  [routerLinkActive]="'active'">تغيير كلمه المرور</a></li>
+         <li class="mb-2"><a routerLink="maindata" [routerLinkActive]="'active'">البيانات الرئيسيه</a></li>
+    </ul>
+  </accordion-group>
+ 
+</accordion>
+</aside>

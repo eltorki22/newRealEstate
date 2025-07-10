@@ -1,0 +1,59 @@
+@use '../../../styles/abstracts/vars' as *;
+@use '../../../styles/abstracts/mixins' as *;
+.aside_dashboard{
+    position: fixed;
+    width: 260px;
+    height:100vh;
+    right:-260px;
+    overflow-y:scroll ;
+    overflow-x: hidden;
+
+    &::-webkit-scrollbar {
+  width: 8px;
+}
+
+&::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+&::-webkit-scrollbar-thumb {
+  background: $background-color;
+  border-radius: 4px;
+}
+
+
+    // right: 0;
+    top: 0;
+    background-color:$background-color ;
+    z-index: 1000;
+    transition: 0.5s;
+
+    @include responsive('small') {
+        width: 190px;
+    }
+
+    &.active{
+        right:0px;
+
+    }
+
+
+
+    
+}
+
+.content-area {
+  transition: margin 0.5s ease;
+
+
+
+  &.with-sidebar {
+    margin-right: 260px; // نفس عرض الـ sidebar
+    // width: auto;
+        @include responsive('small') {
+          //  left: -133px;
+        margin-right: 190px;
+    }
+  }
+}

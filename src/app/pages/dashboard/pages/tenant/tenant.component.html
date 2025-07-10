@@ -1,0 +1,11 @@
+ <div class="d-flex justify-content-between align-items-center">
+ <h3 class="title-page" appIntersection="fade-in" *ngIf="this.visibleShow">الرئيسيه <img src="assets/dashboard/iconarrowdouble.png"  class="mx-1" alt="icon"> <span>المستأجر</span></h3>
+ 
+ <a  *ngIf="this.visibleShow" appIntersection="fade-in" routerLink="/dashboard/tenant/addtenant" class="btn_addTenant"><i class="fa-solid fa-user-plus"></i> اضافه مستأجر جديد</a>
+
+
+ <h3 class="title-page"  appIntersection="fade-in" *ngIf="this.visibleShow == false">الرئيسيه <img src="assets/dashboard/iconarrowdouble.png"  class="mx-1" alt="icon"> <span routerLink="/dashboard/tenant/hometenant">المستأجر</span> <img src="assets/dashboard/iconarrowdouble.png"  class="mx-1" alt="icon"> <span>اضافه مستاجر جديد</span> </h3>
+
+
+</div>
+<router-outlet></router-outlet>

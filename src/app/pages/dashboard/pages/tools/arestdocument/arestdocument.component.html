@@ -1,0 +1,134 @@
+ <h3 class="title-page">الادوات <img src="assets/dashboard/iconarrowdouble.png"  class="mx-1" alt="icon"> <span>سند القبض</span></h3>
+
+ <form [formGroup]="receiptForm" (ngSubmit)="onSubmit()" class="forms_dashboard">
+  <div class="row">
+
+    <div class="mb-3 col-sm-12 col-md-6 col-lg-4">
+      <label for="arestnumber" class="form-label">رقم السند</label>
+      <input type="text" class="form-control" id="arestnumber" formControlName="voucherNumber" placeholder="رقم السند">
+        <ng-container *ngIf="receiptForm.controls['voucherNumber'].invalid && receiptForm.controls['voucherNumber'].touched">
+                      <small *ngIf="receiptForm.controls['voucherNumber'].hasError('required')"> رقم السند مطلوب</small>
+                 </ng-container>
+    </div>
+
+    <div class="mb-3 col-sm-12 col-md-6 col-lg-4">
+      <label for="mblag" class="form-label">المبلغ</label>
+      <input type="text" class="form-control" id="mblag" formControlName="mblag" placeholder="المبلغ" formControlName="amount" (keypress)="validationNumber($event)">
+         <ng-container *ngIf="receiptForm.controls['amount'].invalid && receiptForm.controls['amount'].touched">
+                      <small *ngIf="receiptForm.controls['amount'].hasError('required')"> المبلغ مطلوب</small>
+                 </ng-container>
+    </div>
+
+    <div class="mb-3 col-sm-12 col-md-6 col-lg-4">
+      <label for="date" class="form-label">التاريخ</label>
+      <input type="date" class="form-control" id="date"  placeholder="التاريخ" formControlName="voucherDate" [value]="date">
+               <ng-container *ngIf="receiptForm.controls['voucherDate'].invalid && receiptForm.controls['voucherDate'].touched">
+                      <small *ngIf="receiptForm.controls['voucherDate'].hasError('required')"> التاريخ مطلوب</small>
+                 </ng-container>
+    </div>
+
+    <div class="mb-3 col-sm-12">
+      <label for="tenantname" class="form-label">اسم المستأجر</label>
+      <select class="form-select" id="tenantname" formControlName="tenantId">
+        <option value="" disabled selected>اسم المستأجر</option>
+        <!-- أمثلة -->
+        <!-- <option value="1">المستأجر الأول</option>
+        <option value="2">المستأجر الثاني</option> -->
+        @for (item of getNameTenantData; track $index) {
+          <option [value]="item.id">{{item.fullName}}</option>
+        }
+      </select>
+
+       <ng-container *ngIf="receiptForm.controls['tenantId'].invalid && receiptForm.controls['tenantId'].touched">
+                      <small *ngIf="receiptForm.controls['tenantId'].hasError('required')"> اسم المستأجر مطلوب</small>
+                 </ng-container>
+    </div>
+
+    <div class="mb-3 col-sm-12">
+      <label for="hesap" class="form-label">الحساب</label>
+      <select class="form-select" id="hesap" formControlName="accountsId">
+        <option value="" disabled selected>الحساب</option>
+        @for (item of getNameAccounts; track $index) {
+          <option [value]="item.id">{{item.accountName}}</option>
+        }
+      </select>
+
+      
+       <ng-container *ngIf="receiptForm.controls['accountsId'].invalid && receiptForm.controls['accountsId'].touched">
+                      <small *ngIf="receiptForm.controls['accountsId'].hasError('required')">  الحساب مطلوب</small>
+                 </ng-container>
+    </div>
+
+    <div class="mb-3 col-sm-12">
+      <label for="baian" class="form-label">البيان</label>
+      <textarea class="form-control" id="baian" formControlName="description"
+        placeholder="اكتب المحتوي" style="height: 124px; padding: 15px; font-size: 12px; font-weight: 400; color: #7F7F7F;"></textarea>
+
+           <ng-container *ngIf="receiptForm.controls['description'].invalid && receiptForm.controls['description'].touched">
+                      <small *ngIf="receiptForm.controls['description'].hasError('required')">  الوصف مطلوب</small>
+            </ng-container>
+    </div>
+
+  </div>
+
+  <div class="btn_add_reset">
+       <button type="submit" [ngStyle]="{'background-color':btnText == 'Add' ? '#16601A':'#fd7e14'}">{{btnText=="Add" ? "حفظ" : 'تعديل'}}</button>
+
+  </div>
+</form>
+<div class="table-responsive">
+<table class="table table-striped mt-4">
+  <thead>
+    <tr>
+      <th scope="col">م</th>
+      <th scope="col"> رقم السند</th>
+      <th scope="col">المبلغ</th>
+      <th scope="col">التاريخ</th>
+      <th scope="col"> اسم المستأجر</th>
+      <th scope="col">الحساب</th>
+      <th scope="col">الادوات</th>
+      <!-- <th scope="col">Handle</th> -->
+    </tr>
+  </thead>
+  <tbody>
+
+    @for (item of getData.rows; track $index) {
+  <tr>
+      <th scope="row">{{$index + 1}}</th>
+      <td>{{item.voucherNumber}}</td>
+      <td>{{item.amount}}</td>
+      <td>{{item.voucherDate}}</td>
+      <td>{{item.tenantName}}</td>
+      <td>{{item.accountName}}</td>
+   
+    
+       <td>
+       <button class="btn btn-success ms-3" (click)="getUpdateData(item.id)"> <i class="fa-solid fa-pen-to-square"></i></button>
+       <button class="btn btn-danger" (click)="deleteModel(item.id)"> <i class="fa-solid fa-trash"></i></button>
+
+       </td>
+    </tr>
+    }
+  
+  </tbody>
+</table>   
+</div>
+
+
+<!-- 
+
+صندوق 
+بنك
+-->
+
+<div class="modal_delete" [ngClass]="{'active':this.show}">
+<app-confirm-delete (toggleModal)="onClose()" (onDelete)="deleteConfirmed($event)" [itemId]="this.deleteId"></app-confirm-delete>
+</div>
+
+
+
+<app-pagination
+  [totalPages]="getData?.paginationInfo?.totalPagesCount"
+  [currentPage]="pageIndex"
+  (pageChange)="onPageChanged($event)">
+</app-pagination>

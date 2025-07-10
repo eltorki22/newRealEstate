@@ -1,0 +1,178 @@
+ <h3 class="title-page">الادوات <img src="assets/dashboard/iconarrowdouble.png"  class="mx-1" alt="icon"> <span>الموظفين</span></h3>
+
+
+    <form class="forms_dashboard" [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+
+     
+
+<div class="mb-3 col-sm-12 col-md-6 col-lg-3">
+                 <label for="username" class="form-label">الاسم</label>
+                 <input type="text" class="form-control" id="username" placeholder="الاسم" formControlName="fullName">
+                  <ng-container *ngIf="employeeForm.controls['fullName'].invalid && employeeForm.controls['fullName'].touched">
+                      <small *ngIf="employeeForm.controls['fullName'].hasError('required')"> اسم الموظف مطلوب</small>
+                 </ng-container>
+        </div>
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
+                 <label for="Nationality" class="form-label">الجنسيه</label>
+              
+                   <select class="form-select" id="Nationality" aria-label="Default select example" formControlName="nationality">
+                    <option disabled selected>الجنسيه</option>
+                        @for (item of nationality; track $index) {
+
+                          <option [value]="item.nationality_ar">{{item.nationality_ar}}</option>
+                        }
+                        
+                </select>
+  <ng-container *ngIf="employeeForm.controls['nationality'].invalid && employeeForm.controls['nationality'].touched">
+                      <small *ngIf="employeeForm.controls['nationality'].hasError('required')">  الجنسيه مطلوب</small>
+                 </ng-container>
+
+        </div>
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
+                 <label for="phonenumber" class="form-label">رقم الجوال</label>
+                 <input type="text" class="form-control" id="phonenumber" placeholder="الرقم" formControlName="phoneNumber" maxlength="11" (keypress)="validationNumber($event)">
+                   <ng-container *ngIf="employeeForm.controls['phoneNumber'].invalid && employeeForm.controls['phoneNumber'].touched">
+                      <small *ngIf="employeeForm.controls['phoneNumber'].hasError('required')">  رقم التليفون مطلوب</small>
+                 </ng-container>
+        </div>
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
+                 <label for="email" class="form-label">البريد الالكتروني 
+                 </label>
+                 <input type="text" class="form-control" id="email" placeholder="الايميل" formControlName="email">
+                    <ng-container *ngIf="employeeForm.controls['email'].invalid && employeeForm.controls['email'].touched">
+                      <small *ngIf="employeeForm.controls['email'].hasError('required')">   الايميل مطلوب</small>
+                 </ng-container>
+        </div>
+        
+       
+            <!-- </div> -->
+ 
+
+
+
+
+
+
+
+  <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
+                 <label for="Identitytype" class="form-label">نوع الهويه
+                 </label>
+                <select class="form-select" id="Identitytype" aria-label="Default select example" formControlName="idType">
+                        <option value="" disabled selected>النوع</option>
+                        <option value="هويه الوطنيه">هويه الوطنيه</option>
+                        <option value="هويه مقيم (الاقامه)">هويه مقيم (الاقامه)</option>
+                        <option value="هويه زائر">هويه زائر</option>
+                        <option value="هويه خليجيه (لمواطني دول الخليج)">هويه خليجيه (لمواطني دول الخليج)</option>
+                        <option value="هويه زائر (لليمنيين)">هويه زائر (لليمنيين)</option>
+                        <option value="وثيقه سفر اضطراريه (للسعوديين مؤقتا)"> وثيقه سفر اضطراريه (للسعوديين مؤقتا)</option>
+                        <option value="بطاقه الاحوال المدنيه  (قديمه قبل الهويه الوطنيه)">بطاقه الاحوال المدنيه  (قديمه قبل الهويه الوطنيه)</option>
+                         <option value="هويه دبلوماسيه">هويه دبلوماسيه</option>
+                          <option value="هويه خاصه (للمسؤولين والموظفين الرسميين)">هويه خاصه (للمسؤولين والموظفين الرسميين)</option>
+                          <option value="هويه طالب (لبعض المعاهد الأمنيه والعسكريه)">هويه طالب (لبعض المعاهد الأمنيه والعسكريه)</option>
+                </select>
+
+
+                 <ng-container *ngIf="employeeForm.controls['idType'].invalid && employeeForm.controls['idType'].touched">
+                      <small *ngIf="employeeForm.controls['idType'].hasError('required')">   نوع الهويه مطلوب</small>
+                 </ng-container> 
+        </div>
+
+              <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
+                 <label for="idnumber" class="form-label">رقم الهويه  
+                 </label>
+                 <input type="text" class="form-control" id="idnumber" placeholder="الرقم"  formControlName="idNumber" (keypress)="validationNumber($event)">
+
+                     <ng-container *ngIf="employeeForm.controls['idNumber'].invalid && employeeForm.controls['idNumber'].touched">
+                      <small *ngIf="employeeForm.controls['idNumber'].hasError('required')">   رقم الهويه مطلوب</small>
+                 </ng-container> 
+        </div>      
+            
+              <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
+                 <label for="copy" class="form-label d-block"> نسخه الهويه    
+                 </label>
+                 <input type="file" id="copy" class="d-none" (change)="onFileSelected($event)">
+                 <label for="copy" class="form-label d-flex copy_identity" >  
+                    <div class="icon"><i class="fa-solid fa-download"></i> </div> 
+                     <input type="text" class="form-control" id="copy" placeholder="نسخه" readonly style="pointer-events: none;" [value]="this.fileName"> 
+                 </label>
+               
+            </div>  
+
+                  <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
+                 <label for="salary" class="form-label">الراتب  
+                 </label>
+                 <input type="text" class="form-control" id="salary" placeholder="الراتب" formControlName="salary">
+                      <ng-container *ngIf="employeeForm.controls['salary'].invalid && employeeForm.controls['salary'].touched">
+                      <small *ngIf="employeeForm.controls['salary'].hasError('required')">    الراتب مطلوب</small>
+                 </ng-container> 
+
+        </div>  
+            
+            
+
+      
+
+           
+</div>
+      
+            
+            <div class="btn_add_reset">
+                <!-- <button type="submit">اضافه</button> -->
+                      <button type="submit" [ngStyle]="{'background-color':btnText == 'Add' ? '#16601A':'#fd7e14'}">{{btnText=="Add" ? "حفظ" : 'تعديل'}}</button>
+            </div>
+         
+        
+    </form>
+
+
+    <div class="table-responsive">
+<table class="table table-striped mt-4">
+  <thead>
+    <tr>
+      <th scope="col">م</th>
+      <th scope="col">اسم الموظف</th>
+      <th scope="col">  رقم الجوال</th>
+      <th scope="col">رقم الهويه</th>
+      <th scope="col">الراتب</th>
+      <th scope="col">الادوات</th>
+      <!-- <th scope="col">Handle</th> -->
+    </tr>
+  </thead>
+  <tbody>
+
+    @for (item of getAllData.rows; track $index) {
+ <tr>
+      <th scope="row">{{$index + 1}}</th>
+      <td>{{item.fullName}}</td>
+      <td>{{item.phoneNumber}}</td>
+      <td>{{item.idNumber}}</td>
+      <td>{{item.salary}}</td>
+      <!-- <td>@mdo</td> -->
+       <td>
+       <button class="btn btn-success ms-3" (click)="getUpdateData(item.id)"> <i class="fa-solid fa-pen-to-square"></i></button>
+       <button class="btn btn-danger" (click)="deleteModel(item.id)"> <i class="fa-solid fa-trash"></i></button>
+
+       </td>
+    </tr>
+    }
+   
+  
+  </tbody>
+</table>   
+</div>
+     
+<app-pagination
+  [totalPages]="getAllData?.paginationInfo?.totalPagesCount"
+  [currentPage]="pageIndex"
+  (pageChange)="onPageChanged($event)">
+</app-pagination> 
+
+
+
+<div class="modal_delete" [ngClass]="{'active':this.show}">
+<app-confirm-delete (toggleModal)="onClose()" (onDelete)="deleteConfirmed($event)" [itemId]="this.deleteId"></app-confirm-delete>
+</div>
+
+
+

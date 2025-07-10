@@ -1,0 +1,30 @@
+@use '../../../../../styles/abstracts/vars' as *;
+@use '../../../../../styles/abstracts/mixins' as *;
+
+header{
+     background-color: $background-color;
+     width: 100%;
+    .container{
+  @include width_height(100%,65px);
+  
+   @include flex_box(flex,space-between,center);
+
+   .bars{
+    i{
+        font-size: 30px;
+        cursor: pointer;
+    }
+   }
+}
+
+
+.setting{
+  img{
+    @include responsive('small') {
+      width: 40px;
+      
+    }
+  }
+}
+ 
+}

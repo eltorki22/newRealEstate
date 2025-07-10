@@ -1,0 +1,114 @@
+
+
+
+        <!-- {{this.searchText}} -->
+
+ <form class="forms_search my-3" appIntersection="fade-in" [formGroup]="formData" (ngSubmit)="onSubmit()">
+
+    <div class="row">
+        <div class="col-lg-9 col-md-12">
+            <div class="search">
+            <input type="text"  class="form-control" placeholder=" بحث حسب {{titleSearch}}" (input)="OnSearchText($event)" formControlName="searchData">
+                
+            <div class="filter_search">
+                <button class="btn" type="button" (click)="visibleFilter=!visibleFilter"><i class="fa-solid fa-filter"></i></button>
+
+                <span>|</span>
+                <button class="btn" type="submit"> <i class="fa-solid fa-magnifying-glass"></i></button>
+
+                <div class="drop-down" [ngClass]="{'show':visibleFilter}">
+                    <ul>
+                        <li><a    [class.active]="this.selectedFilter == 'FullName'" (click)="changeFilter('FullName')"  >اسم المستأجر</a></li>
+                        <li><a     [class.active]="this.selectedFilter == 'IdNumber'" (click)="changeFilter('IdNumber')"    >رقم الهويه</a></li>
+                        <li><a   [class.active]="this.selectedFilter == 'PhoneNumber'" (click)="changeFilter('PhoneNumber')"    >رقم الجوال</a></li>
+                    </ul>   
+                </div>
+            </div>
+            </div>
+
+             <ng-container *ngIf="formData.controls['searchData'].invalid && formData.controls['searchData'].touched">
+                      <small *ngIf="formData.controls['searchData'].hasError('required')"> قيمه البحث مطلوبه</small>
+                 </ng-container>
+           
+        </div>
+
+
+        <div class="col-md-6  col-lg-3 ">
+            <div class="show_tenant d-flex align-items-center ">
+                <span class="m-0">اظهار</span>
+                <input type="number"  #page name="pageSize" (input)="onPageSizeChanged(page.value)" name="" id="" class="form-control" value="10" >
+                <span class="m-0">مستأجرين</span>
+            </div>
+        </div>
+        
+    </div>
+
+
+ </form>
+
+ <div class="table-responsive" appIntersection="fade-in">
+<table class="table table-striped mt-4">
+  <thead>
+    <tr>
+      <th scope="col">م</th>
+      <th scope="col">اسم المستأجر</th>
+      <th scope="col">رقم الهويه</th>
+      <th scope="col"> رقم الجوال</th>
+      <th scope="col">الوظيفه</th>
+      <th scope="col">الادوات</th>
+      <!-- <th scope="col">Handle</th> -->
+    </tr>
+  </thead>
+  <tbody>
+    @for (item of getData.rows; track $index) {
+<tr>
+      <th scope="row">{{$index + 1}}</th>
+      <td>{{item.fullName}}</td>
+      <td>{{item.idNumber}}</td>
+      <td>{{item.phoneNumber}}</td>
+      <td>{{item.jobTitle}}</td>
+       <td>
+       <button class="btn btn-success ms-3" (click)="updateData(item.id)"> <i class="fa-solid fa-pen-to-square"></i></button>
+       <button class="btn btn-danger" (click)="deleteData(item.id)"> <i class="fa-solid fa-trash"></i></button>
+
+       </td>
+    </tr>
+    }
+    
+  </tbody>
+</table>   
+
+
+</div>
+
+
+<!-- <div dir="ltr" class="pagination d-flex align-items-center flex my-3">
+    <button><i class="fa-solid fa-arrow-left"></i></button>
+    <ul>
+        <li><a href="#" class="active">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+    </ul>
+    <button class="active"><i class="fa-solid fa-arrow-right "></i></button>
+</div>  -->
+
+<!-- 
+<pagination-controls
+  directionLinks="true"
+  autoHide="true"
+  (pageChange)="onPageChange($event)">
+</pagination-controls> -->
+
+<div class="modal_delete" [ngClass]="{'active':this.show}">
+<app-confirm-delete (toggleModal)="onClose()" (onDelete)="deleteConfirmed($event)" [itemId]="this.deleteId"></app-confirm-delete>
+</div>
+
+
+
+
+<app-pagination
+  [totalPages]="getData?.paginationInfo?.totalPagesCount"
+  [currentPage]="pageIndex"
+  (pageChange)="onPageChanged($event)">
+</app-pagination>
+

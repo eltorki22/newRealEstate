@@ -1,0 +1,56 @@
+if (event.target.files.length > 0) {
+    const file = event.target.files[0];
+    const maxSizeInMB = 4; // الحجم الأقصى بالميجابايت
+    const maxSizeInBytes = maxSizeInMB * 1024 * 1024;
+
+    if (file.size > maxSizeInBytes) {
+      this.selectedFile = null;
+      this.fileName = '';
+      this.dataForm.patchValue({ IdFileCopy: null });
+      this.dataForm.get('IdFileCopy')?.setErrors({ maxSize: true });
+        this.toastr.show(`حجم الملف كبير جداً. الرجاء اختيار ملف أصغر من ${maxSizeInMB} ميجابايت.`,'error')
+      return;
+    }
+    this.selectedFile = file;
+    this.fileName = file.name;
+    this.dataForm.patchValue({ IdFileCopy: file });
+    this.dataForm.get('IdFileCopy')?.setErrors(null); // إزالة أي أخطاء سابقة
+  } else {
+    this.selectedFile = null;
+    this.fileName = '';
+    this.dataForm.patchValue({ IdFileCopy: null });
+  }
+
+  البديل لاستعمال علي اكتر من كمبوننت
+
+  
+  handleFileUploaded(
+    event: any,
+    form: any,
+    controlName: string,
+    maxSizeInMB = 4
+  ){
+
+    if(event.target.files.length > 0){
+       const file = event.target.files[0];
+         const maxSizeInBytes = maxSizeInMB * 1024 * 1024;
+         if(file.size > maxSizeInBytes){
+           form.patchValue({ [controlName]: null });
+           form.get(controlName)?.setErrors({ maxSize: true });
+             this.toastr.show(
+          `حجم الملف كبير جداً. الرجاء اختيار ملف أصغر من ${maxSizeInMB} ميجابايت.`,
+          'error'
+        );
+        return null;
+         }
+
+          form.patchValue({ [controlName]: file });
+         form.get(controlName)?.setErrors(null);
+         return {name:file.name,file}
+
+    }else{
+      form.patchValue({ [controlName]: null });
+      return null;
+    }
+
+  }

@@ -1,0 +1,91 @@
+  <h3 class="title-page" appIntersection="fade-in">الرئيسيه <img src="assets/dashboard/iconarrowdouble.png"  class="mx-1" alt="icon"> <span>الخدمات</span></h3>
+
+
+    <form class="forms_dashboard" appIntersection="fade-in" [formGroup]="formData" (ngSubmit)="onSubmit()">
+        <div class="row">
+
+     
+
+<div class="mb-3 col-sm-12 col-md-6 ">
+                 <label for="nameservices" class="form-label">اسم الخدمه</label>
+                 <input type="text" class="form-control" id="nameservices" placeholder="اسم الخدمه" formControlName="name">
+                  <ng-container *ngIf="formData.controls['name'].invalid && formData.controls['name'].touched">
+                      <small *ngIf="formData.controls['name'].hasError('required')">اسم الخدمه مطلوب</small>
+                 </ng-container>
+        </div>
+     
+        <div class="mb-3 col-sm-12 col-md-6 ">
+                 <label for="priceservices" class="form-label">سعر الخدمه</label>
+                 <input type="text" class="form-control" id="priceservices" placeholder="سعر الخدمه" formControlName="price" (keypress)="validationNumber($event)">
+                  <ng-container *ngIf="formData.controls['price'].invalid && formData.controls['price'].touched">
+                      <small *ngIf="formData.controls['price'].hasError('required')">سعر الخدمه مطلوب</small>
+                 </ng-container>
+        </div>
+
+ 
+
+
+
+
+
+
+
+            
+
+
+      
+
+           
+</div>
+      
+            
+            <div class="btn_add_reset">
+                <button type="reset">جديد</button> 
+                <button type="submit" [ngStyle]="{'background-color':btnText == 'Add' ? '#16601A':'#fd7e14'}">{{btnText=='Add' ? "اضافه" : "تعديل"}}</button>
+                
+            </div>
+         
+        
+    </form>
+<div class="table-responsive" appIntersection="fade-in">
+<table class="table table-striped mt-4">
+  <thead>
+    <tr>
+      <th scope="col">م</th>
+      <th scope="col">اسم الخدمه</th>
+      <th scope="col">سعر الخدمه</th>
+      <th scope="col">الادوات</th>
+      <!-- <th scope="col">Handle</th> -->
+    </tr>
+  </thead>
+  <tbody>
+    @for (item of getAllData.rows; track $index) {
+
+   <tr>
+      <th scope="row">{{$index + 1}}</th>
+      <td>{{item.name}}</td>
+      <td>{{item.price}}</td>
+       <td>
+       <button class="btn btn-success ms-3" (click)="getupdateData(item.id)"> <i class="fa-solid fa-pen-to-square"></i></button>
+       <button class="btn btn-danger" (click)="DeleteModel(item.id)"> <i class="fa-solid fa-trash"></i></button>
+
+       </td>
+    </tr>
+   
+ 
+    }
+  </tbody>
+</table>   
+</div>
+
+<div class="modal_delete" [ngClass]="{'active':this.show}">
+<app-confirm-delete (toggleModal)="onClose()" (onDelete)="deleteConfirmed($event)" [itemId]="this.deleteId"></app-confirm-delete>
+</div>
+
+
+
+<app-pagination
+  [totalPages]="getAllData?.paginationInfo?.totalPagesCount"
+  [currentPage]="pageIndex"
+  (pageChange)="onPageChanged($event)">
+</app-pagination>
