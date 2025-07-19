@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { AddcontractRoutingModule } from './addcontract-routing.module';
 import { AddcontractComponent } from './addcontract.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { IntersectionDirective } from '../../../../../shared/directive/intersection.directive';
 
 
 @NgModule({
@@ -11,7 +12,9 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     AddcontractRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule,
+    IntersectionDirective
   ]
 })
 export class AddcontractModule { }

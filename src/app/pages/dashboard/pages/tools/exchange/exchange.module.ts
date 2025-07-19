@@ -6,6 +6,7 @@ import { ExchangeComponent } from './exchange.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ConfirmDeleteComponent } from '../../../shared/confirm-delete/confirm-delete.component';
 import { PaginationComponent } from '../../../shared/pagination/pagination.component';
+import { IntersectionDirective } from '../../../../../shared/directive/intersection.directive';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { PaginationComponent } from '../../../shared/pagination/pagination.compo
     ExchangeRoutingModule,
     ReactiveFormsModule,
     ConfirmDeleteComponent,
-    PaginationComponent
+    PaginationComponent,
+    IntersectionDirective
   ]
 })
 export class ExchangeModule { }

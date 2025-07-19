@@ -14,7 +14,7 @@
                 <button class="btn" type="button" (click)="visibleFilter=!visibleFilter"><i class="fa-solid fa-filter"></i></button>
 
                 <span>|</span>
-                <button class="btn" type="submit"> <i class="fa-solid fa-magnifying-glass"></i></button>
+                <button class="btn btn_search" type="submit"> <i class="fa-solid fa-magnifying-glass"></i></button>
 
                 <div class="drop-down" [ngClass]="{'show':visibleFilter}">
                     <ul>
@@ -60,7 +60,7 @@
     </tr>
   </thead>
   <tbody>
-    @for (item of getData.rows; track $index) {
+    @for (item of getData?.rows; track $index) {
 <tr>
       <th scope="row">{{$index + 1}}</th>
       <td>{{item.fullName}}</td>
@@ -73,7 +73,15 @@
 
        </td>
     </tr>
+    }@empty {
+       <tr>
+      <td colspan="6" class="text-center py-5" style="color: #888; font-size: 18px;">
+        <i class="fa-solid fa-circle-exclamation fa-2x mb-2" style="color: #ccc;"></i><br>
+        لا توجد بيانات حتى الآن
+      </td>
+    </tr>
     }
+
     
   </tbody>
 </table>   

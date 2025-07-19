@@ -3,7 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { PreviouscontractComponent } from './previouscontract.component';
 
 const routes: Routes = [
-  {path:'',component:PreviouscontractComponent}
+  {path:'',component:PreviouscontractComponent
+   
+  }
 ];
 
 @NgModule({

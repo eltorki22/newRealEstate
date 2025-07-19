@@ -41,7 +41,7 @@ export class LonelinessComponent {
       propertyId:[null,[Validators.required]],
       floorNumber:['',[Validators.required]],
       price:['',[Validators.required]],
-      description:['',Validators.required]
+      description:['']
     })
   
   
@@ -108,13 +108,17 @@ export class LonelinessComponent {
 
       this.formData.reset();
       }else{
-        this.toastr.show('يرجى تعبئة جميع الحقول بشكل صحيح', 'error');
+        // this.toastr.show('يرجى تعبئة جميع الحقول بشكل صحيح', 'error');
         this.formData.markAllAsTouched();
       }
     
 
     }
 
+
+    resetData(){
+      this.btnText='Add';
+    }
     getAllListData(){
 
       let pagination={
@@ -180,11 +184,17 @@ deleteId:any
   deleteConfirmed(id:any){
     // console.log(id);
     this.show=false;
-    this.UnitServices.deleteData(id).subscribe((res)=>{
-      // this.show=false
+   this.subScription= this.UnitServices.deleteData(id).subscribe({
+      
+    next:(res)=>{
       this.getAllListData();
-      this.toastr.show('تم حذف البيانات','success');
-
+ this.toastr.show('تم حذف البيانات','success');      
+    },
+    error:(err)=>{
+      
+       this.toastr.show('لا يمكن حذف العنصر إذا كان به حركات','error'); 
+    }
+   
     })
   }
   onClose(){

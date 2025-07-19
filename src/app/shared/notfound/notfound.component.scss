@@ -1,0 +1,52 @@
+@use '../../../styles/abstracts/vars' as * ;
+@use '../../../styles/abstracts/mixins' as * ;
+
+.not-found {
+  height: 100vh;
+  background-color: $secondary-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  direction: rtl;
+  padding: 20px;
+
+  &__content {
+    max-width: 600px;
+
+    h1 {
+      font-size: 140px;
+      font-weight: 900;
+      color: $main-color;
+      margin-bottom: 10px;
+      line-height: 1;
+    }
+
+    h2 {
+      font-size: 28px;
+      color: $black-color;
+      margin-bottom: 15px;
+    }
+
+    p {
+      color: #7f7f7f;
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+
+    .btn-home {
+      display: inline-block;
+      padding: 12px 30px;
+      background-color: $main-color;
+      color: $white-color;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: $border-radius-sm;
+      transition: 0.3s;
+
+      &:hover {
+        background-color: darken($main-color, 10%);
+      }
+    }
+  }
+}

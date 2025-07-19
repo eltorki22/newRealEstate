@@ -1,52 +1,48 @@
-  <h3 class="title-page">الاعدادات <img src="assets/dashboard/iconarrowdouble.png"  class="mx-1" alt="icon"> <span>الملف الشخصي</span></h3>
+  <h3 class="title-page" appIntersection="fade-in">الاعدادات <img src="assets/dashboard/iconarrowdouble.png"  class="mx-1" alt="icon"> <span>الملف الشخصي</span></h3>
 
 
-<div class="row mt-5 align-items-center">
+<div class="row mt-5 align-items-center" style="transition: 0.6s;" appIntersection="fade-in">
 
     <div class="col-sm-12 col-md-4 col-lg-4 ">
-        <label for="imgprofile" class="imgprofile">
-   <img src="assets/dashboard/changeimage.png" alt="" class="w-100">
-        </label>
+      <label for="imgprofile" class="imgprofile">
+    <img 
+      *ngIf="dataUser?.profilePictureUrl; else defaultImage"
+      [src]="getProfileImageUrl()"
+      alt="صورة المستخدم"
+      class="w-100"
+    />
 
-        <input type="file" style="display: none;" id="imgprofile" accept="image/*">
+    <ng-template #defaultImage>
+      <img src="assets/dashboard/changeimage.png" alt="صورة افتراضية" class="w-100">
+    </ng-template>
+  </label>
+        <input type="file" style="display: none;" id="imgprofile" accept="image/*"  (change)="onFileSelected($event)">
      
     </div>
 
-    <form class="forms_dashboard col-sm-11 col-md-8 ">
+    <form class="forms_dashboard col-sm-11 col-md-8 " [formGroup]="formData" (ngSubmit)="onSubmit()">
         <div class="row">
 
      
 
 <div class="mb-3 col-sm-12 ">
                  <label for="username" class="form-label">اسم المستخدم</label>
-                 <input type="text" class="form-control" id="username" placeholder="اسم المستخدم">
+                 <input type="text" class="form-control" id="username" placeholder="اسم المستخدم" formControlName="UserName">
+
+                    <ng-container *ngIf="formData.controls['UserName'].invalid && formData.controls['UserName'].touched">
+                      <small *ngIf="formData.controls['UserName'].hasError('required')">اسم المستخدم مطلوب</small>
+                 </ng-container>
         </div>
      
-        <div class="mb-3 col-sm-12 col-md-6 ">
+        <div class="mb-3 col-sm-12  ">
                  <label for="phonenumber" class="form-label">رقم الجوال</label>
-                 <input type="text" class="form-control" id="phonenumber" placeholder="الرقم">
+                 <input type="text" class="form-control" id="phonenumber" placeholder="الرقم" formControlName="phoneNumber">
+                    <ng-container *ngIf="formData.controls['phoneNumber'].invalid && formData.controls['phoneNumber'].touched">
+                      <small *ngIf="formData.controls['phoneNumber'].hasError('required')"> رقم الجوال مطلوب</small>
+                 </ng-container>
         </div>
 
-        
-       
-            <!-- </div> -->
- 
-
-
-
-
-
-
-
-  <div class="mb-3 col-sm-12 col-md-6">
-                 <label for="group" class="form-label"> المجموعه
-                 </label>
-                <select class="form-select" id="group" aria-label="Default select example" >
-                    <option disabled selected>اختر المجموعه</option>
-                       
-                </select>
-        </div>
-  
+    
 
 
            

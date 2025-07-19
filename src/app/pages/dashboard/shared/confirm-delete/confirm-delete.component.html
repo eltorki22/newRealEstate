@@ -1,4 +1,4 @@
-<div id="confirmModal" class="modal-overlay">
+<div #modalRef  id="confirmModal" tabindex="0" class="modal-overlay" >
   <div class="modal-container">
     <div class="modal-header">
       <svg xmlns="http://www.w3.org/2000/svg" class="modal-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -11,10 +11,10 @@
     <div class="modal-body">
       <p>هل أنت متأكد أنك تريد حذف هذا العنصر؟</p>
       <small>لن تتمكن من استعادته لاحقًا!</small>
-    </div>
+    </div> 
     <div class="modal-footer">
       <button id="confirmBtn" class="btn btn-danger" (click)="onDeleteClick()">نعم، احذف</button>
-      <button id="cancelBtn" class="btn btn-secondary" (click)="onClose()">إلغاء</button>
+      <button id="cancelBtn"  class="btn btn-secondary" (click)="onClose()">إلغاء</button>
     </div>
   </div>
 </div>

@@ -36,9 +36,9 @@
         </div>
         <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
                  <label for="phonenumber" class="form-label">رقم الجوال</label>
-                 <input type="text" class="form-control" id="phonenumber" placeholder="الرقم" formControlName="phoneNumber" maxlength="11">
-                  <ng-container *ngIf="formData.controls['phoneNumber'].invalid && formData.controls['phoneNumber'].touched">
-                      <small *ngIf="formData.controls['phoneNumber'].hasError('required')"> رقم الجوال مطلوب</small>
+                 <input type="text" class="form-control" id="phonenumber" placeholder="الرقم" formControlName="PhoneNumber" maxlength="11">
+                  <ng-container *ngIf="formData.controls['PhoneNumber'].invalid && formData.controls['PhoneNumber'].touched">
+                      <small *ngIf="formData.controls['PhoneNumber'].hasError('required')"> رقم الجوال مطلوب</small>
                  </ng-container>                 
         </div>
 
@@ -103,7 +103,7 @@
     </tr>
   </thead>
   <tbody>
-    @for (item of getAllData; track $index) {
+    @for (item of getAllData.rows; track $index) {
     <tr>
       <th scope="row">{{$index + 1}}</th>
       <td>{{item.userName}}</td>
@@ -116,7 +116,15 @@
 
        </td>
     </tr>
+    }@empty {
+       <tr>
+      <td colspan="5" class="text-center py-5" style="color: #888; font-size: 18px;">
+        <i class="fa-solid fa-circle-exclamation fa-2x mb-2" style="color: #ccc;"></i><br>
+        لا توجد بيانات حتى الآن
+      </td>
+    </tr>
     }
+
 
 
   </tbody>

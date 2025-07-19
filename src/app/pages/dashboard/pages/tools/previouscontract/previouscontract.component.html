@@ -1,48 +1,68 @@
- <h3 class="title-page">الادوات <img src="assets/dashboard/iconarrowdouble.png"  class="mx-1" alt="icon"> <span>العقودات السابقه</span></h3>
-    <div class="search">
-            <input type="text"  class="form-control" placeholder="بحث">
+ <h3 class="title-page" appIntersection="fade-in">الادوات <img src="assets/dashboard/iconarrowdouble.png"  class="mx-1" alt="icon"> <span>العقودات السابقه</span></h3>
+    <div class="search" appIntersection="fade-in">
+            <input type="text" class="form-control" placeholder="بحث" [(ngModel)]="searchValue">
             <div class="filter_search">
                 <button class="btn" type="button" (click)="visibleFilter=!visibleFilter"><i class="fa-solid fa-filter"></i></button>
 
                 <span>|</span>
-                <button class="btn" type="submit"> <i class="fa-solid fa-magnifying-glass"></i></button>
+                <button class="btn" type="button" (click)="search()"> <i class="fa-solid fa-magnifying-glass"></i></button>
 
                 <div class="drop-down" [ngClass]="{'show':visibleFilter}">
-                    <ul>
-                        <li><a href="" class="active">رقم العقد</a></li>
-                        <li><a href="" >نوع العقد</a></li>
-                        <li><a href="" >التاريخ</a></li>
-                    </ul>   
+                  <ul>
+  <li><a  [class.active]="selectedFilter === 'رقم العقد'" (click)="setFilter('رقم العقد')">رقم العقد</a></li>
+  <li><a  [class.active]="selectedFilter === 'نوع العقد'" (click)="setFilter('نوع العقد')">نوع العقد</a></li>
+</ul>
+
                 </div>
             </div>
             </div>
 
 
-<div class="button_data" dir="ltr">
-    <!-- <button (click)="ShowModel()">فسخ</button> -->
-     <button  data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-  فسخ 
-</button>
-     <button>تعديل</button>
-    <button>تجديد</button> 
-</div>
+
+
+
+@for (item of dataContract?.rows; track $index) {
 
 
 
 
-<div class="accordion" #acco >
-    <div class="heading" (click)="showAcco()">
+
+<div class="accordion my-4" #acco  appIntersection="fade-in">
+
+    <div class="heading" (click)="showAcco(item,$index)">
+   
+   
+
         <div class="left">
    <h3>نوع العقد</h3>
         <div class="content-head">
             <p>رقم العقد</p>
-            <span>20 يناير 2025</span>
+            <span>{{item.contractNumber}}</span>
         </div>
+ 
+
         </div>
         <!-- <i class="fa-solid fa-chevron-up"></i> -->
+                  <div class="button_data mt-3" dir="ltr" *ngIf="activeItem?.id === item.id">
+                    <!-- <ng-container *ngIf=""> -->
+                  
+  <button data-bs-toggle="modal" data-bs-target="#staticBackdrop"  *ngIf="!item.isTermination && !isContractExpired(activeItem?.endDate) " (click)="setIdCancel(activeItem.id)">فسخ</button>
+                    <!-- </ng-container> -->
+                    
+  <button *ngIf="isContractExpired(activeItem?.endDate)" (click)="renewalContract(activeItem.id)">تجديد</button>
+</div>
         <div class="right">
-            <h4>ساري</h4>
-            <h4 style="background-color: #7E7E7E;" *ngIf="false">منتهي</h4>
+            <!-- عرض الحالة -->
+             <ng-container *ngIf="!item.isTermination">
+<h4 *ngIf="!isContractExpired(item?.endDate)">ساري</h4>
+<h4 style="background-color: #7E7E7E;" *ngIf="isContractExpired(item?.endDate)">منتهي</h4>
+             </ng-container>
+             
+<ng-container *ngIf="item.isTermination">
+<h4 style="background-color: #C0392B;">مفسوخ</h4>
+</ng-container>
+
+
             <div class="icon">
                 <i class="fa-solid fa-chevron-down" [ngClass]="{'fa-chevron-down':this.isOpen==false,'fa-chevron-up':this.isOpen==true}"></i>    
             </div>
@@ -54,44 +74,41 @@
             <div class="col-6">
                <div class="mb-3 readonly_input">
                     <label for="numcont" class="form-label">رقم العقد</label>
-                     <input type="text" class="form-control" style="padding-right: 70px;" id="numcont" placeholder="302" value="302" readonly>
+                     <input type="text" class="form-control" style="padding-right: 70px;" id="numcont" placeholder="302" [value]="item?.contractNumber" readonly>
                 </div>
                 </div>
                 <div class="col-6">
  <div class="mb-3 readonly_input">
                     <label for="typecont" class="form-label">نوع العقد</label>
-                     <input type="text" class="form-control" id="typecont" style="padding-right: 70px;"  placeholder="302" value="عقد عمل" readonly>
+                     <input type="text" class="form-control" id="typecont" style="padding-right: 70px;"  placeholder="302" [value]="item?.contractType" readonly>
                 </div>
                 </div>
 
                 <div class="col-6">
  <div class="mb-3 readonly_input">
                     <label for="typecont" class="form-label">تاريخ بدايه العقد</label>
-                     <input type="text" class="form-control"  style="padding-right: 110px;" id="typecont" placeholder="302" value="25 يناير 2026" readonly>
+                     <input type="text" class="form-control"  style="padding-right: 110px;" id="typecont" placeholder="302" [value]="item?.startDate | date" readonly>
                 </div>
                 </div>
               
               <div class="col-6">
   <div class="mb-3 readonly_input">
                     <label for="typecont" class="form-label">تاريخ نهايه العقد</label>
-                     <input type="text" class="form-control" id="typecont" style="padding-right: 110px;"  placeholder="302" value="25 يناير 2026" readonly>
+                     <input type="text" class="form-control" id="typecont" style="padding-right: 110px;"  placeholder="302"  [value]="item?.endDate | date" readonly>
                 </div>
              
               </div>
                <div class="mb-3 readonly_input">
                     <label for="price" class="form-label" style="right: 22px;">السعر</label>
-                     <input type="text" class="form-control" id="price" style="padding-right: 47px;"  placeholder="302" value="3000" readonly>
+                     <input type="text" class="form-control" id="price" style="padding-right: 47px;"  placeholder="302" [value]="item?.totalAmount" readonly>
                 </div>
-               <div class="mb-3 readonly_input">
-                    <label for="typecont" class="form-label" style="right:22px;">تاريخ نهايه العقد</label>
-                     <input type="text" class="form-control" style="padding-right: 110px;" id="typecont" placeholder="302" value="25 يناير 2026" readonly>
-                </div>
+              
                <div class="mb-3 readonly_input">
                     <label for="typecont" class="form-label" style="right:22px;">المرفقات</label>
-                     <input type="text" class="form-control" style="padding-right: 68px;" id="typecont" placeholder="302" value="PNG - PDF" readonly>
+                     <input type="text" class="form-control" style="padding-right: 68px;" id="typecont" placeholder="302" [value]="item?.contractFilePath ? item.contractFilePath.split('/').pop() : ''" readonly>
                 </div>
                <div class="mb-3 readonly_input">
-                     <textarea  style="height:124px; font-size: 12px; color: #7F7F7F; text-align: right;" type="text" class="form-control p-2" id="typecont"  >4-هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربي، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التي يولدها التطبيق. 4-هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربي، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التي يولدها التطبيق. 4-هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربي، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التي يولدها التطبيق.
+                     <textarea  style="height:124px; font-size: 12px; color: #7F7F7F; text-align: right;" type="text" class="form-control p-2" id="typecont"  >{{item?.contractNotes}}
                      </textarea>
                 </div>
 
@@ -103,39 +120,59 @@
             </div>
         </div>
     </div>
+}@empty {
+     <div class="alert alert-warning text-center my-4" style="z-index: -1;" role="alert">
+   
+    لا توجد نتائج مطابقة لبحثك أو لم يتم اختيار عقد بعد.
+     <i class="fa-solid fa-circle-exclamation me-2"></i>
+  </div>
+}
+
 
 <!-- </div> -->
 <!-- Button trigger modal -->
 
 
 <!-- Modal -->
-<div class="modal fade"   id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade"    id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header   justify-content-end">
         <!-- <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5> -->
-        <button type="button" class="btn-close m-0 text-black" style="width: 8px; height:8px; font-size: 12px;   border:2px solid black;border-radius: 50%;" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" #modalRef  class="btn-close m-0 text-black" style="width: 8px; height:8px; font-size: 12px;   border:2px solid black;border-radius: 50%;" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-            <form action="">
+            <form  [formGroup]="formCancel" (ngSubmit)="onCancel()">
                 <div class="top_form">
                     <h4>فسخ العقد</h4>
 
                     <div class="my-4">
                         <label for="form-label">تاريخ فسخ العقد</label>
-                        <input type="date" name="" id="" class="form-control">
+                        <input type="date"  formControlName="TerminationDate" class="form-control text-dark">
+                             <ng-container *ngIf="formCancel.controls['TerminationDate'].invalid && formCancel.controls['TerminationDate'].touched">
+                      <small *ngIf="formCancel.controls['TerminationDate'].hasError('required')"> تاريخ العقد مطلوب</small>
+                 </ng-container>
                     </div>
                     <div class="mb-2">
                         <label for="form-label">سبب الفسخ</label>
-                        <textarea type="text" style="height:124px;" placeholder="اكتب المحتوي" name="" id="" class="form-control"></textarea>
+                        <textarea type="text" formControlName="Reason" style="height:124px; color: #000;" placeholder="اكتب المحتوي"  class="form-control"></textarea>
+                             <ng-container *ngIf="formCancel.controls['Reason'].invalid && formCancel.controls['Reason'].touched">
+                                    <small *ngIf="formCancel.controls['Reason'].hasError('required')"> سبب الفسخ مطلوب</small>
+                            </ng-container>
                     </div>
 
                 </div>
 
-                <button class="btn_modal">حفظ</button>
+                <button type="submit" class="btn_modal">حفظ</button>
             </form>
       </div>
     
     </div>
   </div>
 </div>
+
+<app-pagination
+  [totalPages]="dataContract?.paginationInfo?.totalPagesCount"
+  [currentPage]="pageIndex"
+  (pageChange)="onPageChanged($event)">
+</app-pagination>

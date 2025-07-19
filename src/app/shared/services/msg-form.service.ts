@@ -16,12 +16,9 @@ export class MsgFormService {
 
   apiUrl=environment.apiUrl;
 
-  getDataAllList(){
+  getDataAllList(pagination:any){
 
-    return this.http.post(this.apiUrl + '/api/ContactMessage/ListAsync',{
-  "pageIndex": 0,
-  "pageSize": 0
-})
+    return this.http.post(this.apiUrl + '/api/ContactMessage/ListAsync',pagination);
   }
 
 

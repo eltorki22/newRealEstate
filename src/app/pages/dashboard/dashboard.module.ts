@@ -8,10 +8,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 
 
-// import { NgChartsModule } from 'ng2-charts';
-
-
-
 
 @NgModule({
   declarations: [DashboardComponent],
@@ -20,7 +16,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     DashboardRoutingModule,
     SharedModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
         // NgChartsModule    
     
   ]

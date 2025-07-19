@@ -1,12 +1,16 @@
 
-    <form class="forms_dashboard">
+    <form class="forms_dashboard" [formGroup]='companyForm' (ngSubmit)="onSubmit()" appIntersection="fade-in">
         <div class="row align-items-center">
 
      
 
 <div class="mb-3 col-sm-12 ">
                  <label for="terms" class="form-label">الشروط والاحكام</label>
-                 <textarea type="text" class="form-control mt-3" id="terms" style="height: 510px; font-size: 12px; font-weight: 400; border-radius: 4px;" placeholder=" اكتب المحتوي"></textarea>
+                 <textarea class="form-control mt-3" id="terms" style="height: 510px; font-size: 12px; font-weight: 400; border-radius: 4px;" placeholder=" اكتب المحتوي" formControlName="termsAndConditions"></textarea>
+
+                     <ng-container *ngIf="companyForm.controls['termsAndConditions'].invalid && companyForm.controls['termsAndConditions'].touched">
+                      <small *ngIf="companyForm.controls['termsAndConditions'].hasError('required')"> الشروط والاحكام  مطلوبه</small>
+                 </ng-container>
         </div>
 
 

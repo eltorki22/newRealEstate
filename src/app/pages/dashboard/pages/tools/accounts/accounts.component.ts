@@ -113,7 +113,7 @@ export class AccountsComponent {
     }
       this.subSciption=this.accountSer.getAllDataList(pagination).subscribe((res:any)=>{
         this.accountData=res;
-      })
+        console.log(this.accountData)      })
   }
 
 

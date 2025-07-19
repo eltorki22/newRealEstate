@@ -1,6 +1,6 @@
 import { AuthService } from './shared/services/auth.service';
 import { LoadingService } from './shared/services/loading.service';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -15,9 +15,17 @@ export class AppComponent {
 
   loading$ = this.LoadingService.loading;
 
-   constructor(private authService: AuthService) {}
+   constructor(private authService: AuthService,private cdr:ChangeDetectorRef) {}
+
+
+   loading: boolean = false;
+
 
   ngOnInit(): void {
+
+
     this.authService.checkAndRemoveExpiredToken();
   }
+
+  
 }

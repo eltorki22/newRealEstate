@@ -3,13 +3,17 @@ import { CommonModule } from '@angular/common';
 
 import { SendmsgRoutingModule } from './sendmsg-routing.module';
 import { SendmsgComponent } from './sendmsg.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { IntersectionDirective } from '../../../../../shared/directive/intersection.directive';
 
 
 @NgModule({
   declarations: [SendmsgComponent],
   imports: [
     CommonModule,
-    SendmsgRoutingModule
+    SendmsgRoutingModule,
+    ReactiveFormsModule,
+    IntersectionDirective
   ]
 })
 export class SendmsgModule { }

@@ -25,6 +25,7 @@ export class AddTenantComponent {
   isEditMode=true;
   editIndex: number | null = null;
 
+  
 
   idUpdate:any
 
@@ -106,41 +107,36 @@ deleteDependent(index: number) {
 
 
 
-  ngOnInit(){
-    this.getAllNationality();
-    this.subScription=this.activeRouter.queryParamMap.subscribe((param:any)=>{
-      const id=parseInt(param.get('id'))
-      if(id){
-        this.idUpdate=id;
-        this.isEditMode=false;
-      this.addTenantSer.getupdateData(id).subscribe((res:any)=>{
+visibleShow = true; // مبدئيًا اعتبرها شاشة إضافة
 
-        console.log(res)
-          this.formData.patchValue({
-               FullName :res.fullName,
-             Nationality  :res.nationality,
-               PhoneNumber  :res.phoneNumber,
-              Email  :res.email,
-              JobTitle   :res.jobTitle,
-              IdType :res.idType,
-              IdNumber :res.idNumber,
-            IdFileCopy:res.idFileCopyPath,
-          })
-          this.fileName=res.idFileCopyPath?.split('/').pop() ?? ''
+ngOnInit() {
+  this.getAllNationality();
+  this.subScription = this.activeRouter.queryParamMap.subscribe((param: any) => {
+    const id = parseInt(param.get('id'));
+    if (id) {
+      this.idUpdate = id;
+      this.isEditMode = false;
+      this.visibleShow = false; // 👈 نخفي الزر ونغيّر العنوان
+      this.addTenantSer.getupdateData(id).subscribe((res: any) => {
+        this.formData.patchValue({
+          FullName: res.fullName,
+          Nationality: res.nationality,
+          PhoneNumber: res.phoneNumber,
+          Email: res.email,
+          JobTitle: res.jobTitle,
+          IdType: res.idType,
+          IdNumber: res.idNumber,
+          IdFileCopy: res.idFileCopyPath,
+        });
+        this.fileName = res.idFileCopyPath?.split('/').pop() ?? '';
+      });
+    } else {
+      this.visibleShow = true; // 👈 عرض العناصر في حالة "إضافة"
+    }
+  });
 
-          // this.selectedFile=;
-      })   
-
-
-      
-      }
-     
-    })
-
-
-    this.getRelations();
-    
-  }
+  this.getRelations();
+}
 
 
   
@@ -186,12 +182,14 @@ deleteDependent(index: number) {
 
   // تحقق من الصحة
   if (this.formData.invalid) {
-    this.toastr.show('يرجى تعبئة جميع الحقول بشكل صحيح', 'error');
+    // this.toastr.show('يرجى تعبئة جميع الحقول بشكل صحيح', 'error');
     return;
   }
-
+    for (const dep of this.dependents) {
+      payload.append('Dependents', JSON.stringify(dep));
+    }
  
- payload.append('Dependents', JSON.stringify(this.dependents));
+//  payload.append('Dependents', JSON.stringify(this.dependents));
 
   if(this.isEditMode){
  this.subScription = this.addTenantSer.addData(payload).subscribe({

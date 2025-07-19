@@ -13,6 +13,8 @@ import { ToastrService } from '../../../../../shared/services/toastr.service';
 export class MsgformComponent {
 
   fb:FormBuilder=inject(FormBuilder)
+  pageIndex=1;
+  pageSize=10;
 
   msgServices:MsgFormService=inject(MsgFormService);
   subScription!:Subscription
@@ -20,7 +22,7 @@ export class MsgformComponent {
   toastr:ToastrService=inject(ToastrService)
   btnText='Add';
   idUpdate:any;
-  getAllData:MsgForm[]=[];
+  getAllData:any=[];
 
   formData=this.fb.group({
     messageName:['',Validators.required],
@@ -93,7 +95,7 @@ export class MsgformComponent {
 
 
     }else{
-        this.toastr.show('يرجى تعبئة جميع الحقول بشكل صحيح', 'error');
+        // this.toastr.show('يرجى تعبئة جميع الحقول بشكل صحيح', 'error');
       this.formData.markAllAsTouched()
 
     }
@@ -121,8 +123,12 @@ export class MsgformComponent {
   getAllListData(){
     // return \\t
 
-   this.subScription= this.msgServices.getDataAllList().subscribe((res:any)=>{
-      this.getAllData=res.rows;
+    let pagination={
+      pageIndex:this.pageIndex,
+      pageSize:this.pageSize
+    }
+   this.subScription= this.msgServices.getDataAllList(pagination).subscribe((res:any)=>{
+      this.getAllData=res;
     })
 
   }
@@ -148,12 +154,32 @@ export class MsgformComponent {
 
   deleteConfirmed(id:any){
      this.show=false;
-    this.subScription=this.msgServices.deleteData(id).subscribe((res)=>{
-      // this.show=false
+    this.subScription=this.msgServices.deleteData(id).subscribe({
+    next:(res)=>{
       this.getAllListData();
-      this.toastr.show('تم حذف البيانات','success');
-
-    })
+ this.toastr.show('تم حذف البيانات','success');      
+    },
+    error:(err)=>{
+      
+       this.toastr.show('لا يمكن حذف العنصر إذا كان به حركات','error'); 
+    }
+   })
   }
 
+
+
+  onPageChanged(page:any){
+    this.pageIndex=page;
+
+    this.getAllListData();
+
+  }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    if(this.subScription){
+      this.subScription.unsubscribe();
+    }
+  }
 }

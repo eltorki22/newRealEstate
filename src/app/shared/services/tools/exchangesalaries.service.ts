@@ -18,7 +18,21 @@ export class ExchangesalariesService {
 
 
 
-  getEmployeesalary(id:any){
-    return this.http.get(this.apiUrl + `/api/Employee/GetById/${id}`)
+  getEmployeesalary(){
+    return this.http.get(this.apiUrl + `/api/Employee/GetEmployeesWithSalaryAndLoans`)
   }
+
+
+
+  getDataAllList(pagination:any){
+
+    return this.http.post(this.apiUrl + '/api/SalaryVoucher/ListAsync',pagination);
+    
+  }
+
+  addData(payload:any){
+     return this.http.post(this.apiUrl + '/api/SalaryVoucher/Add',payload);
+
+  }
+
 }

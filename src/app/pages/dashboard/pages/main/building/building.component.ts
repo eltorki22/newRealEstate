@@ -118,7 +118,7 @@ export class BuildingComponent {
 
 
     }else{
-this.toastr.show('يرجى تعبئة جميع الحقول بشكل صحيح', 'error');
+// this.toastr.show('يرجى تعبئة جميع الحقول بشكل صحيح', 'error');
 this.formData.markAllAsTouched();
     }
   }
@@ -139,6 +139,10 @@ this.formData.markAllAsTouched();
   }
 
 
+  resetData(){
+    this.btnText='Add';
+  }
+
   deleteId:any
 
   onClose(){
@@ -152,10 +156,16 @@ this.formData.markAllAsTouched();
     this.show=false;
 
 
-    this.BuildingService.deleteData(this.deleteId).subscribe(res=>{
-        this.getDataList();
-      this.toastr.show('تم حذف البيانات','success');
-    })
+    this.BuildingService.deleteData(this.deleteId).subscribe({
+    next:(res)=>{
+      this.getDataList();
+ this.toastr.show('تم حذف البيانات','success');      
+    },
+    error:(err)=>{
+      
+       this.toastr.show('لا يمكن حذف العنصر إذا كان به حركات','error'); 
+    }
+   })
 
 
   }

@@ -1,5 +1,8 @@
-<section class="login">
-    <div class="row me-0">
+<section class="login" >
+
+  <ng-container>
+
+<div class="row me-0">
         <aside class="col-6" appIntersection="fade-in">
             <img src="assets/login/landing.png" alt="login">
         </aside>
@@ -10,9 +13,29 @@
             </div>
 <ng-container #container></ng-container>
 
+
+<ng-template #emailForgot>
+  <form class="login_card" [formGroup]="emailForm" (ngSubmit)="sendOtpCode()" appIntersection="fade-in">
+    <h3>أدخل بريدك الإلكتروني</h3>
+    <p class="otpcode_content" style="margin-top:-10px;">
+      سنرسل لك رمز التحقق على بريدك الإلكتروني لاستعادة كلمة المرور.
+    </p>
+
+    <div class="mb-3 w-100 input_icon_email input_icon_email">
+      <input type="email" class="form-control Email_Send"  placeholder="البريد الإلكتروني" formControlName="email">
+      <ng-container *ngIf="emailForm.controls['email'].invalid && emailForm.controls['email'].touched">
+        <small *ngIf="emailForm.controls['email'].hasError('required')">البريد الإلكتروني مطلوب</small>
+        <small *ngIf="emailForm.controls['email'].hasError('email')">صيغة البريد الإلكتروني غير صحيحة</small>
+      </ng-container>
+    </div>
+
+    <button type="submit" class="btn_login">إرسال الرمز</button>
+  </form>
+</ng-template>
+
 <ng-template #login>
 <!-- <div class="rotate"></div> -->
-  <form class="login_card" appIntersection="fade-in"  [formGroup]="Dataform" (ngSubmit)="onSubmit()">
+  <form class="login_card" appIntersection="fade-in"  [formGroup]="Dataform" (ngSubmit)="onSubmit()" appIntersection="fade-in">
     
                 <h3>الرجاء إدخال البيانات</h3>
 
@@ -57,7 +80,7 @@
   <!-- <app-otpcode></app-otpcode> -->
 
 
-   <div class="otp-container login_card">
+   <div class="otp-container login_card" appIntersection="fade-in">
     <h3 style="margin-bottom: 0;"> OTP code ادخل</h3>
     <p class="otpcode_content">ادخل رمز التحقق الذي أُرسل إلى البريد الإلكتروني الخاص بك<br>gt******{{'@'}}.com</p>
 
@@ -67,10 +90,10 @@
     </div>
 
     <div class="resend-text">
-      يمكنك اعادة ارسال الرمز بعد <span id="countdown">35</span> ثانية
+      يمكنك اعادة ارسال الرمز بعد <span id="countdown">{{counter}}</span> ثانية
     </div>
 
-    <div class="resend-link">اعاده ارسال الرمز ؟</div>
+    <div class="resend-link" *ngIf="showreset" (click)="replaySend()">اعاده ارسال الرمز ؟</div>
 
     <button class="submit-btn" (click)="enterData()" >استمرار</button>
   </div>
@@ -84,7 +107,7 @@
 
 
 <ng-template #resetpassword>
-  <form class="login_card" [formGroup]="passwordForm" (ngSubmit)="submitNewPassword()">
+  <form class="login_card" [formGroup]="passwordForm" (ngSubmit)="submitNewPassword()" appIntersection="fade-in">
     <h3>ادخل كلمه مرور جديده !</h3>
     <p class="otpcode_content" style="margin-top:-20px;">
       يجب أن تكون كلمة المرور الجديدة الخاصة بك فريدة من نوعها مقارنة بكلمات المرور التي استخدمتها سابقًا.
@@ -115,6 +138,10 @@
 
         </div>
 
+
+  </ng-container>
+    
 </section>
+
 
 

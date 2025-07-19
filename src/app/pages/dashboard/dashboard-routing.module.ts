@@ -33,6 +33,8 @@ const routes: Routes = [
       {path:'exchangesalaries',loadChildren:()=>import('./pages/tools/exchangesalaries/exchangesalaries.module').then(m=>m.ExchangesalariesModule)},
       {path:'salafis',loadChildren:()=>import('./pages/tools/salafis/salafis.module').then(m=>m.SalafisModule)},
       {path:'sendmsg',loadChildren:()=>import('./pages/tools/sendmsg/sendmsg.module').then(m=>m.SendmsgModule)},
+      {path:'contractrenewal',loadChildren:()=>import('./pages/tools/contractrenewal/contractrenewal.module').then(m=>m.ContractrenewalModule)},
+     
       
     ]
   }

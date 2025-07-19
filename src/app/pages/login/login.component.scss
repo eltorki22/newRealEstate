@@ -50,6 +50,7 @@ aside{
     flex-direction: column;
     text-align: right;
     padding: 40px;
+    transition: 0.6s;
     // z-index: 1000;
      z-index: 1; // فقط لو ضروري
 
@@ -311,3 +312,14 @@ aside{
           color: #7F7F7F;
     font-size: 12px;
     }
+.Email_Send{
+  padding-right: 26px;
+  text-align: right;
+}
+
+.input_icon_email{
+  &::before{
+    content: '';
+    top: 11px !important;
+  }
+}

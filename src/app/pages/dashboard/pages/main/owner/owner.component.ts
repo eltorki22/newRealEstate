@@ -62,7 +62,7 @@ pageSize = 10; // اختياري حسب الـ API
   ngOnInit(){
     this.getData();
     this.getAllNationality()
-    console.log(this.getDataUpdate)
+   
   }
 
   validateNumber(e:any){
@@ -98,9 +98,7 @@ pageSize = 10; // اختياري حسب الـ API
       payload.append('Email', this.dataForm.get('Email')?.value ?? '');
       payload.append('IdType', this.dataForm.get('IdType')?.value ?? '');
       payload.append('IdNumber', this.dataForm.get('IdNumber')?.value ?? '');
-    //  if (this.selectedFile) {
-    //       payload.append('idFileCopyPath', this.selectedFile);
-    //   }
+    
 
     if (this.selectedFile && typeof this.selectedFile !== 'string') {
   payload.append('IdFileCopy', this.selectedFile);
@@ -150,7 +148,7 @@ pageSize = 10; // اختياري حسب الـ API
         })
       }
     }else{
-      this.toastr.show('يرجى تعبئة جميع الحقول بشكل صحيح', 'error');
+      // this.toastr.show('يرجى تعبئة جميع الحقول بشكل صحيح', 'error');
       this.dataForm.markAllAsTouched()
     }
 
@@ -230,12 +228,19 @@ this.fileName = extractedFileName;
 
 
   deleteConfirmed(id:any){
-    this.toastr.show('تم حذف البيانات','success');
+   
     this.show=false;
   
-   this.scription= this.OwnerService.deleteData(id).subscribe((res)=>{
+   this.scription= this.OwnerService.deleteData(id).subscribe({
+    next:(res)=>{
       this.getData();
-    })
+ this.toastr.show('تم حذف البيانات','success');      
+    },
+    error:(err)=>{
+      
+       this.toastr.show('لا يمكن حذف العنصر إذا كان به حركات','error'); 
+    }
+   })
   }
   onClose(){
     this.show=false;

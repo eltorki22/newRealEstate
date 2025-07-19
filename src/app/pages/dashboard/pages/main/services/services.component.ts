@@ -34,6 +34,9 @@ export class ServicesComponent {
   }
 
 
+  resetData(){
+    this.btnText='Add';
+  }
   onSubmit(){
 
     
@@ -95,7 +98,7 @@ export class ServicesComponent {
 
 
     }else{
-      this.toastr.show('يرجى تعبئة جميع الحقول بشكل صحيح', 'error');
+      // this.toastr.show('يرجى تعبئة جميع الحقول بشكل صحيح', 'error');
       this.formData.markAllAsTouched();
     }
 
@@ -156,12 +159,16 @@ export class ServicesComponent {
   
   
     this.show=false;
-    this.subScription=this.ServiceService.deleteData(id).subscribe((res)=>{
-      // this.show=false
+    this.subScription=this.ServiceService.deleteData(id).subscribe({
+    next:(res)=>{
       this.getAllListData();
-      this.toastr.show('تم حذف البيانات','success');
-
-    })
+ this.toastr.show('تم حذف البيانات','success');      
+    },
+    error:(err)=>{
+      
+       this.toastr.show('لا يمكن حذف العنصر إذا كان به حركات','error'); 
+    }
+   })
   }
   onClose(){
     this.show=false;

@@ -18,6 +18,7 @@ visibleFilter=false
   pageSize = 10; // اختياري حسب الـ API
 
 
+
   selectedFilter: string = 'FullName'; // الافتراضي مثلاً اسم المستأجر
   columnSearch:any=0
   searchText: string = ''; // النص اللي المستخدم هيكتبه
@@ -84,10 +85,17 @@ deleteData(id:any){
 
 deleteConfirmed(id:any){
   // console.log(id);
- this.subScription= this.addTenantSer.deleteData(id).subscribe((res)=>{
-    this.show=false;
-    this.getAllData()
-  })
+ this.subScription= this.addTenantSer.deleteData(id).subscribe({
+    next:(res)=>{
+      this.getAllData();
+      this.show=false
+ this.Toastr.show('تم حذف البيانات','success');      
+    },
+    error:(err)=>{
+      
+       this.Toastr.show('لا يمكن حذف العنصر إذا كان به حركات','error'); 
+    }
+   })
 }
 
 onPageChanged(page: number) {
@@ -139,6 +147,7 @@ onSubmit(){
     const searchValue = this.formData.value.searchData?.trim(); // نحذف المسافات الزائدة
   if (!searchValue) {
     // لو فاضي، رجّع كل البيانات
+    this.Toastr.show('يرجي املاء قيمه البحث','error');
     this.getAllData();
     return;
   }
@@ -147,9 +156,13 @@ onSubmit(){
     
       const body = {
       criteriaDto: {
-        listRelatedObjects: [],
-        entity: 'Tenant',
-        listOrderOptions: [],
+        listRelatedObjects: [
+          "string"
+        ],
+        entity: 'string',
+        listOrderOptions: [
+          "string"
+        ],
         paginationInfo: {
           pageIndex: this.pageIndex,
           pageSize: this.pageSize
@@ -177,25 +190,14 @@ onSubmit(){
 
 }
 
-// {
-//   "criteriaDto": {
-//     "listRelatedObjects": [
-//       "string"
-//     ],
-//     "entity": "string",
-//     "listOrderOptions": [
-//       "string"
-//     ],
-//     "paginationInfo": {
-//       "pageIndex": 0,
-//       "pageSize": 0
-//     }
-//   },
-//   "searchFilterDto": {
-//     "column": 0,
-//     "value": "شريف التركي"
-//   }
-// }
 
+
+ngOnDestroy(): void {
+  //Called once, before the instance is destroyed.
+  //Add 'implements OnDestroy' to the class.
+  if(this.subScription){
+    this.subScription.unsubscribe();
+  }
+}
  
 }

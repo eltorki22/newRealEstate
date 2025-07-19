@@ -1,5 +1,5 @@
 
- <h3 class="title-page mt-5" appIntersection="fade-in">بيانات المستأجر</h3>
+ <h3 class="title-page mt-3" appIntersection="fade-in">بيانات المستأجر</h3>
 
 
 
@@ -36,7 +36,7 @@
         </div>
         <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
                  <label for="phonenumber" class="form-label" >رقم الجوال</label>
-                 <input type="text" class="form-control" (keypress)="validationNumber($event)" formControlName="PhoneNumber" id="phonenumber" placeholder="الرقم">
+                 <input type="text" class="form-control" (keypress)="validationNumber($event)" formControlName="PhoneNumber" maxlength="11" id="phonenumber" placeholder="الرقم">
                   <ng-container *ngIf="formData.controls['PhoneNumber'].invalid && formData.controls['PhoneNumber'].touched">
                       <small *ngIf="formData.controls['PhoneNumber'].hasError('required')"> رقم التليفون مطلوب</small>
                  </ng-container>
@@ -86,7 +86,7 @@
               <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
                  <label for="idnumber" class="form-label">رقم الهويه  
                  </label>
-                 <input type="text" class="form-control" id="idnumber" (keypress)="validationNumber($event)" placeholder="الرقم" formControlName="IdNumber">
+                 <input type="text" class="form-control" id="idnumber" (keypress)="validationNumber($event)" maxlength="14" placeholder="الرقم" formControlName="IdNumber">
 
                    <ng-container *ngIf="formData.controls['IdNumber'].invalid && formData.controls['IdNumber'].touched">
                       <small *ngIf="formData.controls['IdNumber'].hasError('required')">  رقم الهويه مطلوب</small>
@@ -149,7 +149,7 @@
         </div>
         <div class="mb-3 col-sm-12 col-md-6 col-lg-6">
                  <label for="idOrPassport" class="form-label">رقم الهويه / الاقامه</label>
-                <input type="text" name="" id="idOrPassport" class="form-control" placeholder="رقم الاقامه / الهويه" formControlName="idOrPassport">
+                <input type="text" name="" id="idOrPassport" maxlength="14" class="form-control" placeholder="رقم الاقامه / الهويه" formControlName="idOrPassport">
                   
         </div>
         
@@ -181,7 +181,7 @@
               <div class="mb-3 col-sm-12 col-md-6 col-lg-4">
                  <label for="phonenumber2" class="form-label">رقم الجوال 
                  </label>
-                 <input type="text" class="form-control" id="phonenumber2" placeholder="رقم الجوال" formControlName="phoneNumber">
+                 <input type="text" class="form-control" maxlength="11" id="phonenumber2" placeholder="رقم الجوال" formControlName="phoneNumber">
         </div>      
             
               <div class="mb-3 col-sm-12 col-md-6 col-lg-3">

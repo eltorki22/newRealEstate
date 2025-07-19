@@ -29,7 +29,13 @@
 .forms_search{
     position: relative;
      z-index: 100; // ضروري لجعل الـ dropdown فوق الجدول
-    transition: 0.6s                ;
+    transition: 0.6s;
+    .btn_search{
+        &:hover{
+            background-color: transparent !important;
+            transform: scale(1.1);
+        }
+    }
     .search{
         position: relative;
 

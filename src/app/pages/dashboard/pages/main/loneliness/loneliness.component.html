@@ -126,7 +126,7 @@
       
             
             <div class="btn_add_reset">
-                <button type="reset">جديد</button> 
+                <button type="reset" (click)="resetData()">جديد</button> 
                       <button type="submit" [ngStyle]="{'background-color':btnText == 'Add' ? '#16601A':'#fd7e14'}">{{btnText=='Add' ? "اضافه" : "تعديل"}}</button>
                 
             </div>
@@ -167,7 +167,15 @@
        </td>
     </tr>
    
+    }@empty {
+       <tr>
+      <td colspan="5" class="text-center py-5" style="color: #888; font-size: 18px;">
+        <i class="fa-solid fa-circle-exclamation fa-2x mb-2" style="color: #ccc;"></i><br>
+        لا توجد بيانات حتى الآن
+      </td>
+    </tr>
     }
+
    
   </tbody>
 </table>   

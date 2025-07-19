@@ -1,6 +1,5 @@
-import { Component, inject } from '@angular/core';
-import { ActivatedRoute, NavigationEnd } from '@angular/router';
-import { Router } from '@angular/router';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter, Subscription } from 'rxjs';
 
 @Component({
@@ -8,42 +7,47 @@ import { filter, Subscription } from 'rxjs';
   templateUrl: './tenant.component.html',
   styleUrl: './tenant.component.scss'
 })
-export class TenantComponent {
-visibleFilter=false
-visibleShow=true;
-subScription!:Subscription
+export class TenantComponent implements OnInit, OnDestroy {
 
-router:Router=inject(Router);
+  visibleShow = true;
+  subScription!: Subscription;
+
+  router: Router = inject(Router);
+  activeRoute: ActivatedRoute = inject(ActivatedRoute);
+
+  ngOnInit(): void {
+    // تحديث مرّة واحدة عند تغيّر الرابط
+    this.subScription = this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.updateVisibility();
+      });
+
+    // استدعاء أولي بعد التحميل
+    this.updateVisibility();
+  }
 
 
+pageTitle = '';
+showAddButton = false;
 
+updateVisibility() {
+  const url = this.router.url;
 
-ngOnInit(): void {
-  //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-  //Add 'implements OnInit' to the class.
-
-    if (this.router.url === '/dashboard/tenant/addtenant' || this.router.url === '/dashboard/tenant/addtenant') {
-    this.visibleShow = false;
+  if (url.includes('/dashboard/tenant/addtenant')) {
+    this.pageTitle = url.includes('?id=') ? 'تعديل مستأجر' : 'إضافة مستأجر جديد';
+    this.showAddButton = false;
   } else {
-    this.visibleShow = true;
+    this.pageTitle = 'المستأجر';
+    this.showAddButton = true;
   }
-  this.subScription=this.router.events.pipe(filter(e=>e instanceof NavigationEnd)).subscribe(()=>{
-    if(this.router.url ==  '/dashboard/tenant/addtenant' || this.router.url === '/dashboard/tenant/addtenant'){
-      this.visibleShow=false
+}
 
-    }else{
-      this.visibleShow=true
+
+
+  ngOnDestroy(): void {
+    if (this.subScription) {
+      this.subScription.unsubscribe();
     }
-  })
-}
-
-
-
-ngOnDestroy(): void {
-  //Called once, before the instance is destroyed.
-  //Add 'implements OnDestroy' to the class.
-  if(this.subScription){
-    this.subScription.unsubscribe();
   }
-}
 }

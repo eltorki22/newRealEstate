@@ -1,46 +1,80 @@
 
-    <form class="forms_dashboard">
+    <form class="forms_dashboard" [formGroup]="companyForm" (ngSubmit)="submitForm()" appIntersection="fade-in">
         <div class="row align-items-center">
 
      
 
 <div class="mb-3 col-sm-12 col-md-6">
                  <label for="nameara" class="form-label">اسم الشركه بالعربي</label>
-                 <input type="text" class="form-control" id="nameara" placeholder="اسم الشركه بالعربي">
+                 <input type="text" class="form-control" id="nameara" formControlName="nameAr" placeholder="اسم الشركه بالعربي" (keypress)="validationNameAr($event)">
+                    <ng-container *ngIf="companyForm.controls['nameAr'].invalid && companyForm.controls['nameAr'].touched">
+                      <small *ngIf="companyForm.controls['nameAr'].hasError('required')">اسم الشركه بالعربي مطلوب</small>
+                 </ng-container>
         </div>
 <div class="mb-3 col-sm-12 col-md-6 ">
                  <label for="nameeng" class="form-label">اسم الشركه بالانجليزي</label>
-                 <input type="text" class="form-control" id="nameeng" placeholder="اسم الشركه بالانجليزي">
+                 <input type="text" class="form-control" id="nameeng" placeholder="اسم الشركه بالانجليزي" formControlName="nameEn" (keypress)="validationNameEn($event)">
+                    <ng-container *ngIf="companyForm.controls['nameEn'].invalid && companyForm.controls['nameEn'].touched">
+                      <small *ngIf="companyForm.controls['nameEn'].hasError('required')">اسم الشركه بالانجليزي مطلوب</small>
+                 </ng-container>
         </div>
      
 
         <div class="mb-3 col-sm-12 col-md-6">
                  <label for="phonenumber" class="form-label">رقم الجوال</label>
-                 <input type="text" class="form-control" id="phonenumber" placeholder="الرقم">
+                 <input type="text" class="form-control" id="phonenumber" placeholder="الرقم" formControlName="phoneNumber" (keypress)="ValidationNumber($event)">
+
+                     <ng-container *ngIf="companyForm.controls['phoneNumber'].invalid && companyForm.controls['phoneNumber'].touched">
+                      <small *ngIf="companyForm.controls['phoneNumber'].hasError('required')">رقم الجوال مطلوب</small>
+                 </ng-container>
         </div>
         <div class="mb-3 col-sm-12 col-md-6">
                  <label for="email" class="form-label"> البريد الالكتروني</label>
-                 <input type="text" class="form-control" id="email" placeholder="البريد ">
+                 <input type="text" class="form-control" id="email" placeholder="البريد " formControlName="email">
+                  <ng-container *ngIf="companyForm.controls['email'].invalid && companyForm.controls['email'].touched">
+                      <small *ngIf="companyForm.controls['email'].hasError('required')">  الايميل مطلوب</small>
+                      <small *ngIf="companyForm.controls['email'].hasError('email')">الرجاء إدخال بريد إلكتروني صحيح</small>
+                 </ng-container>
         </div>
         <div class="mb-3 col-sm-12 col-md-6">
                  <label for="numberdarebe" class="form-label">الرقم الضريبي</label>
-                 <input type="text" class="form-control" id="numberdarebe" placeholder="الرقم الضريبي ">
+                 <input type="text" class="form-control" id="numberdarebe" placeholder="الرقم الضريبي " formControlName="taxNumber" (keypress)="ValidationNumber($event)">
+                    <ng-container *ngIf="companyForm.controls['taxNumber'].invalid && companyForm.controls['taxNumber'].touched">
+                      <small *ngIf="companyForm.controls['taxNumber'].hasError('required')">  الرقم الضريبي مطلوب</small>
+                 </ng-container>
         </div> 
         <div class="mb-3 col-sm-12 col-md-6">
                  <label for="segltogare" class="form-label">السجل التجاري </label>
-                 <input type="text" class="form-control" id="segltogare" placeholder="السجل التجاري">
+                 <input type="text" class="form-control" id="segltogare" placeholder="السجل التجاري" formControlName="commercialRegister">
+                  <ng-container *ngIf="companyForm.controls['commercialRegister'].invalid && companyForm.controls['commercialRegister'].touched">
+                      <small *ngIf="companyForm.controls['commercialRegister'].hasError('required')">   السجل التجاري مطلوب</small>
+                 </ng-container>
+
         </div> 
         <div class="mb-3 col-sm-12 col-md-6">
                  <label for="hesap" class="form-label">الحساب البنكي</label>
-                 <input type="text" class="form-control" id="hesap" placeholder="الحساب البنكي">
+                 <input type="text" class="form-control" id="hesap" placeholder="الحساب البنكي" formControlName="bankAccount">
+                   <ng-container *ngIf="companyForm.controls['bankAccount'].invalid && companyForm.controls['bankAccount'].touched">
+                      <small *ngIf="companyForm.controls['bankAccount'].hasError('required')">    الحساب البنكي مطلوب</small>
+
+                 </ng-container>
+
         </div> 
         <div class="mb-3 col-sm-12 col-md-6">
                  <label for="address" class="form-label">العنوان</label>
-                 <input type="text" class="form-control" id="address" placeholder="العنوان">
+                 <input type="text" class="form-control" id="address" placeholder="العنوان" formControlName="address">
+                     <ng-container *ngIf="companyForm.controls['address'].invalid && companyForm.controls['address'].touched">
+                      <small *ngIf="companyForm.controls['address'].hasError('required')"> العنوان مطلوب</small>
+                 </ng-container>
+
         </div> 
         <div class="mb-3 col-sm-12 col-md-6">
                  <label for="nespaDareba" class="form-label">نسبه الضريبه(%)</label>
-                 <input type="text" class="form-control" id="nespaDareba" placeholder="نسبه الضريبه">
+                 <input type="text" class="form-control" id="nespaDareba" placeholder="نسبه الضريبه" formControlName="commissionPercentage" (keypress)="ValidationNumber($event)">
+                   <ng-container *ngIf="companyForm.controls['commissionPercentage'].invalid && companyForm.controls['commissionPercentage'].touched">
+                      <small *ngIf="companyForm.controls['commissionPercentage'].hasError('required')"> نسبه الضريبه مطلوبه</small>
+                 </ng-container>
+
         </div> 
 
         
@@ -57,8 +91,8 @@
   <div class="mt-3 col-sm-12 col-md-6">
 
   <div class="form-check mt-1 d-flex align-items-center"> <!-- خليها mt بدل mb -->
-    <input type="checkbox" class="checkbox" id="status" checked>
-    <label class="form-check-label" for="status" >نشط</label>
+    <input type="checkbox" class="checkbox" id="status" checked formControlName="autoCollectEnabled">
+    <label class="form-check-label" for="status" >تفعيل الضريبه</label>
   </div>   
                 
         </div>

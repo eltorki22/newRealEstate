@@ -8,8 +8,13 @@
  <div class="btn-group" dropdown>
   <button id="button-basic" dropdownToggle type="button" class="dropdown-toggle border-0 d-flex align-items-center flex-row-reverse"
           aria-controls="dropdown-basic">
-    <img src="assets/dashboard/user.png" class="ms-2" alt="user">      
-   محمد احمد
+    <img [src]="'http://gtsdev-001-site17.atempurl.com' + dataUser.profilePictureUrl" class="ms-2" alt="user" style="width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    ">      
+  
+
+ {{dataUser.fullName}}
   <span class="caret me-2"></span>  
      
   </button>

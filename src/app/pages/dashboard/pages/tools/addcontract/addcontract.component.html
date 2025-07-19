@@ -1,4 +1,4 @@
- <h3 class="title-page">الادوات <img src="assets/dashboard/iconarrowdouble.png"  class="mx-1" alt="icon"> <span>اضافه عقد</span></h3>
+ <h3 class="title-page" appIntersection="fade-in">الادوات <img src="assets/dashboard/iconarrowdouble.png"  class="mx-1" alt="icon"> <span>اضافه عقد</span></h3>
 
 
  <div class="box mt-5 mb-3">
@@ -6,7 +6,7 @@
 <h4 class="title_form">بيانات العقد</h4>        
     </div> -->
 
-    <form class="forms_dashboard" [formGroup]="this.formData" (ngSubmit)="onSubmit()">
+    <form class="forms_dashboard" [formGroup]="this.formData"  appIntersection="fade-in">
         <h4 class="title_form" >بيانات العقد</h4>
         <div class="row row_part">
 
@@ -37,7 +37,7 @@
 
 
         <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
-                 <label for="placecontract" class="form-label">مكان ايام العقد</label>
+                 <label for="placecontract" class="form-label">مكان ابرام العقد</label>
                  <input type="text" class="form-control" id="placecontract" placeholder="المكان" formControlName="ContractAddress">
                   <ng-container *ngIf="formData.controls['ContractAddress'].invalid && formData.controls['ContractAddress'].touched">
                       <small *ngIf="formData.controls['ContractAddress'].hasError('required')"> مكان العقد مطلوب</small>
@@ -123,8 +123,8 @@
             <h4 class="title_form" >بيانات المالك</h4>
         </div>
         <div class="col-6 form_search">
-            <input type="text" class="form-control" placeholder="بحث" style="background-color: #FBFBFB;">
-            <button class=""><i class="fa-solid fa-magnifying-glass"></i></button>
+            <input type="text" (keyup.enter)="searchOwner(valOwner.value)" class="form-control searchVal" placeholder="بحث" style="background-color: #FBFBFB;" #valOwner>
+            <button type="button" (click)="searchOwner(valOwner.value)"><i class="fa-solid fa-magnifying-glass" ></i></button>
         </div>
     </div>
 
@@ -135,46 +135,47 @@
         <div class="row row_part">
 
      
-<div class="p-3" style="border: 1px solid #BFDBC9; border-radius: 4px;">
+<div class="p-3" style="border: 1px solid #BFDBC9; border-radius: 4px; ">
     <div class="row">
 <div class="mb-3 col-sm-12 col-md-6 col-lg-3 readonly_input">
                  <label for="username" class="form-label">الاسم</label>
-                 <input type="text" style="padding-right: 50px;" class="form-control" id="username" placeholder="الاسم" readonly value="محمد احمد مجمود">
+                 <input type="text" style="padding-right: 50px;" class="form-control" id="username" readonly   [value]="this.ownerModel.fullName"
+        name="fullName" >
         </div>
         <div class="mb-3 col-sm-12 col-md-6 col-lg-3 readonly_input">
                  <label for="phonenumber" class="form-label"  >رقم الجوال</label>
               
-                 <input type="text" name="phonenumber" readonly style="padding-right: 74px;" id="phonenumber" value="01026381737" class="form-control" placeholder="رقم الجوال">
+                 <input type="text" name="phonenumber" readonly style="padding-right: 74px;" id="phonenumber" [value]="this.ownerModel.phoneNumber" class="form-control" >
         </div>
 
 
         <div class="mb-3 col-sm-12 col-md-6 col-lg-3 readonly_input">
                  <label for="nationality" class="form-label" >الجنسيه</label>
-                 <input type="text" class="form-control" readonly id="nationality" placeholder="الجنسيه" style="padding-right: 60px;" value="سعودي">
+                 <input type="text" class="form-control" readonly id="nationality"  style="padding-right: 60px;" [value]="this.ownerModel.nationality">
         </div>
         <div class="mb-3 col-sm-12 col-md-6 col-lg-3 readonly_input">
                  <label for="email" class="form-label">البريد الالكتروني</label>
  
 
-        <input type="email" class="form-control" id="email" value="gts@gmail.com" placeholder="البريد الالكتروني " readonly style="padding-right: 105px;">
+        <input type="email" class="form-control" id="email" [value]="this.ownerModel.email"  readonly style="padding-right: 105px;">
  </div>  
         <div class="mb-3 col-sm-12 col-md-6 col-lg-4 readonly_input">
                  <label for="idtype" class="form-label">نوع الهويه </label>
  
-        <input type="text" class="form-control" id="idtype" style="padding-right: 74px;" value="جواز سفر" readonly  placeholder="نوع الهويه">
+        <input type="text" class="form-control" id="idtype" style="padding-right: 74px;" [value]="this.ownerModel.idType" readonly  >
  </div>  
         <div class="mb-3 col-sm-12 col-md-6 col-lg-4 readonly_input">
                  <label for="idnumber" class="form-label" >رقم الهويه </label>
  
 
-            <input type="text" class="form-control" value="987654321234567" style="padding-right: 75px;" id="idnumber" placeholder="رقم الهويه">
+            <input type="text" class="form-control" [value]="this.ownerModel.idNumber" style="padding-right: 75px;" id="idnumber" >
  </div>  
 
        
        <div class="mb-3 col-sm-12 col-md-6 col-lg-4 readonly_input">
                  <label for="copy" class="form-label d-block">نسخه الهويه    
                  </label>      
-                 <input type="text" class="form-control" id="copy" value="صوره -  pdf "  placeholder="نسخه" readonly style="pointer-events: none; padding-right: 85px;"> 
+                 <input type="text" class="form-control" id="copy" [value]="this.ownerModel.idFileCopyPath"  readonly style="pointer-events: none; padding-right: 85px;"> 
                  
                
             </div>   
@@ -191,19 +192,50 @@
 
     <div class="my-3 col-sm-12 col-md-6 col-lg-4">
                  <label for="building" class="form-label">العماره</label>
-                 <input type="text" class="form-control" id="building" placeholder="العماره">
+                 <!-- <input type="text" class="form-control" id="building" placeholder="العماره"> -->
+                  <select id="building" class="form-select">
+                    <option value="" disabled selected>اسم العماره</option>
+                    @for (item of getDataBuilding; track $index) {
+                        <option [value]="item.id">{{item.name}}</option>
+                    }
+                  </select>
         </div>
 
 
     <div class="my-3 col-sm-12 col-md-6 col-lg-4">
                  <label for="door" class="form-label">الدور</label>
-                 <input type="text" class="form-control" id="door" placeholder="الدور">
+                 <!-- <input type="text" class="form-control" id="door" placeholder="الدور"> -->
+
+                     <select id="door" class="form-select">
+                    <option value="" disabled selected>اسم الدور</option>
+                       <option value="الاول">الاول</option>
+                    <option value="الثاني">الثاني</option>
+                    <option value="الثالث">الثالث</option>
+                    <option value="الرابع">الرابع</option>
+                    <option value="الخامس">الخامس</option>
+                    <option value="السادس">السادس</option>
+                    <option value="السابع">السابع</option>
+                    <option value="الثامن">الثامن</option>
+                    <option value="التاسع">التاسع</option>
+                    <option value="العاشر">العاشر</option>
+                  </select>
         </div>
 
 
     <div class="my-3 col-sm-12 col-md-6 col-lg-4">
                  <label for="shaka" class="form-label">شقه</label>
-                 <input type="text" class="form-control" id="shaka" placeholder="شقه">
+                 <!-- <input type="text" class="form-control" id="shaka" placeholder="شقه"> -->
+                  <select  id="shaka" class="form-select" formControlName="UnitId" (change)="changeUnit($event)">
+                    <option value="" disabled selected>اسم الشقه</option>
+                    @for (item of getDataUnit1; track $index) {
+                        <option [value]="item.id">{{item.unitName}}</option>
+                    }
+
+                  </select>
+
+                      <ng-container *ngIf="formData.controls['UnitId'].invalid && formData.controls['UnitId'].touched">
+                      <small *ngIf="formData.controls['UnitId'].hasError('required')">اسم الشقه مطلوبه</small>
+              </ng-container>
         </div>
 
 <!-- </div> -->
@@ -222,11 +254,11 @@
 <div class="box">
     <div class="row align-items-center">
         <div class="col-6">
-            <h4 class="title_form" >  بيانات المستاجر</h4>
+            <h4 class="title_form">  بيانات المستاجر</h4>
         </div>
         <div class="col-6 form_search">
-            <input type="text" class="form-control" placeholder="بحث" style="background-color: #FBFBFB;">
-            <button class=""><i class="fa-solid fa-magnifying-glass"></i></button>
+            <input type="text" (keyup.enter)="searchTenant(valTenant.value)" class="form-control searchVal" placeholder="بحث" style="background-color: #FBFBFB;" #valTenant>
+            <button type="button" (click)="searchTenant(valTenant.value)"><i class="fa-solid fa-magnifying-glass"></i></button>
         </div>
     </div>
 
@@ -234,43 +266,43 @@
 
 
 
-        <div class="row row_part">
+        <div class="row row_part" >
 
      
 <!-- <div class="p-3" style="border: 1px solid #BFDBC9; border-radius: 4px;"> -->
-    <div class="row">
+    <div class="row" >
 <div class="mb-3 col-sm-12 col-md-6 col-lg-3 readonly_input">
                  <label for="username2" class="form-label" >الاسم</label>
-                 <input type="text" style="padding-right: 50px;" class="form-control" value="شريف يحيي" readonly id="username2" placeholder="الاسم">
+                 <input type="text" style="padding-right: 50px;" class="form-control" [value]="tenantModel.fullName" readonly id="username2" >
         </div>
         <div class="mb-3 col-sm-12 col-md-6 col-lg-3 readonly_input">
                  <label for="phonenumber2" class="form-label">رقم الجوال</label>
               
-                 <input type="text" style="padding-right: 74px;" readonly value="01098765443" name="phonenumber" id="phonenumber2" class="form-control" placeholder="رقم الجوال">
+                 <input type="text" style="padding-right: 74px;" readonly [value]="tenantModel.phoneNumber" name="phonenumber" id="phonenumber2" class="form-control" >
         </div>
 
 
         <div class="mb-3 col-sm-12 col-md-6 col-lg-3 readonly_input">
                  <label for="nationality2" class="form-label">الجنسيه</label>
-                 <input type="text" style="padding-right: 60px;" class="form-control" id="nationality2" value="سعودي" readonly placeholder="الجنسيه">
+                 <input type="text" style="padding-right: 60px;" class="form-control" id="nationality2" [value]="tenantModel.nationality" readonly >
         </div>
         <div class="mb-3 col-sm-12 col-md-6 col-lg-3 readonly_input">
                  <label for="email2"  class="form-label">البريد الالكتروني</label>
  
 
-        <input type="email" style="padding-right: 105px;" readonly  value="gts@gmail.com" class="form-control" id="email2" placeholder="البريد الالكتروني ">
+        <input type="email" style="padding-right: 105px;" readonly  [value]="tenantModel.email" class="form-control" id="email2" >
  </div>  
         <div class="mb-3 col-sm-12 col-md-6 col-lg-3 readonly_input">
                  <label for="idtype2" class="form-label">نوع الهويه </label>
  
 
-        <input type="text" style="padding-right: 75px;" class="form-control" id="idtype2" readonly placeholder="نوع الهويه">
+        <input type="text" style="padding-right: 75px;" [value]="tenantModel.idType"  class="form-control" id="idtype2" readonly >
  </div>  
         <div class="mb-3 col-sm-12 col-md-6 col-lg-3 readonly_input">
                  <label for="idnumber2" class="form-label">رقم الهويه </label>
  
 
-            <input type="text" class="form-control" style="padding-right: 76px; pointer-events: none;"  readonly value="987654321234567" id="idnumber2" placeholder="رقم الهويه">
+            <input type="text" class="form-control" [value]="tenantModel.idNumber" style="padding-right: 76px; pointer-events: none;"  readonly value="987654321234567" id="idnumber2">
  </div>  
 
        
@@ -280,7 +312,7 @@
                  <!-- <input type="file" id="copy2" class="d-none" >     -->
                   
                    
-                     <input type="text" class="form-control"  value="صوره -  pdf " id="copy2" placeholder="نسخه" readonly style="pointer-events: none; padding-right: 85px;"> 
+                     <input type="text" class="form-control"  [value]="tenantModel.idFileCopyPath" id="copy2"  readonly style="pointer-events: none; padding-right: 85px;"> 
                
                
             </div>   
@@ -309,8 +341,8 @@
             <h4 class="title_form" >بيانات السمسار ( الوسيط ) </h4>
         </div>
         <div class="col-6 form_search">
-            <input type="text" class="form-control" placeholder="بحث" style="background-color: #FBFBFB;">
-            <button class=""><i class="fa-solid fa-magnifying-glass"></i></button>
+            <input type="text" class="form-control searchVal" (keyup.enter)="searchBroker(valueBroker.value)" placeholder="بحث" style="background-color: #FBFBFB;" #valueBroker>
+            <button type="button" (click)="searchBroker(valueBroker.value)" ><i class="fa-solid fa-magnifying-glass"></i></button>
         </div>
     </div>
 
@@ -318,43 +350,43 @@
 
 
 
-        <div class="row row_part">
+        <div class="row row_part" >
 
      
 <!-- <div class="p-3" style="border: 1px solid #BFDBC9; border-radius: 4px;"> -->
     <div class="row">
 <div class="mb-3 col-sm-12 col-md-6 col-lg-3 readonly_input">
                  <label for="username3" class="form-label">الاسم</label>
-                 <input type="text" class="form-control" value="محمد احمد محمود"  readonly style="padding-right: 50px;" id="username3" placeholder="الاسم">
+                 <input type="text" class="form-control" [value]="brokerModel.fullName"  readonly style="padding-right: 50px;" id="username3" >
         </div>
         <div class="mb-3 col-sm-12 col-md-6 col-lg-3 readonly_input">
                  <label for="phonenumber3" class="form-label">رقم الجوال</label>
               
-                 <input type="text" name="phonenumber" style="padding-right: 80px;" readonly value="01026381737" id="phonenumber3" class="form-control" placeholder="رقم الجوال">
+                 <input type="text" class="form-control" name="phonenumber" style="padding-right: 80px;" [value]="brokerModel.phoneNumber" readonly  id="phonenumber3" >
         </div>
 
 
         <div class="mb-3 col-sm-12 col-md-6 col-lg-3 readonly_input">
                  <label for="nationality3" class="form-label">الجنسيه</label>
-                 <input type="text" class="form-control" readonly style="padding-right: 60px; " value="سعودي" id="nationality3" placeholder="الجنسيه">
+                 <input type="text" class="form-control" readonly style="padding-right: 60px;" [value]="brokerModel.nationality" id="nationality3" >
         </div>
         <div class="mb-3 col-sm-12 col-md-6 col-lg-3 readonly_input">
                  <label for="email3" class="form-label">البريد الالكتروني</label>
  
 
-        <input type="email" class="form-control" id="email3" readonly style="padding-right: 105px;" value="gts@gmail.com" placeholder="البريد الالكتروني ">
+        <input type="email" class="form-control" id="email3" readonly style="padding-right: 105px;" [value]="brokerModel.email" >
  </div>  
         <div class="mb-3 col-sm-12 col-md-6 col-lg-4 readonly_input">
                  <label for="idtype3" class="form-label">نوع الهويه </label>
  
 
-        <input type="text" class="form-control" id="idtype3" readonly style="padding-right:75px ;" placeholder="نوع الهويه">
+        <input type="text" class="form-control" id="idtype3" readonly [value]="brokerModel.idType" style="padding-right:75px ;" >
  </div>  
         <div class="mb-3 col-sm-12 col-md-6 col-lg-4 readonly_input">
                  <label for="idnumber3" class="form-label">رقم الهويه </label>
  
 
-            <input type="text" class="form-control" id="idnumber3" style="padding-right:75px ;" readonly placeholder="رقم الهويه">
+            <input type="text" class="form-control" id="idnumber3" [value]="brokerModel.idNumber" style="padding-right:75px ;" readonly >
  </div>  
 
        
@@ -363,7 +395,7 @@
                  </label>
                  <input type="file" id="copy3" class="d-none" >
                 
-                     <input type="text" class="form-control"  id="copy" placeholder="نسخه" readonly style="pointer-events: none; padding-right: 85px;"> 
+                     <input type="text" class="form-control" [value]="brokerModel.idFileCopyPath"  id="copy"  readonly style="pointer-events: none; padding-right: 85px;"> 
              
                
             </div>   
@@ -395,14 +427,14 @@
      
 <!-- <div class="p-3" style="border: 1px solid #BFDBC9; border-radius: 4px;"> -->
     <div class="row">
-<div class="mb-3 col-sm-12 col-md-6 col-lg-4">
+<div class="mb-3 col-sm-12 col-md-6 col-lg-3">
                  <label for="price" class="form-label">السعر</label>
-                 <input type="text" class="form-control" id="price" placeholder="السعر" formControlName="TotalAmount">
+                 <input type="text" class="form-control" id="price" placeholder="السعر" formControlName="TotalAmount" readonly>
                    <ng-container *ngIf="formData.controls['TotalAmount'].invalid && formData.controls['TotalAmount'].touched">
                       <small *ngIf="formData.controls['TotalAmount'].hasError('required')">  السعر مطلوب</small>
               </ng-container>
         </div>
-        <div class="mb-3 col-sm-12 col-md-6 col-lg-4">
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
                  <label for="pushed" class="form-label">المدفوع</label>
               
                  <input type="text" name="" id="pushed" class="form-control" placeholder="المدفوع" formControlName="PaidAmount">
@@ -412,32 +444,56 @@
         </div>
 
 
-        <div class="mb-3 col-sm-12 col-md-6 col-lg-4">
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
                  <label for="motabaky" class="form-label">المتبقي</label>
-                 <input type="text" class="form-control" id="motabaky" placeholder="المتبقي" formControlName="RemainingAmount">
+                 <input type="text" class="form-control" id="motabaky" readonly placeholder="المتبقي" formControlName="RemainingAmount" readonly>
                       <ng-container *ngIf="formData.controls['RemainingAmount'].invalid && formData.controls['RemainingAmount'].touched">
                       <small *ngIf="formData.controls['RemainingAmount'].hasError('required')"> المتبقي مطلوب</small>
               </ng-container> 
         </div>
-        <div class="mb-3 col-sm-12 col-md-6 col-lg-4">
+                <div class="mb-3 col-sm-12 col-md-3">
+                 <label for="warn" class="form-label" for="accountcompany">الحساب </label>
+                <select name="accountcompany" id="accountcompany" class="form-select" formControlName="AccountDebitForCompanyId">
+                    <option value="" disabled selected> اختر الحساب </option>
+                    @for (item of accountCompany; track $index) {
+                        <option [value]="item.id">{{item.accountName}}</option>
+                    }
+                </select>
+                  <ng-container *ngIf="formData.controls['AccountDebitForCompanyId'].invalid && formData.controls['AccountDebitForCompanyId'].touched">
+                      <small *ngIf="formData.controls['AccountDebitForCompanyId'].hasError('required')">حساب الشركه مطلوب</small>
+              </ng-container> 
+        </div>
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
                  <label for="valueemola" class="form-label">قيمه العموله</label>
-                 <input type="text" class="form-control" id="valueemola" placeholder="قيمه " formControlName="CommissionValue">
-                 <ng-container *ngIf="formData.controls['CommissionValue'].invalid && formData.controls['CommissionValue'].touched">
+                 <input type="text" class="form-control" id="valueemola" placeholder="قيمه " formControlName="CommissionValue" readonly>
+                 <ng-container *ngIf="formData.controls['CommissionValue'].invalid && formData.controls['CommissionValue'].touched" >
                       <small *ngIf="formData.controls['CommissionValue'].hasError('required')">  قيمه العموله مطلوبه</small>
               </ng-container> 
         </div>
-        <div class="mb-3 col-sm-12 col-md-6 col-lg-4">
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
                  <label for="madphoa" class="form-label">المدفوع عموله</label>
                  <input type="text" class="form-control" id="madphoa" placeholder="المدفوع " formControlName="CommissionPaid">
-                  <ng-container *ngIf="formData.controls['CommissionPaid'].invalid && formData.controls['CommissionPaid'].touched">
+                  <ng-container *ngIf="formData.controls['CommissionPaid'].invalid && formData.controls['CommissionPaid'].touched" >
                       <small *ngIf="formData.controls['CommissionPaid'].hasError('required')">المدفوع  عموله مطلوب</small>
               </ng-container> 
         </div>
-        <div class="mb-3 col-sm-12 col-md-6 col-lg-4">
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
                  <label for="motapky" class="form-label">المتبقي عموله</label>
-                 <input type="text" class="form-control" id="motapky" placeholder="المتبقي" formControlName="CommissionRemaining">
-                   <ng-container *ngIf="formData.controls['CommissionRemaining'].invalid && formData.controls['CommissionRemaining'].touched">
+                 <input type="text" class="form-control" id="motapky" placeholder="المتبقي" formControlName="CommissionRemaining" readonly>
+                   <ng-container *ngIf="formData.controls['CommissionRemaining'].invalid && formData.controls['CommissionRemaining'].touched" >
                       <small *ngIf="formData.controls['CommissionRemaining'].hasError('required')">   المتبقي عموله مطلوبه</small>
+              </ng-container> 
+        </div>
+            <div class="mb-3 col-sm-12 col-md-3">
+                 <label for="warn" class="form-label" for="accountrelator">الحساب</label>
+                <select name="accountrelator" id="accountrelator" class="form-select" formControlName="AccountCreditForCompanyId">
+                    <option value="" disabled selected> اختر الحساب  </option>
+                    @for (item of accountCompany; track $index) {
+                        <option [value]="item.id">{{item.accountName}}</option>
+                    }
+                </select>
+             <ng-container *ngIf="formData.controls['AccountCreditForCompanyId'].invalid && formData.controls['AccountCreditForCompanyId'].touched">
+                      <small *ngIf="formData.controls['AccountCreditForCompanyId'].hasError('required')">حساب السمسار مطلوب</small>
               </ng-container> 
         </div>
         <div class="mb-3 col-sm-12 col-md-6">
@@ -454,6 +510,8 @@
                       <small *ngIf="formData.controls['InsuranceValue'].hasError('required')"> قيمه التأمين مطلوبه</small>
               </ng-container> 
         </div>
+
+    
     
 
                
@@ -501,7 +559,7 @@
         </div>
         <div class="mb-3 col-sm-12 col-md-6 col-lg-4">
                  <label for="phonenumber4" class="form-label">رقم الجوال </label>
-                 <input type="text" name="" id="phonenumber4" class="form-control" placeholder="المدفوع" formControlName="PhoneNumber">
+                 <input type="text" name="" id="phonenumber4" class="form-control" placeholder="رقم الجوال " formControlName="PhoneNumber">
                   <ng-container *ngIf="formData.controls['PhoneNumber'].invalid && formData.controls['PhoneNumber'].touched">
                       <small *ngIf="formData.controls['PhoneNumber'].hasError('required')"> رقم الفون مطلوب</small>
                  </ng-container>
@@ -542,12 +600,14 @@
     
 
             <div class="btn_add_reset">
-                <button type="button">طباعه</button> 
-                <button type="submit">اضافه</button>
+                <button type="button" (click)="onPrint()">طباعه</button> 
+                <button type="button" (click)="onSubmit()">اضافه</button>
                 
             </div>
          
         
     </form>
  </div>
+ 
+
  

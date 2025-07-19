@@ -7,14 +7,14 @@
 
 <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
                  <label for="username" class="form-label">الاسم</label>
-                 <input type="text" [value]="this.getDataUpdate?.fullName" class="form-control" id="username" placeholder="الاسم" formControlName="FullName">
+                 <input type="text" [value]="this.getDataUpdate?.fullName" class="form-control" id="username" name="username" placeholder="الاسم" formControlName="FullName">
                  <ng-container *ngIf="dataForm.controls['FullName'].invalid && dataForm.controls['FullName'].touched">
                       <small *ngIf="dataForm.controls['FullName'].hasError('required')">اسم المالك مطلوب</small>
                  </ng-container>
         </div>
         <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
                  <label for="Nationality" class="form-label">الجنسيه</label>
-                   <select class="form-select" placeholder="الجنسيه"  id="Identitytype" aria-label="Default select example" formControlName="Nationality">
+                   <select class="form-select" placeholder="الجنسيه"  id="Identitytype"  name="Nationality" aria-label="Default select example" formControlName="Nationality">
                     <option value="" disabled selected>الجنسيه</option>
                     @for (item of dataNationality; track $index) {
                       <option [value]="item.nationality_ar">{{item.nationality_ar}}</option>
@@ -26,7 +26,7 @@
         </div>
         <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
                  <label for="phonenumber" class="form-label">رقم الجوال</label>
-                 <input type="text" [value]="this.getDataUpdate?.phoneNumber" (keypress)="validateNumber($event)" maxlength="11" inputmode="numeric" pattern="[0-9]*" class="form-control" id="phonenumber" placeholder="الرقم" formControlName="PhoneNumber">
+                 <input type="text" [value]="this.getDataUpdate?.phoneNumber" name="phonenumber" (keypress)="validateNumber($event)" maxlength="11" inputmode="numeric" pattern="[0-9]*" class="form-control" id="phonenumber" placeholder="الرقم" formControlName="PhoneNumber">
                    <ng-container *ngIf="dataForm.controls['PhoneNumber'].invalid && dataForm.controls['PhoneNumber'].touched">
                       <small *ngIf="dataForm.controls['PhoneNumber'].hasError('required')">رقم الجوال مطلوب</small>
                  </ng-container>
@@ -34,7 +34,7 @@
         <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
                  <label for="email" class="form-label">البريد الالكتروني
                  </label>
-                 <input type="text" class="form-control" id="email" placeholder="الايميل" formControlName="Email" [value]="this.getDataUpdate?.email">
+                 <input type="text" class="form-control" id="email" name="email" autocomplete="email" placeholder="الايميل" formControlName="Email" [value]="this.getDataUpdate?.email">
                   <ng-container *ngIf="dataForm.controls['Email'].invalid && dataForm.controls['Email'].touched">
                       <small *ngIf="dataForm.controls['Email'].hasError('required')">  البريد الإلكتروني مطلوب</small>
                       <small *ngIf="dataForm.controls['Email'].hasError('email')">الرجاء إدخال بريد إلكتروني صحيح</small>
@@ -55,7 +55,7 @@
   <div class="mb-3 col-sm-12 col-md-6 col-lg-4">
                  <label for="Identitytype" class="form-label">نوع الهويه
                  </label>
-                <select class="form-select" id="Identitytype" [value]="this.getDataUpdate?.idType" aria-label="Default select example" formControlName="IdType" >
+                <select class="form-select" id="Identitytype" name="Identitytype" [value]="this.getDataUpdate?.idType" aria-label="Default select example" formControlName="IdType" >
                         <option value="" disabled selected>النوع</option>
                         <option value="هويه الوطنيه">هويه الوطنيه</option>
                         <option value="هويه مقيم (الاقامه)">هويه مقيم (الاقامه)</option>
@@ -77,7 +77,7 @@
               <div class="mb-3 col-sm-12 col-md-6 col-lg-4">
                  <label for="idnumber" class="form-label">رقم الهويه
                  </label>
-                 <input type="text" [value]="this.getDataUpdate?.idNumber" class="form-control"  id="idnumber" placeholder="الرقم" formControlName="IdNumber" inputmode="numeric" (keypress)="validateNumber($event)">
+                 <input type="text" name="idnumber" [value]="this.getDataUpdate?.idNumber" class="form-control"  id="idnumber" placeholder="الرقم" formControlName="IdNumber" maxlength="14" inputmode="numeric" (keypress)="validateNumber($event)">
 
                  <ng-container *ngIf="dataForm.controls['IdNumber'].invalid && dataForm.controls['IdNumber'].touched">
                       <small *ngIf="dataForm.controls['IdNumber'].hasError('required')">رقم الهويه مطلوب</small>
@@ -87,7 +87,7 @@
               <div class="mb-3 col-sm-12 col-md-6 col-lg-4">
                  <label for="copyFile" class="form-label d-block">نسخه
                  </label>
-                 <input type="file" id="copyFile" class="d-none"  (change)="onFileSelected($event)" >
+                 <input type="file" id="copyFile" class="d-none"  (change)="onFileSelected($event)" name="file">
                  <label for="copyFile" class="form-label d-flex copy_identity" >
                     <div class="icon"><i class="fa-solid fa-download"></i> </div>
                      <input type="text" class="form-control" id="copy"  placeholder="نسخه" [value]="getDataUpdate ? getDataUpdate.idFileCopyPath : fileName" readonly style="pointer-events: none;">
@@ -120,7 +120,7 @@
     </tr>
   </thead>
   <tbody>
-    @for (item of Owners.rows; track $index) {
+    @for (item of Owners?.rows; track $index) {
   <tr>
       <th scope="row">م</th>
       <td>{{item.fullName}}</td>
@@ -132,6 +132,14 @@
        <button class="btn btn-danger" (click)="DeleteModel(item.id)">  <i class="fa-solid fa-trash"></i></button>
 
        </td>
+    </tr>
+    }
+    @empty {
+       <tr>
+      <td colspan="5" class="text-center py-5" style="color: #888; font-size: 18px;">
+        <i class="fa-solid fa-circle-exclamation fa-2x mb-2" style="color: #ccc;"></i><br>
+        لا توجد بيانات حتى الآن
+      </td>
     </tr>
     }
 

@@ -125,7 +125,6 @@ pageSize = 10; // اختياري حسب الـ API
         payload.append('email',this.formData.value.email ?? '')
         payload.append('idType',this.formData.value.idType ?? '')
         payload.append('idNumber',this.formData.value.idNumber ?? '')
-        console.log('Selected File:', this.selectedFile);
        if (this.selectedFile) {
        payload.append('IdFileCopy', this.selectedFile);
 }
@@ -165,7 +164,10 @@ if (bonusType === 'value') {
               
             });
           }
-         }else{
+         }else if(err.error.message){
+          this.toastr.show(err.error.message, 'error');
+         }
+         else{
          
             this.toastr.show('حدث خطأ أثناء العملية', 'error');
 
@@ -213,11 +215,22 @@ if (bonusType === 'value') {
       
 
       this.formData.markAllAsTouched();
-      this.toastr.show('يرجى تعبئة جميع الحقول بشكل صحيح', 'error');
+      // this.toastr.show('يرجى تعبئة جميع الحقول بشكل صحيح', 'error');
     }
 
   }
 
+  resetData(){
+    this.btnText='Add';
+    this.formData.reset();
+  this.formData.patchValue({
+    bonusType: 'value' // القيمة الافتراضية
+  });
+
+  this.fileName = 'نسخه';
+  this.selectedFile = null;
+  this.inpBouns.nativeElement.value = '';
+  }
 
   markAsFileTouched(){
     this.formData.controls['idFileCopyPath'].markAsTouched();
@@ -238,7 +251,6 @@ if (bonusType === 'value') {
   };
     this.subscription=this.RealtorService.getListData(body).subscribe((res:any)=>{
       this.getAllData=res;
-      console.log(this.getAllData);
     
     })
   }
@@ -258,9 +270,7 @@ if (bonusType === 'value') {
     this.btnText='Update';
 
      this.subscription= this.RealtorService.getUpdateData(this.idUpdate).subscribe((res:any)=>{
-        console.log(res);
           this.formData.patchValue({
-
       fullName:res.fullName,
        nationality:res.nationality,
        phoneNumber:res.phoneNumber,
@@ -299,8 +309,7 @@ if (bonusType === 'value') {
 
             this.fileName = extractedFileName;
               this.selectedFile=fullPath
-           
-            //  this.fileName=
+       
         })
 
      
@@ -320,12 +329,16 @@ if (bonusType === 'value') {
   
   
     this.show=false;
-    this.RealtorService.deleteData(id).subscribe((res)=>{
-      // this.show=false
+    this.RealtorService.deleteData(id).subscribe({
+    next:(res)=>{
       this.getListData();
-      this.toastr.show('تم حذف البيانات','success');
-
-    })
+ this.toastr.show('تم حذف البيانات','success');      
+    },
+    error:(err)=>{
+      
+       this.toastr.show('لا يمكن حذف العنصر إذا كان به حركات','error'); 
+    }
+   })
   }
   onClose(){
     this.show=false;
@@ -333,13 +346,11 @@ if (bonusType === 'value') {
   
 onPageChanged(page: number) {
   this.pageIndex = page;
-  // this.fetchEmployees(); // أعد جلب البيانات
   this.getListData()
 }
 
   ngOnDestroy(): void {
-    //Called once, before the instance is destroyed.
-    //Add 'implements OnDestroy' to the class.
+
     if(this.subscription){
       this.subscription.unsubscribe();
     }

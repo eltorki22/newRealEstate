@@ -52,7 +52,7 @@
   </thead>
   <tbody>
 
-    @for (item of getAllData; track $index) {
+    @for (item of getAllData?.rows; track $index) {
    <tr>
       <th scope="row">{{$index}}</th>
       <td>{{item.messageName}}</td>
@@ -65,7 +65,15 @@
 
        </td>
     </tr>
+    }@empty {
+       <tr>
+      <td colspan="5" class="text-center py-5" style="color: #888; font-size: 18px;">
+        <i class="fa-solid fa-circle-exclamation fa-2x mb-2" style="color: #ccc;"></i><br>
+        لا توجد بيانات حتى الآن
+      </td>
+    </tr>
     }
+
  
 
   </tbody>
@@ -76,3 +84,10 @@
 <div class="modal_delete" [ngClass]="{'active':this.show}">
 <app-confirm-delete (toggleModal)="onClose()" (onDelete)="deleteConfirmed($event)" [itemId]="this.deleteId"></app-confirm-delete>
 </div>
+
+
+<app-pagination
+  [totalPages]="getAllData?.paginationInfo?.totalPagesCount"
+  [currentPage]="pageIndex"
+  (pageChange)="onPageChanged($event)">
+</app-pagination>

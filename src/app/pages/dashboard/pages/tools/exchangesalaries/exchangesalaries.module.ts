@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ExchangesalariesRoutingModule } from './exchangesalaries-routing.module';
 import { ExchangesalariesComponent } from './exchangesalaries.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { IntersectionDirective } from '../../../../../shared/directive/intersection.directive';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     ExchangesalariesRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    IntersectionDirective
   ]
 })
 export class ExchangesalariesModule { }

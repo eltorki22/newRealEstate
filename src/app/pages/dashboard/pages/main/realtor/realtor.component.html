@@ -77,7 +77,7 @@
               <div class="mb-3 col-sm-12 col-md-6 col-lg-4">
                  <label for="idnumber" class="form-label">رقم الهويه
                  </label>
-                 <input type="text" class="form-control" id="idnumber" (keypress)="validateNumber($event)" placeholder="الرقم" formControlName="idNumber">
+                 <input type="text" class="form-control" id="idnumber" maxlength="14" (keypress)="validateNumber($event)" placeholder="الرقم" formControlName="idNumber">
                        <ng-container *ngIf="formData.controls['idNumber'].invalid && formData.controls['idNumber'].touched">
                       <small *ngIf="formData.controls['idNumber'].hasError('required')">رقم الهويه مطلوب</small>
                  </ng-container>
@@ -139,7 +139,7 @@
 
 
             <div class="btn_add_reset">
-                <button type="reset">جديد</button>
+                <button type="button" (click)="resetData()">جديد</button>
                 <button type="submit" [ngStyle]="{'background-color':btnText=='Add' ? '#16601A' : '#fd7e14'}">{{btnText == 'Add'  ? 'اضافه' : 'تعديل'}}</button>
 
             </div>
@@ -151,7 +151,7 @@
   <thead>
     <tr>
       <th scope="col">م</th>
-      <th scope="col">اسم المالك</th>
+      <th scope="col">اسم السمسار</th>
       <th scope="col">رقم الجوال</th>
       <th scope="col">نسبة البونص</th>
       <th scope="col">قيمه البونص</th>
@@ -160,7 +160,7 @@
     </tr>
   </thead>
   <tbody>
-    @for (item of getAllData.rows; track $index) {
+    @for (item of getAllData?.rows; track $index) {
    <tr>
       <th scope="row">{{$index + 1}}</th>
       <td>{{item?.fullName}}</td>
@@ -172,7 +172,15 @@
        <button class="btn btn-danger" (click)="DeleteModel(item.id)"> <i class="fa-solid fa-trash"></i></button>
        </td>
     </tr>
+    }@empty {
+       <tr>
+      <td colspan="6" class="text-center py-5" style="color: #888; font-size: 18px;">
+        <i class="fa-solid fa-circle-exclamation fa-2x mb-2" style="color: #ccc;"></i><br>
+        لا توجد بيانات حتى الآن
+      </td>
+    </tr>
     }
+
 
 
 

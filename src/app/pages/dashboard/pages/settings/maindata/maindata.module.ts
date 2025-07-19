@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MaindataRoutingModule } from './maindata-routing.module';
 import { MaindataComponent } from './maindata.component';
 import { RouterModule } from '@angular/router';
+import { IntersectionDirective } from '../../../../../shared/directive/intersection.directive';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     MaindataRoutingModule,
-    RouterModule
+    RouterModule,
+    IntersectionDirective
   ]
 })
 export class MaindataModule { }

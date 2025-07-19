@@ -1,10 +1,10 @@
- <h3 class="title-page">الادوات <img src="assets/dashboard/iconarrowdouble.png"  class="mx-1" alt="icon"> <span>سند الصرف</span></h3>
+ <h3 class="title-page" appIntersection="fade-in">الادوات <img src="assets/dashboard/iconarrowdouble.png"  class="mx-1" alt="icon"> <span>سند الصرف</span></h3>
 
 
 
 
  
- <form [formGroup]="voucherForm" (ngSubmit)="onSubmit()" class="forms_dashboard">
+ <form [formGroup]="voucherForm" (ngSubmit)="onSubmit()" class="forms_dashboard" appIntersection="fade-in">
   <div class="row">
 
     <div class="mb-3 col-sm-12 col-md-6 col-lg-4">
@@ -80,7 +80,7 @@
 
   </div>
 </form>
-<div class="table-responsive">
+<div class="table-responsive" appIntersection="fade-in">
 <table class="table table-striped mt-4">
   <thead>
     <tr>
@@ -113,7 +113,15 @@
 
        </td>
     </tr>
+    }@empty {
+       <tr>
+      <td colspan="5" class="text-center py-5" style="color: #888; font-size: 18px;">
+        <i class="fa-solid fa-circle-exclamation fa-2x mb-2" style="color: #ccc;"></i><br>
+        لا توجد بيانات حتى الآن
+      </td>
+    </tr>
     }
+
    
 
   </tbody>
