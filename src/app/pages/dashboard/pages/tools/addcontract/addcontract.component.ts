@@ -204,6 +204,14 @@ export class AddcontractComponent {
                   document.querySelectorAll('.searchVal').forEach(val=>{
                     (val as HTMLInputElement).value='';
                   })
+
+                   this.formData.reset({
+
+                    ContractDate:this.formData.get('ContractDate')?.value,
+                    StartDate:this.formData.get('StartDate')?.value ,
+                    EndDate:this.formData.get('EndDate')?.value
+
+        });
           },error:(err)=>{
                         if(err.error.errors){
             const errorFields=err.error.errors;
@@ -231,11 +239,9 @@ export class AddcontractComponent {
           }
         })
 
-        this.formData.reset({
-
-        });
+       
       }else{
-          this.toastr.show('يرجى تعبئة جميع الحقول بشكل صحيح', 'error');
+          // this.toastr.show('يرجى تعبئة جميع الحقول بشكل صحيح', 'error');
         this.formData.markAllAsTouched();
       }
 
@@ -373,7 +379,7 @@ const commission = (price * commissionPercentage) / 100;
     }
   },
   searchFilterDto: {
-    column: 0,
+    column: this.columnSearchOwner,
     value: val
   }
 }
@@ -433,7 +439,7 @@ this.ownerModel.idFileCopyPath=owner.idFileCopyPath
 
 
 tenantModel={
-   email:'',
+      email:'',
       fullName:'', 
       id:null,
       idFileCopyPath:'' ,
@@ -441,14 +447,15 @@ tenantModel={
       idType:'',
       nationality: '',
       phoneNumber: '',
+      dependents:[]
 }
 
 
 showTenant=false
   searchTenant(val:any){
 
-        if(!val){
-          this.showTenant=false;
+        if(!val || val.trim().length === 0){
+      this.showTenant=false;
       this.toastr.show('رجاء املاء قيمه البحث الخاصه بالمستأجر','error');
       return ;
     }
@@ -467,7 +474,7 @@ showTenant=false
     }
   },
   searchFilterDto: {
-    column: 0,
+    column: this.columnSearchTenant,
     value: val
   }
 }
@@ -477,10 +484,13 @@ showTenant=false
 
   this.subScription = this.addContractser.searchTenant(value).subscribe({
     next:(res:any)=>{
-    // console.log(res);
+    console.log(res);
     this.showTenant=true;
     let tenant=res.rows[0];
-    console.log(tenant)
+
+    this.tenantModel.dependents=tenant.dependents;
+
+
 
 this.tenantModel.fullName=tenant.fullName
 this.tenantModel.id=tenant.id;
@@ -490,12 +500,17 @@ this.tenantModel.email=tenant.email
 this.tenantModel.idType=tenant.idType
 this.tenantModel.idNumber=tenant.idNumber
 this.tenantModel.idFileCopyPath=tenant.idFileCopyPath.split('/').pop() ?? ''
+this.tenantModel.dependents=tenant.dependents
+
+
 
 
 this.formData.patchValue({
   TenantId:tenant.id
 })
-    },error:(err)=>{
+
+
+},error:(err)=>{
         if(err.error.errors){
           const errorFields=err.error.errors;
           for(let key in errorFields){
@@ -560,7 +575,7 @@ phoneNumber: '',
     }
   },
   searchFilterDto: {
-    column: 0,
+    column: this.columnSearchBroker,
     value: val
   }
 }
@@ -732,6 +747,118 @@ error:(err)=>{
 
       
   }
+
+
+   selectedFilterTenant: string = 'FullName'; // الافتراضي مثلاً اسم المستأجر
+  columnSearchTenant:any=0
+  searchTextTenant: string = ''; // النص اللي المستخدم هيكتبه
+  titleSearchTenant:string = 'اسم المستأجر'
+  
+show:any
+
+visibleFilter=false;
+
+
+
+
+changeFilter(filter:string){
+
+  
+  this.selectedFilterTenant=filter;
+
+  this.visibleFilter=false
+
+  console.log(this.selectedFilterTenant);
+
+  if(filter==='IdNumber'){
+ this.titleSearchTenant='رقم الهويه'
+ this.columnSearchTenant=1
+
+  }else if(filter==='PhoneNumber'){
+ this.titleSearchTenant='رقم الجوال '
+ this.columnSearchTenant=2;
+  }else{
+     this.titleSearchTenant='المستأجر'
+      this.columnSearchTenant=0
+      
+  }
+ console.log(this.columnSearchTenant)
+
+}
+
+OnSearchText(e:any){
+  this.searchTextTenant=e.target.value;
+}
+
+
+
+visibleFilterOwner=false;
+
+selectedFilterOwner:string="FullName"
+
+ columnSearchOwner:any=0
+  searchTextOwner: string = ''; // النص اللي المستخدم هيكتبه
+  titleSearchOwner:string = 'اسم المالك'
+
+
+  OnSearchTextOnwer(e:any){
+    this.searchTextOwner=e.target.value
+
+  }
+
+
+  searchFilterOwner(filter:any){
+    this.selectedFilterOwner = filter;
+    this.visibleFilterOwner=false;
+     if(filter==='IdNumber'){
+ this.titleSearchOwner='رقم الهويه'
+ this.columnSearchOwner=1
+
+  }else if(filter==='PhoneNumber'){
+ this.titleSearchOwner='رقم الجوال '
+ this.columnSearchOwner=2;
+  }else{
+     this.titleSearchOwner='المالك'
+      this.columnSearchOwner=0
+      
+  }
+
+  }
+
+
+  visibleFilterBroker=false;
+  
+  
+selectedFilterBroker:string="FullName"
+
+ columnSearchBroker:any=0
+  searchTextBroker: string = ''; // النص اللي المستخدم هيكتبه
+  titleSearchBroker:string = 'اسم السمسار'
+
+
+  OnSearchTextBroker(e:any){
+    this.searchTextBroker=e.target.value
+  }
+
+
+    searchFilterBroker(filter:any){
+        this.selectedFilterBroker = filter;
+       this.visibleFilterBroker=false
+     if(filter==='IdNumber'){
+ this.titleSearchBroker='رقم الهويه'
+ this.columnSearchBroker=1
+
+  }else if(filter==='PhoneNumber'){
+ this.titleSearchBroker='رقم الجوال '
+ this.columnSearchBroker=2;
+  }else{
+     this.titleSearchBroker='السمسار'
+      this.columnSearchBroker=0
+      
+  }
+
+  }
+
   ngOnDestroy(): void {
     if(this.subScription){
       this.subScription.unsubscribe()

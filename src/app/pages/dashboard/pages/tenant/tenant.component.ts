@@ -1,4 +1,5 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter, Subscription } from 'rxjs';
 
@@ -11,19 +12,22 @@ export class TenantComponent implements OnInit, OnDestroy {
 
   visibleShow = true;
   subScription!: Subscription;
+  title:Title=inject(Title);
 
   router: Router = inject(Router);
   activeRoute: ActivatedRoute = inject(ActivatedRoute);
 
   ngOnInit(): void {
-    // تحديث مرّة واحدة عند تغيّر الرابط
+
+    this.title.setTitle('المستأجر')
+
     this.subScription = this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
         this.updateVisibility();
       });
 
-    // استدعاء أولي بعد التحميل
+
     this.updateVisibility();
   }
 

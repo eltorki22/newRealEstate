@@ -34,7 +34,6 @@ apiUrl=environment.apiUrl;
 
   searchTenant(payload:any){
     return this.http.post(this.apiUrl + '/api/Tenant/Search',payload);
-
   }
 
 

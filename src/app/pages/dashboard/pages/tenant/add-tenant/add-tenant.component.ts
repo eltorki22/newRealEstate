@@ -185,9 +185,13 @@ ngOnInit() {
     // this.toastr.show('يرجى تعبئة جميع الحقول بشكل صحيح', 'error');
     return;
   }
-    for (const dep of this.dependents) {
-      payload.append('Dependents', JSON.stringify(dep));
-    }
+ this.dependents.forEach((dep, index) => {
+  payload.append(`Dependents[${index}].FullName`, dep.fullName);
+  payload.append(`Dependents[${index}].PhoneNumber`, dep.phoneNumber);
+  payload.append(`Dependents[${index}].IdOrPassport`, dep.idOrPassport);
+  payload.append(`Dependents[${index}].Relation`, dep.relation);
+  payload.append(`Dependents[${index}].Nationality`, dep.nationality);
+});
  
 //  payload.append('Dependents', JSON.stringify(this.dependents));
 

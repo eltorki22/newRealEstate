@@ -79,13 +79,13 @@
 
 
 <!-- Modal -->
-<div class="modal fade "  [hidden]="!show" #messageModal id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade "   #messageModal id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header justify-content-end">
         <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-        <button type="button" class="btn-close m-0 text-black" style="width: 8px; height:8px; font-size: 12px;   border:2px solid black;border-radius: 50%;" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" #closeBtn  class="btn-close m-0 text-black" style="width: 8px; height:8px; font-size: 12px;   border:2px solid black;border-radius: 50%;" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
      
      <div class="modal-body">
@@ -111,7 +111,7 @@
         </div>
               
  <div class="btn_add_reset">
-                <button type="button" (click)="btnSelected()">اختيار</button>
+                <button type="button" #selectBtn  (click)="btnSelected()">اختيار</button>
                 
             </div>  
       </form>

@@ -1,7 +1,7 @@
  <h3 class="title-page" appIntersection="fade-in">الادوات <img src="assets/dashboard/iconarrowdouble.png"  class="mx-1" alt="icon"> <span>اضافه عقد</span></h3>
 
 
- <div class="box mt-5 mb-3">
+ <div class="box mt-1 mb-3">
     <!-- <div class="container">
 <h4 class="title_form">بيانات العقد</h4>        
     </div> -->
@@ -122,9 +122,43 @@
         <div class="col-6">
             <h4 class="title_form" >بيانات المالك</h4>
         </div>
-        <div class="col-6 form_search">
+        <!-- <div class="col-6 form_search">
             <input type="text" (keyup.enter)="searchOwner(valOwner.value)" class="form-control searchVal" placeholder="بحث" style="background-color: #FBFBFB;" #valOwner>
             <button type="button" (click)="searchOwner(valOwner.value)"><i class="fa-solid fa-magnifying-glass" ></i></button>
+        </div> -->
+         <div class="col-6">
+<form class="forms_search my-3 " appIntersection="fade-in" [formGroup]="formData" (ngSubmit)="searchOwner(valOwner.value)">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="search">
+            <input type="text"  class="form-control" #valOwner (keyup.enter)="searchOwner(valOwner.value)"  placeholder=" بحث حسب {{titleSearchOwner}}" (input)="OnSearchTextOnwer($event)" >
+                
+            <div class="filter_search">
+                <button class="btn" type="button" (click)="visibleFilterOwner=!visibleFilterOwner"><i class="fa-solid fa-filter"></i></button>
+
+                <span>|</span>
+                <button class="btn btn_search" type="submit"> <i class="fa-solid fa-magnifying-glass"></i></button>
+
+                <div class="drop-down" [ngClass]="{'show':visibleFilterOwner}">
+                    <ul>
+                        <li><a    [class.active]="selectedFilterOwner == 'FullName'" (click)="searchFilterOwner('FullName')"  >اسم المالك</a></li>
+                        <li><a     [class.active]="selectedFilterOwner == 'IdNumber'" (click)="searchFilterOwner('IdNumber')"    >رقم الهويه</a></li>
+                        <li><a   [class.active]="selectedFilterOwner == 'PhoneNumber'" (click)="searchFilterOwner('PhoneNumber')"    >رقم الجوال</a></li>
+                    </ul>   
+                </div>
+            </div>
+            </div>
+
+           
+        </div>
+
+
+        
+    </div>
+
+
+ </form>
         </div>
     </div>
 
@@ -256,10 +290,51 @@
         <div class="col-6">
             <h4 class="title_form">  بيانات المستاجر</h4>
         </div>
-        <div class="col-6 form_search">
+        <!-- <div class="col-6 form_search">
             <input type="text" (keyup.enter)="searchTenant(valTenant.value)" class="form-control searchVal" placeholder="بحث" style="background-color: #FBFBFB;" #valTenant>
             <button type="button" (click)="searchTenant(valTenant.value)"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div> -->
+    
+        <div class="col-6">
+<form class="forms_search my-3 " appIntersection="fade-in" [formGroup]="formData" (ngSubmit)="searchTenant(valTenant.value)">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="search">
+            <!-- <input type="text"  class="form-control"  #valTenant (keyup.enter)="searchTenant(valTenant.value)" placeholder=" بحث حسب {{titleSearch}}" (input)="OnSearchText($event)" > -->
+               <input type="text" class="form-control"
+      #valTenant
+       name="searchTenant"
+       placeholder="بحث حسب {{selectedFilterTenant}}"
+       (keyup.enter)="searchTenant(valTenant.value)" />
+ 
+            <div class="filter_search">
+                <button class="btn" type="button" (click)="visibleFilter=!visibleFilter"><i class="fa-solid fa-filter"></i></button>
+
+                <span>|</span>
+                <button class="btn btn_search" type="submit"> <i class="fa-solid fa-magnifying-glass"></i></button>
+
+                <div class="drop-down" [ngClass]="{'show':visibleFilter}">
+                    <ul>
+                        <li><a    [class.active]="this.selectedFilterTenant == 'FullName'" (click)="changeFilter('FullName')"  >اسم المستأجر</a></li>
+                        <li><a     [class.active]="this.selectedFilterTenant == 'IdNumber'" (click)="changeFilter('IdNumber')"    >رقم الهويه</a></li>
+                        <li><a   [class.active]="this.selectedFilterTenant == 'PhoneNumber'" (click)="changeFilter('PhoneNumber')"    >رقم الجوال</a></li>
+                    </ul>   
+                </div>
+            </div>
+            </div>
+
+           
         </div>
+
+
+        
+    </div>
+
+
+ </form>
+        </div>
+ 
     </div>
 
 </div>
@@ -323,7 +398,7 @@
  
 
                  <div class="nummor_eye">
-                    <input type="text" class="form-control" style="padding-right: 100px;" value="2" id="nummor" placeholder="رقم الهويه">
+                    <input type="text" class="form-control" style="padding-right: 100px;" [value]="tenantModel.dependents.length" id="nummor" readonly>
                     <button class="btn btn-success"><i class="fa-solid fa-eye"></i></button>
                  </div>
             
@@ -340,9 +415,43 @@
         <div class="col-6">
             <h4 class="title_form" >بيانات السمسار ( الوسيط ) </h4>
         </div>
-        <div class="col-6 form_search">
+        <!-- <div class="col-6 form_search">
             <input type="text" class="form-control searchVal" (keyup.enter)="searchBroker(valueBroker.value)" placeholder="بحث" style="background-color: #FBFBFB;" #valueBroker>
             <button type="button" (click)="searchBroker(valueBroker.value)" ><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div> -->
+           <div class="col-6">
+<form class="forms_search my-3 " appIntersection="fade-in" [formGroup]="formData" (ngSubmit)="searchBroker(valBroker.value)">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="search">
+            <input type="text"  class="form-control" #valBroker (keyup.enter)="searchBroker(valBroker.value)"  placeholder=" بحث حسب {{titleSearchBroker}}" (input)="OnSearchTextBroker($event)" >
+                
+            <div class="filter_search">
+                <button class="btn" type="button" (click)="visibleFilterBroker=!visibleFilterBroker"><i class="fa-solid fa-filter"></i></button>
+
+                <span>|</span>
+                <button class="btn btn_search" type="submit"> <i class="fa-solid fa-magnifying-glass"></i></button>
+
+                <div class="drop-down" [ngClass]="{'show':visibleFilterBroker}">
+                    <ul>
+                        <li><a    [class.active]="selectedFilterBroker == 'FullName'" (click)="searchFilterBroker('FullName')"  >اسم السمسار</a></li>
+                        <li><a     [class.active]="selectedFilterBroker == 'IdNumber'" (click)="searchFilterBroker('IdNumber')"    >رقم الهويه</a></li>
+                        <li><a   [class.active]="selectedFilterBroker == 'PhoneNumber'" (click)="searchFilterBroker('PhoneNumber')"    >رقم الجوال</a></li>
+                    </ul>   
+                </div>
+            </div>
+            </div>
+
+           
+        </div>
+
+
+        
+    </div>
+
+
+ </form>
         </div>
     </div>
 

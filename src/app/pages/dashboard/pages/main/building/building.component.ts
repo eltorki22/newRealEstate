@@ -5,6 +5,7 @@ import { Building } from '../../../../../shared/Models/building';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from '../../../../../shared/services/toastr.service';
 import { Owners } from '../../../../../shared/Models/owners';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-building',
@@ -40,9 +41,10 @@ export class BuildingComponent {
   })
 
 
-
+title:Title=inject(Title);
 
   ngOnInit(){
+    this.title.setTitle('العماره')
     this.getDataList();
     this.getDataListOwner();
   }
@@ -106,7 +108,7 @@ export class BuildingComponent {
 
       }else{
 
-        this.BuildingService.updateData(this.idUpdate,payload).subscribe((res)=>{
+     this.subScription=   this.BuildingService.updateData(this.idUpdate,payload).subscribe((res)=>{
           this.getDataList();
           this.toastr.show('تم تعديل البيانات بنجاح','success');
           this.formData.reset()
@@ -156,7 +158,7 @@ this.formData.markAllAsTouched();
     this.show=false;
 
 
-    this.BuildingService.deleteData(this.deleteId).subscribe({
+  this.subScription=  this.BuildingService.deleteData(this.deleteId).subscribe({
     next:(res)=>{
       this.getDataList();
  this.toastr.show('تم حذف البيانات','success');      

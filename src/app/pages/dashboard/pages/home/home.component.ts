@@ -1,5 +1,6 @@
 import { isPlatformBrowser } from '@angular/common';
-import { Component, ElementRef, Inject, PLATFORM_ID, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, Inject, PLATFORM_ID, ViewChild } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ChartOptions, ChartType, ChartData } from 'chart.js';
 import Chart from 'chart.js/auto';
 import { getRelativePosition } from 'chart.js/helpers';
@@ -14,9 +15,14 @@ export class HomeComponent {
     @ViewChild('myChart2', { static: true }) myChart2!: ElementRef<HTMLCanvasElement>;
   chart!: Chart; 
   chart2!:Chart;
+  // title:Title=inject(Title);
+
+
+
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 ngOnInit(){
+  // this.title.setTitle('لوحه التحكم');
   if (isPlatformBrowser(this.platformId)) {
   const ctx = this.chartRef.nativeElement.getContext('2d');
   const ctx2 = this.myChart2.nativeElement;

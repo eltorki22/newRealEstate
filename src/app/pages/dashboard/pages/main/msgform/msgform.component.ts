@@ -4,6 +4,7 @@ import { MsgFormService } from '../../../../../shared/services/msg-form.service'
 import { MsgForm } from '../../../../../shared/Models/msg-form';
 import { Subscription } from 'rxjs';
 import { ToastrService } from '../../../../../shared/services/toastr.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-msgform',
@@ -29,8 +30,10 @@ export class MsgformComponent {
     message:['',Validators.required]
   })
 
+  title:Title=inject(Title);
 
   ngOnInit(){
+    this.title.setTitle('نموذج الرسائل ')
     this.getAllListData();
   }
 

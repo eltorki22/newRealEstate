@@ -46,7 +46,29 @@ export class ExchangesalariesComponent implements OnInit {
       bonuses: [0],
       loanRepayment: [0]
     });
+
+
+    this.rowForm.valueChanges.subscribe(() => {
+  this.calculateNetSalary();
+});
   }
+
+  netSalaryPreview: number = 0;
+
+  calculateNetSalary() {
+  const baseSalary = +this.rowForm.get('baseSalary')?.value || 0;
+  const absenceDays = +this.rowForm.get('absenceDays')?.value || 0;
+  const loanRepayment = +this.rowForm.get('loanRepayment')?.value || 0;
+  const deductions = +this.rowForm.get('deductions')?.value || 0;
+  const bonuses = +this.rowForm.get('bonuses')?.value || 0;
+
+  // احسب خصم الغياب إن وجد - يمكن استخدام قيمة ثابته للخصم اليومي إن أردت
+  // const absencePenalty = absenceDays * 50; // خصم 50 لكل يوم مثلًا
+
+  const net = baseSalary - loanRepayment - deductions - absenceDays + bonuses;
+
+  this.netSalaryPreview = net;
+}
 
   getFormControl(controlName: string): FormControl {
     return this.rowForm.get(controlName) as FormControl;
@@ -101,7 +123,7 @@ export class ExchangesalariesComponent implements OnInit {
       deductions: +formValue.deductions || 0,
       bonuses: +formValue.bonuses || 0,
       loanRepayment: +formValue.loanRepayment || 0,
-      netSalary: (+formValue.baseSalary || 0) - (+formValue.deductions || 0) - (+formValue.loanRepayment || 0) + (+formValue.bonuses || 0)
+      // netSalary: (+formValue.baseSalary || 0) - (+formValue.deductions || 0) - (+formValue.loanRepayment || 0) + (+formValue.bonuses || 0)
     };
 
     if (this.editIndex !== null) {
@@ -157,7 +179,7 @@ export class ExchangesalariesComponent implements OnInit {
         this.getAllData = [];
       });
     } else {
-      this.toastr.show('يرجى تعبئة جميع الحقول بشكل صحيح', 'error');
+      // this.toastr.show('يرجى تعبئة جميع الحقول بشكل صحيح', 'error');
       this.exChangeForms.markAllAsTouched();
     }
   }

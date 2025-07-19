@@ -6,6 +6,7 @@ import { Owners } from '../../../../../shared/Models/owners';
 import { Realtor } from '../../../../../shared/Models/realtor';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from '../../../../../shared/services/toastr.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-realtor',
@@ -51,8 +52,10 @@ pageSize = 10; // اختياري حسب الـ API
   })
   
 
+  title:Title=inject(Title);
 
   ngOnInit(){
+    this.title.setTitle('السمسار')
     this.getListData();
     this.getNationality();
   }

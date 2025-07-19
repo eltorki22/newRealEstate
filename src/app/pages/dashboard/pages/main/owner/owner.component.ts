@@ -7,6 +7,7 @@ import { OwnerService } from '../../../../../shared/services/owner.service';
 import { Owners } from '../../../../../shared/Models/owners';
 import { Subscription } from 'rxjs';
 import { ConfirmDeleteService } from '../../../../../shared/services/confirm-delete.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-owner',
@@ -20,6 +21,8 @@ scription!:Subscription
 
 
   Owners:any;
+
+  title:Title=inject(Title);
 
   pageIndex = 1;
 pageSize = 10; // اختياري حسب الـ API
@@ -60,6 +63,7 @@ pageSize = 10; // اختياري حسب الـ API
 
 
   ngOnInit(){
+    this.title.setTitle('المالك')
     this.getData();
     this.getAllNationality()
    

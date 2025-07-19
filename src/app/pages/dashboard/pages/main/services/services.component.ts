@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { Services } from '../../../../../shared/Models/services';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from '../../../../../shared/services/toastr.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-services',
@@ -28,9 +29,11 @@ export class ServicesComponent {
     price:['',[Validators.required]]
   })
 
+  title:Title=inject(Title);
 
   ngOnInit(){
-    this.getAllListData()
+    this.title.setTitle('الخدمات');
+       this.getAllListData()
   }
 
 

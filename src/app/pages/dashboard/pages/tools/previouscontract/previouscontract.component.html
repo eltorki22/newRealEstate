@@ -1,6 +1,6 @@
  <h3 class="title-page" appIntersection="fade-in">الادوات <img src="assets/dashboard/iconarrowdouble.png"  class="mx-1" alt="icon"> <span>العقودات السابقه</span></h3>
     <div class="search" appIntersection="fade-in">
-            <input type="text" class="form-control" placeholder="بحث" [(ngModel)]="searchValue">
+            <input type="text" class="form-control" (keyup.enter)="search()" placeholder="بحث" [(ngModel)]="searchValue">
             <div class="filter_search">
                 <button class="btn" type="button" (click)="visibleFilter=!visibleFilter"><i class="fa-solid fa-filter"></i></button>
 

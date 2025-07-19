@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { NewuserService } from '../../../../../shared/services/newuser.service';
 import { ToastrService } from '../../../../../shared/services/toastr.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-newuser',
@@ -34,7 +35,10 @@ export class NewuserComponent {
   show = false;
   deleteId: any;
 
+  title:Title=inject(Title);
   ngOnInit(): void {
+
+    this.title.setTitle('مستخدم جديد')
     this.getAllListData();
   }
 

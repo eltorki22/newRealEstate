@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, inject, Renderer2, ViewChild } from '@angular/core';
 import { AddTenantService } from '../../../../../shared/services/add-tenant.service';
 import { Subscription } from 'rxjs';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -13,6 +13,8 @@ import { SendMsgService } from '../../../../../shared/services/tools/send-msg.se
 export class SendmsgComponent {
 
   render:Renderer2=inject(Renderer2);
+
+  @ViewChild('selectBtn') selectBtn!: ElementRef;
 
 
   formData:any;
@@ -40,6 +42,19 @@ export class SendmsgComponent {
     this.getDataTenantSer();  
   }
 
+
+@HostListener('document:keydown',['$event'])
+
+onselect(e:any){
+
+  if(e.key == 'Enter'){
+    this.selectBtn.nativeElement.click();
+  }
+
+}
+
+  @ViewChild('closeBtn') closeBtn!: ElementRef;
+
   btnSelected(){
      const selectedInput: any = document.querySelector('input[name="msg"]:checked');
 
@@ -57,15 +72,19 @@ export class SendmsgComponent {
     messageText: messageText
   });
 
+
+
+
   // أزل التحديد عشان تقدر تختار نفس الرسالة مرة تانية
   selectedInput.checked = false;
 
   // اختياريًا، أقفل المودال يدويًا
-  const modalBackdrop = document.querySelector('.modal-backdrop');
-  if (modalBackdrop) {
-    this.render.setStyle(modalBackdrop, 'display', 'none');
-  }
+  // const modalBackdrop = document.querySelector('.modal-backdrop');
+  // if (modalBackdrop) {
+    // this.render.setStyle(modalBackdrop, 'display', 'none');
+  // }
 
+ this.closeBtn.nativeElement.click(); 
   this.show = false;
   }
 

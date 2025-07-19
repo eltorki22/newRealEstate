@@ -19,12 +19,14 @@ export class ConfirmDeleteComponent {
     this.modalRef.nativeElement.focus();
   }, 0);
   }
-
+@Input() isVisible: boolean = false;
 
   @HostListener('document:keydown.enter', ['$event'])
 handleEnter(event: KeyboardEvent) {
-  this.onDeleteClick();
-  this.onClose()
+  if (this.isVisible) {
+    this.onDeleteClick();
+    this.onClose();
+  }
 
 }
 

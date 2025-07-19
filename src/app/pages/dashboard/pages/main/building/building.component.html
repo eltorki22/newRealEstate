@@ -97,7 +97,7 @@
 
 <!-- </div> -->
 <div class="modal_delete" [ngClass]="{'active':this.show}">
-<app-confirm-delete (toggleModal)="onClose()" (onDelete)="deleteConfirmed($event)" [itemId]="this.deleteId"></app-confirm-delete>
+<app-confirm-delete [isVisible]="show" (toggleModal)="onClose()" (onDelete)="deleteConfirmed($event)" [itemId]="this.deleteId"></app-confirm-delete>
 </div>
 
 

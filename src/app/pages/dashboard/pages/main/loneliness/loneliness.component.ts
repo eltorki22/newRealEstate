@@ -6,6 +6,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from '../../../../../shared/services/toastr.service';
 import { Building } from '../../../../../shared/Models/building';
 import { BuildingService } from '../../../../../shared/services/building.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-loneliness',
@@ -44,8 +45,10 @@ export class LonelinessComponent {
       description:['']
     })
   
+    title:Title=inject(Title)
   
     ngOnInit(){
+      this.title.setTitle('الوحده')
       this.getAllListData();
       this.getListBuilding();
     }

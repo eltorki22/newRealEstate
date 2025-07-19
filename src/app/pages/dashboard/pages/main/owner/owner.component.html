@@ -122,7 +122,7 @@
   <tbody>
     @for (item of Owners?.rows; track $index) {
   <tr>
-      <th scope="row">م</th>
+      <th scope="row">{{$index + 1}}</th>
       <td>{{item.fullName}}</td>
       <td>{{item.phoneNumber}}</td>
       <td>{{item.idNumber}}</td>
@@ -150,7 +150,7 @@
 
 <!-- </div> -->
 <div class="modal_delete" [ngClass]="{'active':this.show}">
-<app-confirm-delete (toggleModal)="onClose()" (onDelete)="deleteConfirmed($event)" [itemId]="this.deleteId"></app-confirm-delete>
+<app-confirm-delete (toggleModal)="onClose()"  [isVisible]="show" (onDelete)="deleteConfirmed($event)" [itemId]="this.deleteId"></app-confirm-delete>
 </div>
 
 <!-- 

@@ -9,10 +9,17 @@
     <div class="mb-3 col-sm-12 col-md-6">
       <label for="arestnumber" class="form-label">رقم السند</label>
       <input type="text" class="form-control" id="arestnumber" formControlName="voucherNumber">
+           <ng-container *ngIf="exChangeForms.controls['voucherNumber'].invalid && exChangeForms.controls['voucherNumber'].touched">
+                      <small *ngIf="exChangeForms.controls['voucherNumber'].hasError('required')">   رقم السند  مطلوب</small>
+                 </ng-container>
+                  
     </div>
     <div class="mb-3 col-sm-12 col-md-6">
       <label for="date" class="form-label">التاريخ</label>
       <input type="date" class="form-control" id="date" formControlName="voucherDate">
+          <ng-container *ngIf="exChangeForms.controls['voucherDate'].invalid && exChangeForms.controls['voucherDate'].touched">
+                      <small *ngIf="exChangeForms.controls['voucherDate'].hasError('required')">    التاريخ  مطلوب</small>
+                 </ng-container>
     </div>
   </div>
 
@@ -53,10 +60,10 @@
             </select>
           </td>
           <td><input type="text" class="form-control text-center" [formControl]="getFormControl('absenceDays')"></td>
-          <td><input type="text" class="form-control text-center" [formControl]="getFormControl('loanRepayment')"></td>
+          <td><input type="text" class="form-control text-center" [formControl]="getFormControl('loanRepayment')" readonly></td>
           <td><input type="text" class="form-control text-center" [formControl]="getFormControl('deductions')"></td>
           <td><input type="text" class="form-control text-center" [formControl]="getFormControl('bonuses')"></td>
-          <td><input type="text" class="form-control text-center" value="-" readonly></td>
+           <td><input type="text" class="form-control text-center" [value]="netSalaryPreview" readonly></td>
           <td>
             <button type="button" (click)="AddDataSalary()" class="btn btn-success">{{ editIndex !== null ? 'تعديل' : 'إضافة' }}</button>
           </td>
