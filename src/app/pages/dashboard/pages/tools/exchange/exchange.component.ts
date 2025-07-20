@@ -8,6 +8,7 @@ import { Accounts, exchange } from '../../../../../shared/Models/tools/tools';
 import { ExchangeService } from '../../../../../shared/services/tools/exchange.service';
 import { ToastrService } from '../../../../../shared/services/toastr.service';
 import { getTodayDate } from '../../../../../shared/validations/datehelpers';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-exchange',
@@ -33,6 +34,7 @@ export class ExchangeComponent {
   pageIndex=1;
   pageSize=10;
 
+  title:Title=inject(Title);
   ngOnInit(): void {
     this.voucherForm = this.fb.group({
       voucherNumber: ['', Validators.required],
@@ -40,12 +42,13 @@ export class ExchangeComponent {
       voucherDate: [getTodayDate(), Validators.required],
       accountsId: ['', Validators.required],
       serviceId: ['', Validators.required],
-      description: ['',Validators.required]
+      description: ['']
     });
 
     this.getServicesName();
     this.getAccountName();
     this.getAllDataList();
+    this.title.setTitle('سند الصرف')
   }
 
   onSubmit(): void {
@@ -92,7 +95,7 @@ export class ExchangeComponent {
 
       this.voucherForm.reset();
     } else {
-      this.toastr.show('يرجى تعبئة جميع الحقول بشكل صحيح','error')
+      // this.toastr.show('يرجى تعبئة جميع الحقول بشكل صحيح','error')
       this.voucherForm.markAllAsTouched();
     }
   }

@@ -7,6 +7,7 @@ import { getTenant } from '../../../../../shared/Models/Tenat';
 import { AccountsService } from '../../../../../shared/services/tools/accounts.service';
 import { ToastrService } from '../../../../../shared/services/toastr.service';
 import { getTodayDate } from '../../../../../shared/validations/datehelpers';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-arestdocument',
@@ -21,6 +22,7 @@ export class ArestdocumentComponent {
   btnText='Add';
   idUpdate:any
  
+
   arrestDocument:ArrestdocumentService=inject(ArrestdocumentService);
   accountSer:AccountsService=inject(AccountsService)
   getData:any;
@@ -34,17 +36,19 @@ export class ArestdocumentComponent {
   pageIndex=1;
   pageSize=10;
 
+  title:Title=inject(Title)
   ngOnInit(): void {
+
+    this.title.setTitle('سند القبض')
       this.receiptForm = this.fb.group({
       voucherNumber: ['', Validators.required],
       amount: ['', [Validators.required]],
       voucherDate: [getTodayDate(), Validators.required],
       tenantId: ['', Validators.required],
       accountsId: ['', Validators.required],
-      description: ['',[Validators.required]]
+      description: ['']
     });
 
-    console.log(getTodayDate())
     this.getAllListData();
     this.getNameTenant();
     this.getAccountName();
@@ -108,7 +112,7 @@ export class ArestdocumentComponent {
       
 
     } else {
-      this.toastr.show('يرجى تعبئة جميع الحقول بشكل صحيح', 'error');
+      // this.toastr.show('يرجى تعبئة جميع الحقول بشكل صحيح', 'error');
       this.receiptForm.markAllAsTouched();
     }
   }

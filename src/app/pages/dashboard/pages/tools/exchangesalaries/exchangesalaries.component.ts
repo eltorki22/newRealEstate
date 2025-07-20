@@ -6,6 +6,7 @@ import { AccountsService } from '../../../../../shared/services/tools/accounts.s
 import { ToastrService } from '../../../../../shared/services/toastr.service';
 import { Subscription } from 'rxjs';
 import { getTodayDate } from '../../../../../shared/validations/datehelpers';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-exchangesalaries',
@@ -27,8 +28,10 @@ export class ExchangesalariesComponent implements OnInit {
   accountser = inject(AccountsService);
   fb = inject(FormBuilder);
   toastr = inject(ToastrService);
-
+  title:Title=inject(Title)
   ngOnInit(): void {
+
+    this.title.setTitle('صرف الرواتب ')
     this.getEmployeeName();
     this.getAccountName();
 

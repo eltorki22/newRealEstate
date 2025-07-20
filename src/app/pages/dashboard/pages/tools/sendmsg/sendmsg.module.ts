@@ -6,14 +6,15 @@ import { SendmsgComponent } from './sendmsg.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { IntersectionDirective } from '../../../../../shared/directive/intersection.directive';
 
-
+// import { NgSelectModule } from '@ng-select/ng-select';
 @NgModule({
   declarations: [SendmsgComponent],
   imports: [
     CommonModule,
     SendmsgRoutingModule,
     ReactiveFormsModule,
-    IntersectionDirective
+    IntersectionDirective,
+    // NgSelectModule
   ]
 })
 export class SendmsgModule { }

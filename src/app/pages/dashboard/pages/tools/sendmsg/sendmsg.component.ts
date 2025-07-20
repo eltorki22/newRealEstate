@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from '../../../../../shared/services/toastr.service';
 import { SendMsgService } from '../../../../../shared/services/tools/send-msg.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-sendmsg',
@@ -32,8 +33,10 @@ export class SendmsgComponent {
 
   dataSelected:any;
 
+  title:Title=inject(Title);
 
   ngOnInit(): void {
+    this.title.setTitle('ارسال رساله')
     this.formData=this.fb.group({
       messageText:['',Validators.required],
       recipientNumbers:['',Validators.required],
@@ -97,9 +100,6 @@ onselect(e:any){
       pageSize:0
     }
     this.subScription=this.TenantSer.getAllData(pagination).subscribe((res:any)=>{
-
-      console.log(res);
-
       this.getData=res.rows.map((item:any)=>{
         return {
           id:item.id,
@@ -107,9 +107,6 @@ onselect(e:any){
           phoneNumber:item.phoneNumber,
         }
       })
-
-      // console.log(this.getData);
-
     })
 
   }
@@ -166,5 +163,13 @@ onselect(e:any){
     this.toastr.show('يرجى تعبئة جميع الحقول بشكل صحيح', 'error');
     this.formData.markAllAsTouched();
   }
+  }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    if(this.subScription){
+      this.subScription.unsubscribe();
+    }
   }
 }

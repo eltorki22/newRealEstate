@@ -37,7 +37,7 @@ export class TermsComponent {
   onSubmit(){
 
    if (this.companyForm.invalid) {
-            this.toastr.show('يرجى تعبئة جميع الحقول بشكل صحيح', 'error');
+            // this.toastr.show('يرجى تعبئة جميع الحقول بشكل صحيح', 'error');
       this.companyForm.markAllAsTouched();
       return;
     }

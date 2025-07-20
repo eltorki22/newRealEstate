@@ -5,6 +5,8 @@ import { ToastrService } from '../../../../../shared/services/toastr.service';
 import { Router } from '@angular/router';
 import { getTodayDate } from '../../../../../shared/validations/datehelpers';
 import { FormBuilder, Validators } from '@angular/forms';
+// import { Title } from 'chart.js';
+import { Title } from '@angular/platform-browser';
 // import { Modal } from 'bootstrap';
 
 @Component({
@@ -31,7 +33,11 @@ fb:FormBuilder=inject(FormBuilder)
 pageIndex=1;
 pageSize=10;
 formCancel:any
+
+title:Title=inject(Title);
+// title:Title=inject(Title);
 ngOnInit(): void {
+  this.title.setTitle('العقودات السابقه')
 this.getDataList()
 this.formCancel=this.fb.group({
   TerminationDate:[getTodayDate(),Validators.required],
@@ -48,7 +54,6 @@ getDataList(){
     pageSize:this.pageSize
   }
   this.sub=this.previouscontractser.getAllData(pagination).subscribe((res:any)=>{
-    // console.log(res);
     this.dataContract=res
   })
 }
@@ -139,12 +144,10 @@ search() {
 // console.log(this.searchValue)
   this.sub=this.previouscontractser.searchData(data).subscribe({
    next: (res:any)=>{
-    console.log(res.rows);
     this.isTermination=res.rows.isTermination
     this.dataContract=res;
     this.searchValue=''
 
-    console.log(this.dataContract);
 
 
     this.showContract=true
@@ -221,7 +224,7 @@ onCancel(){
   
   this.sub=this.previouscontractser.contractCancel(formDataCancel).subscribe({
     next:(res:any)=>{
-      console.log(res);
+      
     
 
    this.toastr.show('تم  فسخ العقد بنجاح','success');

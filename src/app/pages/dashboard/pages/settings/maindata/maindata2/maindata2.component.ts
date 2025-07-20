@@ -36,7 +36,7 @@ export class Maindata2Component {
 
   submitForm(): void {
     if (this.companyForm.invalid) {
-            this.toastr.show('يرجى تعبئة جميع الحقول بشكل صحيح', 'error');
+            // this.toastr.show('يرجى تعبئة جميع الحقول بشكل صحيح', 'error');
       this.companyForm.markAllAsTouched();
       return;
     }
@@ -92,7 +92,6 @@ export class Maindata2Component {
 
   getAllData(){
     this.sub=this.mainDataSer.getData().subscribe((res:any)=>{
-      console.log(res);
       this.companyForm.patchValue({
         nameAr: res.nameAr,
       nameEn: res.nameEn,

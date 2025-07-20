@@ -25,7 +25,15 @@ export class AppComponent {
 
 
     this.authService.checkAndRemoveExpiredToken();
+
+    // setTimeout(() => this.cdr.detectChanges(), 0);
   }
+
+  ngAfterViewInit(): void {
+  // يجبر Angular يعيد التحقق بعد أول رسم
+  this.cdr.detectChanges();
+}
+
 
   
 }

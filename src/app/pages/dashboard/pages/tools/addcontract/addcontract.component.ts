@@ -10,6 +10,7 @@ import { getTodayDate } from '../../../../../shared/validations/datehelpers';
 import { AccountsService } from '../../../../../shared/services/tools/accounts.service';
 import { RealtorService } from '../../../../../shared/services/realtor.service';
 import { ActivatedRoute } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-addcontract',
@@ -74,6 +75,7 @@ export class AddcontractComponent {
     MessageType:['0',Validators.required]
   })
 
+
   
   getOneYearFromToday() {
   const today = new Date();
@@ -84,6 +86,7 @@ export class AddcontractComponent {
   return nextYear.toISOString().split('T')[0];
 }
 
+title:Title=inject(Title);
     formDataOwner:any
     ngOnInit(){
         this.formDataOwner=this.fb.group({
@@ -97,6 +100,7 @@ export class AddcontractComponent {
         phoneNumber: ['']
       })
 
+      this.title.setTitle('اضافه عقد')
       this.getAllMessageName();
       this.getBuilding();
       this.getUnitData();
@@ -673,7 +677,6 @@ error:(err)=>{
       pageSize:0
     }
     this.subScription=this.realtorser.getListData(pagination).subscribe((res:any)=>{
-      console.log(res);
       this.nameRealtor=res.rows.map((item:any)=>{
 
         return {
@@ -749,7 +752,7 @@ error:(err)=>{
   }
 
 
-   selectedFilterTenant: string = 'FullName'; // الافتراضي مثلاً اسم المستأجر
+   selectedFilterTenant: string = 'المستأجر'; // الافتراضي مثلاً اسم المستأجر
   columnSearchTenant:any=0
   searchTextTenant: string = ''; // النص اللي المستخدم هيكتبه
   titleSearchTenant:string = 'اسم المستأجر'

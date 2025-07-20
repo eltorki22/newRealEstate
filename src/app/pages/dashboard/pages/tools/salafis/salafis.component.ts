@@ -6,6 +6,7 @@ import { EmployeesService } from '../../../../../shared/services/tools/employees
 import { Subscription } from 'rxjs';
 import { AccountsService } from '../../../../../shared/services/tools/accounts.service';
 import { SalafisService } from '../../../../../shared/services/tools/salafis.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-salafis',
@@ -39,9 +40,10 @@ export class SalafisComponent {
 
   idUpadate:any
 
-
+  title:Title=inject(Title);
 
   ngOnInit(): void {
+    this.title.setTitle('السلفيات')
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.FormSalafis=this.fb.group({
@@ -122,7 +124,7 @@ export class SalafisComponent {
 
 
     }else{
-       this.toastr.show('يرجى تعبئة جميع الحقول بشكل صحيح', 'error');
+      //  this.toastr.show('يرجى تعبئة جميع الحقول بشكل صحيح', 'error');
     this.FormSalafis.markAllAsTouched();
     }
   }
@@ -202,8 +204,6 @@ export class SalafisComponent {
         })
       }
 
-
-      console.log(this.getAllData);
     })
   }
   

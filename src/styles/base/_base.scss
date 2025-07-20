@@ -517,3 +517,13 @@ button[type='submit']{
     }
 }
 
+.dropdown-menu{
+    inset: 100% auto auto 0px;
+    transform: translateY(11px) !important;
+    text-align: center !important;
+    li{
+        a{
+            padding: 5px;
+        }
+    }
+}

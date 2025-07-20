@@ -4,6 +4,7 @@ import { FileUploadService } from '../../../../../shared/services/file-upload.se
 import { EmployeesService } from '../../../../../shared/services/tools/employees.service';
 import { ToastrService } from '../../../../../shared/services/toastr.service';
 import { Subscription } from 'rxjs';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-employees',
@@ -26,8 +27,10 @@ export class EmployeesComponent {
    toastr:ToastrService=inject(ToastrService);
    subScription!:Subscription
    idUpdate:any
-
+    title:Title=inject(Title);
    ngOnInit(): void {
+
+    this.title.setTitle('الموظفين')
     this.employeeForm = this.fb.group({
       fullName: ['', Validators.required],
       nationality: ['', Validators.required],
@@ -144,7 +147,7 @@ this.fileName='';
     this.employeeForm.reset();   
 
   }else{
-     this.toastr.show('يرجى تعبئة جميع الحقول بشكل صحيح', 'error');
+    //  this.toastr.show('يرجى تعبئة جميع الحقول بشكل صحيح', 'error');
     this.employeeForm.markAllAsTouched();
   }
 
@@ -167,7 +170,6 @@ getAllDataList(){
     pageSize:this.pageSize,
   }
   this.employeesSer.getDataAllList(pagination).subscribe((res:any)=>{
-    console.log(res);
     this.getAllData={
       paginationInfo:res.paginationInfo,
       rows:res.rows.map((item:any)=>{
@@ -182,7 +184,7 @@ getAllDataList(){
 
     }
 
-    console.log(this.getAllData);
+
   })
 }
 
@@ -207,6 +209,8 @@ ngOnDestroy(): void {
 
 getUpdateData(id:any){
   console.log(id);
+      this.btnText='Update'
+    this.idUpdate=id;
   this.subScription=this.employeesSer.getUpdateData(id).subscribe((res:any)=>{
 
     this.employeeForm.patchValue({
@@ -222,8 +226,7 @@ getUpdateData(id:any){
 
     this.fileName=res.idFileCopyPath.split('/').pop()
 
-    this.btnText='Update'
-    this.idUpdate=id;
+
   //  console.log(res);
   // this.employeeFor
   })

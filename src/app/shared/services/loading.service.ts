@@ -15,11 +15,15 @@ export class LoadingService {
 
 
   show(){
+      setTimeout(() => {
     this.LoadingSubject.next(true);
+  });
   }
 
 
   hide(){
+      setTimeout(() => {
     this.LoadingSubject.next(false);
+  });
   }
 }

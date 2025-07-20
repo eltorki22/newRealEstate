@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ChangepasswordService } from '../../../../../shared/services/settings/changepassword.service';
 import { ToastrService } from '../../../../../shared/services/toastr.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-changepassword',
@@ -22,8 +23,9 @@ export class ChangepasswordComponent implements OnInit, OnDestroy {
   toastr: ToastrService = inject(ToastrService);
 
   dataUser: any;
-
+  title:Title=inject(Title)
   ngOnInit(): void {
+    this.title.setTitle('تغيير كلمه المرور')
     // جلب بيانات المستخدم من localStorage
     const userJson = localStorage.getItem('dataUser');
     if (userJson) {
@@ -46,7 +48,7 @@ export class ChangepasswordComponent implements OnInit, OnDestroy {
   changePassword() {
     if (this.changePassForm.invalid) {
       this.changePassForm.markAllAsTouched();
-      this.toastr.show('يرجى التأكد من إدخال كل البيانات بشكل صحيح', 'error');
+      // this.toastr.show('يرجى التأكد من إدخال كل البيانات بشكل صحيح', 'error');
       return;
     }
 

@@ -125,7 +125,7 @@ export class ServicesComponent {
     this.subScription=this.ServiceService.getAllListData(pagination2).subscribe((res:any)=>{
 
       this.getAllData=res;
-      console.log(this.getAllData);
+     
     })
   }
 

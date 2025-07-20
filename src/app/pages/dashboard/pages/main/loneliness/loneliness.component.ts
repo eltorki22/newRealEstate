@@ -130,7 +130,6 @@ export class LonelinessComponent {
 }
       this.subScription=this.UnitServices.getAllListData(pagination).subscribe((res:any)=>{
         this.getAllData=res;
-        console.log(this.getAllData)
       })
 
     }
@@ -140,7 +139,7 @@ export class LonelinessComponent {
     getListBuilding(){
       this.subScription=this.BuildingService.getDataList().subscribe((res:any)=>{
         this.getBuildingData=res.rows;
-        console.log(this.getBuildingData)
+        
       })
     }
 ValidationNumber(e: any): void {

@@ -96,13 +96,13 @@
   </thead>
   <tbody>
 
-    @for (item of getDataAll.rows; track $index) {
+    @for (item of getDataAll?.rows; track $index) {
 
  <tr>
       <th scope="row">{{$index + 1}}</th>
       <td>{{item.voucherNumber}}</td>
       <td>{{item.amount}}</td>
-      <td>{{item.voucherDate}}</td>
+      <td>{{item.voucherDate | date:"dd/MM/yyyy" }}</td>
       <td>{{item.serviceName}}</td>
       <td>{{item.accountName}}</td>
    
@@ -130,7 +130,7 @@
 
 
 <div class="modal_delete" [ngClass]="{'active':this.show}">
-<app-confirm-delete (toggleModal)="onClose()" (onDelete)="deleteConfirmed($event)" [itemId]="this.deleteId"></app-confirm-delete>
+<app-confirm-delete [isVisible]="show" (toggleModal)="onClose()" (onDelete)="deleteConfirmed($event)" [itemId]="this.deleteId"></app-confirm-delete>
 </div>
 <app-pagination
   [totalPages]="getDataAll?.paginationInfo?.totalPagesCount"

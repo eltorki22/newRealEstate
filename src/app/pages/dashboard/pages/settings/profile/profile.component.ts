@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { ProfileService } from '../../../../../shared/services/settings/profile.service';
 import { ToastrService } from '../../../../../shared/services/toastr.service';
 import { SendUserService } from '../../../../../shared/services/settings/send-user.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-profile',
@@ -20,9 +21,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
   profileSer: ProfileService = inject(ProfileService);
   toastr: ToastrService = inject(ToastrService);
   sendUserser:SendUserService=inject(SendUserService)
-
+title:Title=inject(Title);
   ngOnInit(): void {
 
+    this.title.setTitle('الملف الشخصي')
   const userJson = localStorage.getItem('dataUser');
   
   if (!userJson) {
@@ -59,7 +61,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   onSubmit(): void {
     if (this.formData.invalid) {
-      this.toastr.show("يرجى تعبئة البيانات كاملة", 'error');
+      // this.toastr.show("يرجى تعبئة البيانات كاملة", 'error');
       this.formData.markAllAsTouched();
       return;
     }

@@ -4,6 +4,8 @@ import { Accounts } from '../../../../../shared/Models/tools/tools';
 import { Subscription } from 'rxjs';
 import { AccountsService } from '../../../../../shared/services/tools/accounts.service';
 import { ToastrService } from '../../../../../shared/services/toastr.service';
+import { Title } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-accounts',
@@ -26,8 +28,11 @@ export class AccountsComponent {
   pageSize=10;
 
   accountData:any;
+  title:Title=inject(Title);
 
    ngOnInit(){
+
+    this.title.setTitle('الحسابات')
      this.accountForm = this.fb.group({
       accountName: ['', Validators.required],
       accountType: ['', Validators.required],
@@ -88,7 +93,7 @@ export class AccountsComponent {
       this.accountForm.reset();
 
     }else{
-      this.toastr.show('يرجى تعبئة جميع الحقول بشكل صحيح', 'error');
+      // this.toastr.show('يرجى تعبئة جميع الحقول بشكل صحيح', 'error');
       this.accountForm.markAllAsTouched();
     }
 
@@ -113,7 +118,7 @@ export class AccountsComponent {
     }
       this.subSciption=this.accountSer.getAllDataList(pagination).subscribe((res:any)=>{
         this.accountData=res;
-        console.log(this.accountData)      })
+           })
   }
 
 
