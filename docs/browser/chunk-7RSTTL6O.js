@@ -1,0 +1,1 @@
+import{t as i}from"./chunk-KT3ALLZ7.js";var r=class s{constructor(){}message="";type="success";isVisible=!1;show(t,e="success"){this.message=t,this.type=e,this.isVisible=!0,setTimeout(()=>{this.isVisible=!1},3e3)}static \u0275fac=function(e){return new(e||s)};static \u0275prov=i({token:s,factory:s.\u0275fac,providedIn:"root"})};export{r as a};

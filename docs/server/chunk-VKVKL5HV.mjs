@@ -1,0 +1,2 @@
+import './polyfills.server.mjs';
+import{b as t,q as o}from"./chunk-Q2DPBFOB.mjs";var a=class r{userSource=new t(this.getUserFromStorage());user$=this.userSource.asObservable();getUserFromStorage(){let e=localStorage.getItem("dataUser");return e?JSON.parse(e):null}setUser(e){localStorage.setItem("dataUser",JSON.stringify(e)),this.userSource.next(e)}constructor(){}static \u0275fac=function(s){return new(s||r)};static \u0275prov=o({token:r,factory:r.\u0275fac,providedIn:"root"})};export{a};

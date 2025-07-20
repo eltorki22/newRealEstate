@@ -1,0 +1,2 @@
+import './polyfills.server.mjs';
+import{a as i,q as c}from"./chunk-Q2DPBFOB.mjs";var o=class e{confirmSubject=new i;messageSubject=new i;confirmResult$=this.confirmSubject.asObservable();confirmMessage$=this.messageSubject.asObservable();confirm(r){return this.messageSubject.next(r),new Promise(t=>{this.confirmResult$.subscribe(s=>{t(s)})})}confirmYes(){this.confirmSubject.next(!0)}confirmNo(){this.confirmSubject.next(!1)}static \u0275fac=function(t){return new(t||e)};static \u0275prov=c({token:e,factory:e.\u0275fac,providedIn:"root"})};export{o as a};

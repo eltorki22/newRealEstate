@@ -1,0 +1,33 @@
+{
+    "relations": [
+      { "id": 1, "relation_en": "Father", "relation_ar": "أب" },
+      { "id": 2, "relation_en": "Mother", "relation_ar": "أم" },
+      { "id": 3, "relation_en": "Son", "relation_ar": "ابن" },
+      { "id": 4, "relation_en": "Daughter", "relation_ar": "ابنة" },
+      { "id": 5, "relation_en": "Brother", "relation_ar": "أخ" },
+      { "id": 6, "relation_en": "Sister", "relation_ar": "أخت" },
+      { "id": 7, "relation_en": "Grandfather", "relation_ar": "جد" },
+      { "id": 8, "relation_en": "Grandmother", "relation_ar": "جدة" },
+      { "id": 9, "relation_en": "Grandson", "relation_ar": "حفيد" },
+      { "id": 10, "relation_en": "Granddaughter", "relation_ar": "حفيدة" },
+      { "id": 11, "relation_en": "Uncle (paternal)", "relation_ar": "عم" },
+      { "id": 12, "relation_en": "Aunt (paternal)", "relation_ar": "عمة" },
+      { "id": 13, "relation_en": "Uncle (maternal)", "relation_ar": "خال" },
+      { "id": 14, "relation_en": "Aunt (maternal)", "relation_ar": "خالة" },
+      { "id": 15, "relation_en": "Nephew", "relation_ar": "ابن الأخ / ابن الأخت" },
+      { "id": 16, "relation_en": "Niece", "relation_ar": "ابنة الأخ / ابنة الأخت" },
+      { "id": 17, "relation_en": "Cousin (male)", "relation_ar": "ابن العم / ابن العمة / ابن الخال / ابن الخالة" },
+      { "id": 18, "relation_en": "Cousin (female)", "relation_ar": "ابنة العم / ابنة العمة / ابنة الخال / ابنة الخالة" },
+      { "id": 19, "relation_en": "Husband", "relation_ar": "زوج" },
+      { "id": 20, "relation_en": "Wife", "relation_ar": "زوجة" },
+      { "id": 21, "relation_en": "Father-in-law", "relation_ar": "حمو" },
+      { "id": 22, "relation_en": "Mother-in-law", "relation_ar": "حماة" },
+      { "id": 23, "relation_en": "Brother-in-law", "relation_ar": "صهر" },
+      { "id": 24, "relation_en": "Sister-in-law", "relation_ar": "نسيبة" },
+      { "id": 25, "relation_en": "Stepfather", "relation_ar": "زوج الأم" },
+      { "id": 26, "relation_en": "Stepmother", "relation_ar": "زوجة الأب" },
+      { "id": 27, "relation_en": "Stepson", "relation_ar": "ابن الزوج / ابن الزوجة" },
+      { "id": 28, "relation_en": "Stepdaughter", "relation_ar": "ابنة الزوج / ابنة الزوجة" },
+      { "id": 29, "relation_en": "Other", "relation_ar": "أخر" }
+    ]
+  }
